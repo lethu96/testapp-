@@ -17,7 +17,7 @@ class CreateMemberProjectsTable extends Migration
             $table->increments('id');
             $table->integer('meber_id');
             $table->integer('project_id');
-            $table->string('role');
+            $table->string('role') -> nullable();
             $table->timestamps();
         });
     }
