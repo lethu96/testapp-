@@ -10,7 +10,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/list', 'MemberController@listMember');
+Route::get('/listdele/{id}', 'MemberController@deleteMember');
+Route::post('/add', 'MemberController@editMember');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/listmp/{id}', 'MemberProjectController@deleteMemberProject');
+Route::get('/edit/{id}', 'MemberProjectController@getEditMemberProject');
+Route::post('/edit', 'Mem berProjectController@editMemberProject');
+Route::get('/editm/{id}', 'MemberController@getEditMember');
+Route::post('/editm', 'MemberController@editMember');
+Route::get('/editproject/{id}', 'ProjectController@getEditProject');
+Route::post('/editproject', 'ProjectController@editProject');
