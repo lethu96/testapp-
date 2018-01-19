@@ -15,7 +15,7 @@ class MemberController extends Controller
     public function listMember(Request $request)
     {
         $listMember= Member::all()->toArray();
-        dd($listMember) ;
+        return $listMember ;
     }
 
     public function deleteMember($id)
@@ -45,9 +45,6 @@ class MemberController extends Controller
         $memberEdit->information=$data['information'];
         $memberEdit->birthday=$data['birthday'];
         $memberEdit->position_id=$data['position_id'];
-        $memberEdit->position = DB::table('positions')
-            ->where('id', $memberEdit->position_id)
-            ->value('name');
         $memberEdit->gender=$data['gender'];
         if ($request->hasFile('avatar')) {
             $file = $request->avatar;
@@ -67,9 +64,6 @@ class MemberController extends Controller
         $newMember->information=$data['information'];
         $newMember->birthday=$data['birthday'];
         $newMember->position_id=$data['position_id'];
-        $newMember->position =DB::table('positions')
-            ->where('id', $newMember->position_id)
-            ->value('name');
         $newMember->gender=$data['gender'];
         if ($request->hasFile('avatar')) {
             $file = $request->avatar;

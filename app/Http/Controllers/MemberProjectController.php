@@ -31,6 +31,7 @@ class MemberProjectController extends Controller
     }
     public function getEditMemberProject($id)
     {
+        
              $item=MemberProject::find($id)->toArray();
              return view('test_edit', ['id'=>$id, 'item'=>$item]);
     }
