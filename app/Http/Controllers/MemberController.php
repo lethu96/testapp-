@@ -1,9 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCreateMember;
+use App\Http\Requests\StoreEditMember;
 use App\Member;
 use App\User;
 use App\Position;
@@ -33,10 +33,10 @@ class MemberController extends Controller
     public function getEditMember($id)
     {
         $item = Member::find($id)->toArray();
-        return view('test', ['id'=>$id, 'item'=>$item]);
+        return view('editmember', ['id'=>$id, 'item'=>$item]);
     }
 
-    public function editMember(StoreCreateMember $request)
+    public function editMember(StoreEditMember $request)
     {
         $data=$request->all();
         $memberEdit=Member::find($data['id']);
@@ -71,6 +71,6 @@ class MemberController extends Controller
             $newMember->avatar = $file->getClientOriginalName();
         }
         $newMember->save();
-        return $newMember;
+         return $newMember;
     }
 }

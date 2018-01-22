@@ -23,7 +23,7 @@ class MemberProjectController extends Controller
     {
         $data= $request->all();
         $newMp=new MemberProject();
-        $newMp->meber_id=$data['member_id'];
+        $newMp->meber_id=$data['meber-id'];
         $newMp->project_id=$data['project_id'];
         $newMp->role=$data['role'];
         $newMp->save();
