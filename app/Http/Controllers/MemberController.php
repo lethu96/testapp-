@@ -36,7 +36,7 @@ class MemberController extends Controller
         return view('editmember', ['id'=>$id, 'item'=>$item]);
     }
 
-    public function editMember(StoreEditMember $request)
+    public function editMember(StoreCreateMember $request)
     {
         $data=$request->all();
         $memberEdit=Member::find($data['id']);
@@ -71,6 +71,6 @@ class MemberController extends Controller
             $newMember->avatar = $file->getClientOriginalName();
         }
         $newMember->save();
-         return $newMember;
+        return $newMember;
     }
 }
