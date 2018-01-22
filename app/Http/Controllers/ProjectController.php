@@ -11,7 +11,7 @@ class ProjectController extends Controller
     public function listProject(Request $request)
     {
         $listProject= Project::all()->toArray();
-        dd($listProject) ;
+        return $listProject;
     }
     public function deleteProject($id)
     {
@@ -19,8 +19,9 @@ class ProjectController extends Controller
         $member ->delete();
         return "xóa thành công" ;
     }
-    public function createProject(StoreCreateProject $request)
+    public function createProject(StoreCreateProjectS $request)
     {
+
         $data=$request->all();
         $newProject=new Project();
         $newProject->name=$data['name'];
@@ -29,12 +30,12 @@ class ProjectController extends Controller
         $newProject->type=$data['type'];
         $newProject->status=$data['status'];
         $newProject->save();
-        return $newProject;
+        return response()->json($newProject);
     }
     public function getEditProject($id)
     {
         $item=Project::find($id)->toArray();
-        return view('test', ['id'=>$id, 'item'=>$item]);
+        return view('editproject', ['id'=>$id, 'item'=>$item]);
     }
     public function editProject(StoreCreateProject $request)
     {
