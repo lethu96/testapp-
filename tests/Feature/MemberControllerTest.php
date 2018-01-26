@@ -41,7 +41,7 @@ class MemberControllerTest extends TestCase
         'gender' => 'female',
         'avatar' => $file,
         ])->toArray();
-        $response=$this->json('POST', 'members/create', $newMember);
+        $response = $this->json('POST', 'members/create', $newMember);
         $this->assertEquals(200, $response->status());
         $this->assertDatabaseHas('members', [
             'name' => $newMember['name'],
@@ -60,7 +60,7 @@ class MemberControllerTest extends TestCase
         $path = public_path().'/img/test/'.$name;
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpeg', filesize($path), null, true);
-        $newMember =[
+        $newMember = [
         'name' => 'thuuu',
         'information' => 'interu',
         'phone_number' => '09716945',
@@ -88,7 +88,7 @@ class MemberControllerTest extends TestCase
         $path = public_path().'/img/test/'.$name;
         copy($stub, $path);
         $file  = new UploadedFile($path, $name, 'image/jpg', filesize($path), null, true) ;
-        $newMember =[
+        $newMember = [
         'name' => 'thuuu',
         'information' => 'interu',
         'phone_number' => '09716945',
@@ -116,7 +116,7 @@ class MemberControllerTest extends TestCase
         $path = public_path().'/img/test/'.$name;
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpg', filesize($path), null, true);
-        $newMember =[
+        $newMember = [
         'name' => 'thuuu',
         'information' => 'interu',
         'phone_number' => '09716945',
@@ -144,7 +144,7 @@ class MemberControllerTest extends TestCase
         $path = public_path().'/img/test/'.$name;
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpg', filesize($path), null, true);
-        $array =[
+        $array = [
         'id' => 1,
         'name' => 'thuuu',
         'information' => 'interu',
@@ -183,7 +183,7 @@ class MemberControllerTest extends TestCase
         $path = public_path().'/img/test/'.$name;
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpg', filesize($path), null, true);
-        $array =[
+        $array = [
         'id' => 1,
         'name' => 'thuuu',
         'information' => 'interu',
@@ -222,7 +222,7 @@ class MemberControllerTest extends TestCase
         $path = public_path().'/img/test/'.$name;
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpeg', filesize($path), null, true);
-        $array =[
+        $array = [
         'id' => 1,
         'name' => 'thuuu',
         'information' => 'interu',

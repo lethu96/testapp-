@@ -10,10 +10,6 @@ use Illuminate\Support\Facades\Response;
 
 class ProjectController extends Controller
 {
-    public function show($id)
-    {
-    }
-
     public function index(Request $request)
     {
         $listProject = Project::all()->toArray();

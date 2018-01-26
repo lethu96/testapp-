@@ -18,24 +18,13 @@ class MemberController extends Controller
         return $listMember ;
     }
 
-    public function create()
-    {
-    }
-
-    public function show($id)
-    {
-    }
-
-    public function edit($id)
-    {
-    }
-
     public function destroy(Request $request)
     {
-        $id = $request -> id;
+        $id = $request->id;
         if ($member = Member::find($id)) {
-        $listMember = Member::all() ->toArray();
-        return $listMember ;
+            $member->delete();
+            $listMember = Member::all() ->toArray();
+            return $listMember ;
         }
         return ["message" => "Doesn't Exit Item"];
     }
@@ -55,8 +44,8 @@ class MemberController extends Controller
                 $file->move("img", $file->getClientOriginalName());
                 $memberEdit->avatar = mt_rand(1000, 10000).'-'.$file->getClientOriginalName();
             }
-                $memberEdit->save();
-                return $memberEdit;
+            $memberEdit->save();
+            return $memberEdit;
         }
         return ["message" => "Doesn't Exit Member"];
     }

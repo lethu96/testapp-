@@ -49,7 +49,7 @@ class ProjectControllerTest extends TestCase
     {
         $json = '{"id":1,"name":"test","information":"tr",'.
         '"deadline":"2018-02-25","type":"single","status":"planned"}';
-        $array1=[
+        $array1 = [
         'id' => 1,
         'name' => 'test',
         'information' => 'tr',
@@ -68,7 +68,7 @@ class ProjectControllerTest extends TestCase
     {
         $json = '{"name":"testapp","information":"traniing",'.
         '"deadline":"2018-02-25","type":"lab","status":"planned","id":1}';
-        $array=[
+        $array = [
             'name' => 'testapp',
             'information' => 'traniing',
             'deadline' => '2018-02-25',
@@ -83,7 +83,7 @@ class ProjectControllerTest extends TestCase
 
     public function testAddProjectFailWithNameNull()
     {
-        $array=[
+        $array = [
             'name' => 'thu123$#%',
             'information' => 'traniing',
             'deadline' => '2018-01-22',
@@ -103,14 +103,14 @@ class ProjectControllerTest extends TestCase
 
     public function testAddProjectWithNameMax10()
     {
-        $array=[
+        $array = [
             'name' => 'xinchaooooo',
             'information' => 'traniing',
             'deadline' => '2018-02-22',
             'type' => 'lab',
             'status' => 'planned',
         ];
-        $response=$this->json('POST', 'project/create', $array);
+        $response = $this->json('POST', 'project/create', $array);
         $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('projects', [
             'name' => $array['name'],
@@ -130,7 +130,7 @@ class ProjectControllerTest extends TestCase
             'type' => 'lab',
             'status' => 'planned',
         ];
-        $response=$this->json('POST', 'project/create', $array);
+        $response = $this->json('POST', 'project/create', $array);
         $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('projects', [
             'name' => $array['name'],
@@ -182,7 +182,7 @@ class ProjectControllerTest extends TestCase
             'type' => 'lab',
             'status' => 'planned',
         ];
-        $response=$this->json('POST', 'project/create', $array);
+        $response = $this->json('POST', 'project/create', $array);
         $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('projects', [
             'name' => $array['name'],
@@ -202,7 +202,7 @@ class ProjectControllerTest extends TestCase
             'type' => '',
             'status' => 'planned',
         ];
-        $response=$this->json('POST', 'project/create', $array);
+        $response = $this->json('POST', 'project/create', $array);
         $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('projects', [
             'name' => $array['name'],
@@ -222,7 +222,7 @@ class ProjectControllerTest extends TestCase
             'type' => 'lap',
             'status' => 'planned',
         ];
-        $response=$this->json('POST', 'project/create', $array);
+        $response = $this->json('POST', 'project/create', $array);
         $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('projects', [
             'name' => $array['name'],
@@ -242,7 +242,7 @@ class ProjectControllerTest extends TestCase
             'type' => 'lab',
             'status' => ' ',
         ];
-        $response=$this->json('POST', 'project/create', $array);
+        $response = $this->json('POST', 'project/create', $array);
         $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('projects', [
             'name' => $array['name'],
@@ -262,7 +262,7 @@ class ProjectControllerTest extends TestCase
             'type' => 'lap',
             'status' => 'plan',
         ];
-        $response=$this->json('POST', 'project/create', $array);
+        $response = $this->json('POST', 'project/create', $array);
         $response->assertStatus(422);
         $this->assertDatabaseMissing('projects', [
         'name' => $array['name'],
@@ -275,7 +275,7 @@ class ProjectControllerTest extends TestCase
 
     public function testEditProjectWithValidName()
     {
-        $array1=[
+        $array1 = [
             'name' => 'thu123$#%',
             'information' => 'traniing',
             'deadline' => '2018-01-22',
@@ -296,7 +296,7 @@ class ProjectControllerTest extends TestCase
 
     public function testEditProjectWithNameMax10()
     {
-        $array1=[
+        $array1 = [
         'name' => 'thuthuthuthuthuthu',
         'information' => 'traniing',
         'deadline' => '2018-01-22',
@@ -304,7 +304,7 @@ class ProjectControllerTest extends TestCase
         'status' => 'planned',
         ];
         $array = Factory(Project::class)->create()->toArray();
-        $response=$this->json('PUT', 'project/update', $array1);
+        $response = $this->json('PUT', 'project/update', $array1);
         $response->assertStatus(422, $response->status());
         $this->assertDatabaseMissing('projects', [
         'name' => $array1['name'],
@@ -353,7 +353,7 @@ class ProjectControllerTest extends TestCase
             'status' => 'planned',
         ];
         $array = Factory(Project::class)->create()->toArray();
-        $response=$this->json('PUT', 'project/update', $array1);
+        $response = $this->json('PUT', 'project/update', $array1);
         $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('projects', [
             'name' => $array1['name'],

@@ -17,4 +17,3 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::get('/list', 'MemberController@listMember');
     Route::get('/listdele/{id}', 'MemberController@deleteMember');
 });
-//Route::delete('member_projects/{id}','MemberProjectController@destroy');

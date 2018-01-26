@@ -15,18 +15,6 @@ class MemberProjectController extends Controller
         return $listMemberProject;
     }
 
-    public function create()
-    {
-    }
-
-    public function show($id)
-    {
-    }
-
-    public function edit($id)
-    {
-    }
-
     public function store(StoreCreateMemberProject $request)
     {
         $data = $request->all();
@@ -56,8 +44,8 @@ class MemberProjectController extends Controller
         $id = $request->id;
         if ($deleteMp = MemberProject::find($id)) {
             $deleteMp->delete();
-        $listMemberProject = MemberProject::all()->toArray();
-        return $listMemberProject;
+            $listMemberProject = MemberProject::all()->toArray();
+            return $listMemberProject;
         }
         return ["message" => "Doesn't Exit item MemberProject"];
     }

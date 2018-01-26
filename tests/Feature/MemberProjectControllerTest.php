@@ -35,15 +35,15 @@ class MemberProjectControllerTest extends TestCase
         $response = $this->call('DELETE', 'member_projects/destroy', $array);
         $this->assertEquals(200, $response->status());
         $this->assertDatabaseMissing('projects', [
-        'meber_id'=>$array['meber_id'],
-        'project_id'=>$array['project_id'],
-        'role'=>$array['role'],
+            'meber_id'=>$array['meber_id'],
+            'project_id'=>$array['project_id'],
+            'role'=>$array['role'],
         ]);
     }
     public function testEditMemberProjectSuccess()
     {
         $json = '{"id":1,"meber_id":1,"project_id":1,"role":"haha"}';
-        $array1=[
+        $array1 = [
             'id'=>1,
             'meber_id'=>1,
             'project_id'=>1,
@@ -58,13 +58,13 @@ class MemberProjectControllerTest extends TestCase
     public function testAddMemberProjecSuccess()
     {
         $json = '{"meber_id":1,"project_id":1,"role":"haha","id":1}';
-        $array1=[
+        $array1 = [
             'id'=>1,
             'meber_id'=>1,
             'project_id'=>1,
             'role'=>'haha',
         ];
-        $response=$this->json('POST', 'member_projects/create', $array1);
+        $response = $this->json('POST', 'member_projects/create', $array1);
         $this->assertSame($json, $response->getContent());
         $response->assertStatus(200, $response->status());
         $response->assertSuccessful();
@@ -72,25 +72,25 @@ class MemberProjectControllerTest extends TestCase
     public function testAddMemberProjecSuccessWithRoleNull()
     {
         $json = '{"meber_id":1,"project_id":1,"role":"","id":1}';
-        $array1=[
+        $array1 = [
             'id'=>1,
             'meber_id'=>1,
             'project_id'=>1,
             'role'=>'',
         ];
-        $response=$this->json('POST', 'member_projects/create', $array1);
+        $response = $this->json('POST', 'member_projects/create', $array1);
         $this->assertSame($json, $response->getContent());
         $response->assertStatus(200, $response->status());
         $response->assertSuccessful();
     }
     public function testAddMemberProjectWithMemberIdRequired()
     {
-        $array=[
+        $array = [
             'meber_id'=>'',
             'project_id'=>1,
             'role'=>'haha',
         ];
-        $response=$this->json('POST', 'member_projects/create', $array);
+        $response = $this->json('POST', 'member_projects/create', $array);
         $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('projects', [
             'meber_id'=>$array['meber_id'],
@@ -100,12 +100,12 @@ class MemberProjectControllerTest extends TestCase
     }
     public function testAddMemberProjectWithProjectIdRequired()
     {
-        $array=[
+        $array = [
         'meber_id'=>1,
         'project_id'=>'',
         'role'=>'haha',
         ];
-        $response=$this->json('POST', 'member_projects/create', $array);
+        $response = $this->json('POST', 'member_projects/create', $array);
         $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('projects', [
             'meber_id'=>$array['meber_id'],
@@ -115,7 +115,7 @@ class MemberProjectControllerTest extends TestCase
     }
     public function testAddMemberProjectWithValidMemberId()
     {
-        $array=[
+        $array = [
             'meber_id'=>'eeee',
             'project_id'=>1,
             'role'=>'haha',
@@ -130,12 +130,12 @@ class MemberProjectControllerTest extends TestCase
     }
     public function testAddMemberProjectWithValidProjectId()
     {
-        $array=[
+        $array = [
             'meber_id'=>1,
             'project_id'=>'ddd',
             'role'=>'haha',
         ];
-        $response=$this->json('POST', 'member_projects/create', $array);
+        $response = $this->json('POST', 'member_projects/create', $array);
         $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('projects', [
             'meber_id'=>$array['meber_id'],
@@ -145,12 +145,12 @@ class MemberProjectControllerTest extends TestCase
     }
     public function testEditMemberProjectWithValidMemberId()
     {
-        $array=[
+        $array = [
             'meber_id'=>'eeee',
             'project_id'=>1,
             'role'=>'haha',
         ];
-        $response=$this->json('PUT', 'member_projects/update', $array);
+        $response = $this->json('PUT', 'member_projects/update', $array);
         $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('projects', [
             'meber_id'=>$array['meber_id'],
@@ -160,12 +160,12 @@ class MemberProjectControllerTest extends TestCase
     }
     public function testEditMemberProjectWithValidProjectId()
     {
-        $array=[
+        $array = [
             'meber_id'=>1,
             'project_id'=>'ddd',
             'role'=>'haha',
         ];
-        $response=$this->json('PUT', 'member_projects/update', $array);
+        $response = $this->json('PUT', 'member_projects/update', $array);
         $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('projects', [
             'meber_id'=>$array['meber_id'],

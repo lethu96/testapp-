@@ -22,4 +22,32 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
+$factory->define(App\Project::class, function (Faker $faker) {
+    return [
+        'name'=>'halo',
+        'information'=>'halo',
+        'deadline'=>'2018-02-08',
+        'type'=>'lab',
+        'status'=>'planned',
+    ];
+});
 
+$factory->define(App\MemberProject::class, function (Faker $faker) {
+    return [
+        'meber_id' =>$faker->randomDigit,
+        'project_id' => $faker->randomDigit,
+        'role' => $faker->name,
+    ];
+});
+
+$factory->define(App\Member::class, function (Faker $faker) {
+    return [
+        'name'=>$faker->name,
+        'phone_number'=>$faker->randomDigit,
+        'information'=>$faker->name,
+        'birthday'=>$faker->dateTimeBetween('-7300 days', '+1 days'),
+        'position_id'=>$faker->randomDigit,
+        'gender'=>'male',
+        'avatar'=> str_random(30)
+    ];
+});
