@@ -24,8 +24,8 @@ class StoreCreateMemberProject extends FormRequest
     public function rules()
     {
         return [
-            'project_id'=>'required',
-            'member_id'=>'required'
+            'project_id'=>'required|integer',
+            'meber_id'=>'required|integer'
         ];
     }
 }

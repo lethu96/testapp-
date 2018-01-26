@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Response;
 
 class StoreCreateProject extends FormRequest
 {
@@ -26,9 +27,14 @@ class StoreCreateProject extends FormRequest
         return [
             'name'=>'required|regex:/^[A-Za-z0-9,\-\.]+$/|max:10',
             'information'=>'max:300',
-            'deadline'=>'date',
+            'deadline'=>'date|after:now',
             'type'=>'required|in: "lab", "single", "acceptance"',
             'status'=>'required|in: "planned", "onhold", "doing", "done","cancelled"',
         ];
+    }
+    
+    public function response(array $errors)
+    {
+        return response()->json(['error' => $errors], 422);
     }
 }

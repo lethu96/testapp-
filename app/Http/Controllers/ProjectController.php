@@ -4,49 +4,58 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCreateProject;
+use App\Http\Requests\StoreEditProject;
 use App\Project;
+use Illuminate\Support\Facades\Response;
 
 class ProjectController extends Controller
 {
-    public function listProject(Request $request)
+    public function show($id)
     {
-        $listProject= Project::all()->toArray();
+    }
+
+    public function index(Request $request)
+    {
+        $listProject = Project::all()->toArray();
         return $listProject;
     }
-    public function deleteProject($id)
-    {
-        $member=Project::find($id);
-        $member ->delete();
-        return "xóa thành công" ;
-    }
-    public function createProject(StoreCreateProjectS $request)
-    {
 
-        $data=$request->all();
-        $newProject=new Project();
-        $newProject->name=$data['name'];
-        $newProject->information=$data['information'];
-        $newProject->deadline=$data['deadline'];
-        $newProject->type=$data['type'];
-        $newProject->status=$data['status'];
+    public function destroy(Request $request)
+    {
+        $id = $request->id;
+        if ($project = Project::find($id)) {
+            $project->delete();
+            $listProject = Project::all()->toArray();
+            return $listProject;
+        }
+        return ["message" => "Doesn't exit this item"];
+    }
+
+    public function store(StoreCreateProject $request)
+    {
+        $data = $request->all();
+        $newProject = new Project();
+        $newProject->name = $data['name'];
+        $newProject->information = $data['information'];
+        $newProject->deadline = $data['deadline'];
+        $newProject->type = $data['type'];
+        $newProject->status = $data['status'];
         $newProject->save();
-        return response()->json($newProject);
+        return $newProject;
     }
-    public function getEditProject($id)
+
+    public function update(StoreCreateProject $request)
     {
-        $item=Project::find($id)->toArray();
-        return view('editproject', ['id'=>$id, 'item'=>$item]);
-    }
-    public function editProject(StoreCreateProject $request)
-    {
-        $data=$request->all();
-        $editProject=Project::find($data['id']);
-        $editProject->name=$data['name'];
-        $editProject->information=$data['information'];
-        $editProject->deadline=$data['deadline'];
-        $editProject->type=$data['type'];
-        $editProject->status=$data['status'];
-        $editProject->save();
-        return $editProject;
+        $data = $request->all();
+        if ($editProject = Project::find($data['id'])) {
+            $editProject->name = $data['name'];
+            $editProject->information = $data['information'];
+            $editProject->deadline = $data['deadline'];
+            $editProject->type = $data['type'];
+            $editProject->status = $data['status'];
+            $editProject->save();
+            return $editProject;
+        }
+        return ["message" => "Doesn't Exit item Project"];
     }
 }

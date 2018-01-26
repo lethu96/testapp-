@@ -24,13 +24,15 @@ class TestRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|regex:/^[A-Za-z0-9,\-\.]+$/|max:50',
-            'information' =>'max:300',
-            'phone_number'=>'required|regex:/^[\(\)\-\.\+\/0-9]+$/|max:20',
-            'birthday'=>'required|date|before:yesterday|after:60 year ago',
-            'position_id'=>'required',
-            'avatar'=>'required|mimes:png,jpeg,gif|max:10240',
-            'gender'=>'required|in:"male","female"'
+            'name'=>'regex:/^[A-Za-z0-9,\-\.]+$/|max:10',
+            'information'=>'max:300',
+            'deadline'=>'date|after:now',
+            'type'=>'in: "lab", "single", "acceptance"',
+            'status'=>'in: "planned", "onhold", "doing", "done","cancelled"',
         ];
+    }
+    public function response(array $errors)
+    {
+        return response()->json(['error' => $errors]);
     }
 }

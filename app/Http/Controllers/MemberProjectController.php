@@ -4,44 +4,61 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCreateMemberProject;
+use App\Http\Requests\StoreEditMemberProject;
 use App\MemberProject;
 
 class MemberProjectController extends Controller
 {
-    public function listMemberProject()
+    public function index()
     {
-        $listMemberProject=MemberProject::all()->toArray();
+        $listMemberProject = MemberProject::all()->toArray();
         return $listMemberProject;
     }
-    public function deleteMemberProject($id)
+
+    public function create()
     {
-        $deleteMemberProject=MemberProject::find($id);
-        $deleteMemberProject->delete();
-        return "delete item successful";
     }
-    public function createMemberProject(StoreCreateMemberProject $request)
+
+    public function show($id)
     {
-        $data= $request->all();
-        $newMp=new MemberProject();
-        $newMp->meber_id=$data['meber_id'];
-        $newMp->project_id=$data['project_id'];
-        $newMp->role=$data['role'];
+    }
+
+    public function edit($id)
+    {
+    }
+
+    public function store(StoreCreateMemberProject $request)
+    {
+        $data = $request->all();
+        $newMp = new MemberProject();
+        $newMp->meber_id = $data['meber_id'];
+        $newMp->project_id = $data['project_id'];
+        $newMp->role = $data['role'];
         $newMp->save();
         return $newMp;
     }
-    public function getEditMemberProject($id)
+
+    public function update(StoreCreateMemberProject $request)
     {
-        $item=MemberProject::find($id)->toArray();
-        return view('layouts.memberproject.editmp', ['id'=>$id, 'item'=>$item]);
+        $data = $request->all();
+        if ($editMp = MemberProject::find($data['id'])) {
+            $editMp->meber_id = $data['meber_id'];
+            $editMp->project_id = $data['project_id'];
+            $editMp->role = $data['role'];
+            $editMp->save();
+            return $editMp;
+        }
+        return ["message" => "Doesn't Exit item"];
     }
-    public function editMemberProject(StoreCreateMemberProject $request)
+
+    public function destroy(Request $request)
     {
-        $data=$request->all();
-        $editMp=MemberProject::find($data['id']);
-        $editMp->meber_id=$data['meber_id'];
-        $editMp->project_id=$data['project_id'];
-        $editMp->role=$data['role'];
-        $editMp->save();
-        return $editMp;
+        $id = $request->id;
+        if ($deleteMp = MemberProject::find($id)) {
+            $deleteMp->delete();
+        $listMemberProject = MemberProject::all()->toArray();
+        return $listMemberProject;
+        }
+        return ["message" => "Doesn't Exit item MemberProject"];
     }
 }
