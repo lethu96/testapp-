@@ -27,7 +27,7 @@ class MemberController extends Controller
             return $listMember ;
         }
         return response()->json([
-            'message' => 'Doesnt Exit Item'
+                'message' => 'Doesnt Exit Item'
             ]);
     }
 
@@ -50,7 +50,7 @@ class MemberController extends Controller
             return $memberEdit;
         }
         return response()->json([
-            'message' => 'Doesnt Exit Item'
+                'message' => 'Doesnt Exit Item'
             ]);
     }
 

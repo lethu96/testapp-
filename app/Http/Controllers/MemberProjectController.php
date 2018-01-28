@@ -37,7 +37,7 @@ class MemberProjectController extends Controller
             return $editMp;
         }
         return response()->json([
-            'message' => 'Doesnt Exit Item'
+                'message' => 'Doesnt Exit Item'
             ]);
     }
 
@@ -50,7 +50,7 @@ class MemberProjectController extends Controller
             return $listMemberProject;
         }
         return response()->json([
-            'message' => 'Doesnt Exit Item'
+                'message' => 'Doesnt Exit Item'
             ]);
     }
 }
