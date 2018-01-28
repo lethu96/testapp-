@@ -24,7 +24,9 @@ class ProjectController extends Controller
             $listProject = Project::all()->toArray();
             return $listProject;
         }
-        return ["message" => "Doesn't exit this item"];
+        return response()->json([
+            'message' => 'Doesnt Exit Item'
+            ]);
     }
 
     public function store(StoreCreateProject $request)
@@ -52,6 +54,8 @@ class ProjectController extends Controller
             $editProject->save();
             return $editProject;
         }
-        return ["message" => "Doesn't Exit item Project"];
+        return response()->json([
+            'message' => 'Doesnt Exit Item'
+            ]);
     }
 }

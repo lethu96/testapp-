@@ -14,7 +14,7 @@ class MemberController extends Controller
 {
     public function index(Request $request)
     {
-        $listMember = Member::all() ->toArray();
+        $listMember = Member::all()->toArray();
         return $listMember ;
     }
 
@@ -26,7 +26,9 @@ class MemberController extends Controller
             $listMember = Member::all() ->toArray();
             return $listMember ;
         }
-        return ["message" => "Doesn't Exit Item"];
+        return response()->json([
+            'message' => 'Doesnt Exit Item'
+            ]);
     }
 
     public function update(StoreCreateMember $request)
@@ -47,7 +49,9 @@ class MemberController extends Controller
             $memberEdit->save();
             return $memberEdit;
         }
-        return ["message" => "Doesn't Exit Member"];
+        return response()->json([
+            'message' => 'Doesnt Exit Item'
+            ]);
     }
 
     public function store(StoreCreateMember $request)

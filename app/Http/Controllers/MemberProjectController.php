@@ -36,7 +36,9 @@ class MemberProjectController extends Controller
             $editMp->save();
             return $editMp;
         }
-        return ["message" => "Doesn't Exit item"];
+        return response()->json([
+            'message' => 'Doesnt Exit Item'
+            ]);
     }
 
     public function destroy(Request $request)
@@ -47,6 +49,8 @@ class MemberProjectController extends Controller
             $listMemberProject = MemberProject::all()->toArray();
             return $listMemberProject;
         }
-        return ["message" => "Doesn't Exit item MemberProject"];
+        return response()->json([
+            'message' => 'Doesnt Exit Item'
+            ]);
     }
 }

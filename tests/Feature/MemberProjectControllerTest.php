@@ -23,12 +23,14 @@ class MemberProjectControllerTest extends TestCase
     {
         $this->assertTrue(true);
     }
+
     public function testListMemberProjectSuccess()
     {
         $project = factory(MemberProject::class)->create();
         $response = $this->get('member_projects');
         $response->assertStatus(200);
     }
+
     public function testDeleteMemberProjectSuccess()
     {
         $array = Factory(MemberProject::class)->create()->toArray();
@@ -40,6 +42,7 @@ class MemberProjectControllerTest extends TestCase
             'role'=>$array['role'],
         ]);
     }
+
     public function testEditMemberProjectSuccess()
     {
         $json = '{"id":1,"meber_id":1,"project_id":1,"role":"haha"}';
@@ -55,6 +58,7 @@ class MemberProjectControllerTest extends TestCase
         $response->assertStatus(200, $response->status());
         $response->assertSuccessful();
     }
+
     public function testAddMemberProjecSuccess()
     {
         $json = '{"meber_id":1,"project_id":1,"role":"haha","id":1}';
@@ -69,6 +73,7 @@ class MemberProjectControllerTest extends TestCase
         $response->assertStatus(200, $response->status());
         $response->assertSuccessful();
     }
+
     public function testAddMemberProjecSuccessWithRoleNull()
     {
         $json = '{"meber_id":1,"project_id":1,"role":"","id":1}';
@@ -83,6 +88,7 @@ class MemberProjectControllerTest extends TestCase
         $response->assertStatus(200, $response->status());
         $response->assertSuccessful();
     }
+
     public function testAddMemberProjectWithMemberIdRequired()
     {
         $array = [
@@ -98,6 +104,7 @@ class MemberProjectControllerTest extends TestCase
             'role'=>$array['role'],
             ]);
     }
+
     public function testAddMemberProjectWithProjectIdRequired()
     {
         $array = [
@@ -113,6 +120,7 @@ class MemberProjectControllerTest extends TestCase
             'role'=>$array['role'],
             ]);
     }
+
     public function testAddMemberProjectWithValidMemberId()
     {
         $array = [
@@ -128,6 +136,7 @@ class MemberProjectControllerTest extends TestCase
             'role'=>$array['role'],
            ]);
     }
+
     public function testAddMemberProjectWithValidProjectId()
     {
         $array = [
@@ -143,6 +152,7 @@ class MemberProjectControllerTest extends TestCase
             'role'=>$array['role'],
            ]);
     }
+
     public function testEditMemberProjectWithValidMemberId()
     {
         $array = [
@@ -158,6 +168,7 @@ class MemberProjectControllerTest extends TestCase
             'role'=>$array['role'],
            ]);
     }
+
     public function testEditMemberProjectWithValidProjectId()
     {
         $array = [
