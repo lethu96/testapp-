@@ -24,7 +24,7 @@ class MemberController extends Controller
             $member->delete();
             $listMember = Member::all() ->toArray();
             return response()->json([
-                'message' => 'Delete success '.$id
+                'message' => 'Delete success Member '.$id
             ]);
         }
         return response()->json([

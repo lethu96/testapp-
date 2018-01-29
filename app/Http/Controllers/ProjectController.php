@@ -23,7 +23,7 @@ class ProjectController extends Controller
             $project->delete();
             $listProject = Project::all()->toArray();
             return response()->json([
-                'message' => 'Delete success '.$id
+                'message' => 'Delete success project '.$id
             ]);
         }
         return response()->json([

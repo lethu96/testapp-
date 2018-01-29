@@ -48,7 +48,7 @@ class MemberProjectController extends Controller
             $deleteMp->delete();
             $listMemberProject = MemberProject::all()->toArray();
             return response()->json([
-                'message' => 'Delete success '.$id
+                'message' => 'Delete success MemberProject '.$id
             ]);
         }
         return response()->json([
