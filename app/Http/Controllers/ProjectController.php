@@ -22,7 +22,9 @@ class ProjectController extends Controller
         if ($project = Project::find($id)) {
             $project->delete();
             $listProject = Project::all()->toArray();
-            return $listProject;
+            return response()->json([
+                'message' => 'Delete success '.$id
+            ]);
         }
         return response()->json([
                 'status' => '404'

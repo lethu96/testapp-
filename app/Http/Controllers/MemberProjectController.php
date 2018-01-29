@@ -47,7 +47,9 @@ class MemberProjectController extends Controller
         if ($deleteMp = MemberProject::find($id)) {
             $deleteMp->delete();
             $listMemberProject = MemberProject::all()->toArray();
-            return $listMemberProject;
+            return response()->json([
+                'message' => 'Delete success '.$id
+            ]);
         }
         return response()->json([
                 'status' => '404'

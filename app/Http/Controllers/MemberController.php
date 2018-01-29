@@ -23,7 +23,9 @@ class MemberController extends Controller
         if ($member = Member::find($id)) {
             $member->delete();
             $listMember = Member::all() ->toArray();
-            return $listMember ;
+                    return response()->json([
+                'message' => 'Delete success '.$id
+            ]);
         }
         return response()->json([
                 'status' => '404'

@@ -24,9 +24,11 @@ class MemberProjectControllerTest extends TestCase
 
     public function testDeleteMemberProjectSuccess()
     {
+        $json = '{"message":"Delete success 1"}';
         $array = Factory(MemberProject::class)->create()->toArray();
         $response = $this->call('DELETE', 'member_projects/destroy', $array);
         $this->assertEquals(200, $response->status());
+        $this->assertSame($json, $response->getContent());
         $this->assertDatabaseMissing('projects', [
             'member_id'=>$array['member_id'],
             'project_id'=>$array['project_id'],
@@ -77,11 +79,13 @@ class MemberProjectControllerTest extends TestCase
         $response = $this->json('POST', 'member_projects/create', $array1);
         $this->assertSame($json, $response->getContent());
         $response->assertStatus(200, $response->status());
+        $this->assertSame($json, $response->getContent());
         $response->assertSuccessful();
     }
 
     public function testAddMemberProjectWithMemberIdRequired()
     {
+        $json = '{"message":"The given data was invalid.","errors":{"member_id":["The member id field is required."]}}';
         $array = [
             'member_id'=>'',
             'project_id'=>1,
@@ -89,7 +93,8 @@ class MemberProjectControllerTest extends TestCase
         ];
         $response = $this->json('POST', 'member_projects/create', $array);
         $response->assertStatus(422, $response->status());
-         $this->assertDatabaseMissing('projects', [
+        $this->assertSame($json, $response->getContent());
+        $this->assertDatabaseMissing('projects', [
             'member_id'=>$array['member_id'],
             'project_id'=>$array['project_id'],
             'role'=>$array['role'],
@@ -98,6 +103,7 @@ class MemberProjectControllerTest extends TestCase
 
     public function testAddMemberProjectWithProjectIdRequired()
     {
+        $json = '{"message":"The given data was invalid.","errors":{"project_id":["The project id field is required."]}}';
         $array = [
         'member_id'=>1,
         'project_id'=>'',
@@ -105,7 +111,8 @@ class MemberProjectControllerTest extends TestCase
         ];
         $response = $this->json('POST', 'member_projects/create', $array);
         $response->assertStatus(422, $response->status());
-         $this->assertDatabaseMissing('projects', [
+        $this->assertSame($json, $response->getContent());
+        $this->assertDatabaseMissing('projects', [
             'member_id'=>$array['member_id'],
             'project_id'=>$array['project_id'],
             'role'=>$array['role'],
@@ -114,6 +121,7 @@ class MemberProjectControllerTest extends TestCase
 
     public function testAddMemberProjectWithNotValidMemberId()
     {
+        $json = '{"message":"The given data was invalid.","errors":{"member_id":["The member id must be an integer."]}}';
         $array = [
             'member_id'=>'eeee',
             'project_id'=>1,
@@ -126,10 +134,12 @@ class MemberProjectControllerTest extends TestCase
             'project_id'=>$array['project_id'],
             'role'=>$array['role'],
            ]);
+        $this->assertSame($json, $response->getContent());
     }
 
     public function testAddMemberProjectWithNotValidProjectId()
     {
+        $json = '{"message":"The given data was invalid.","errors":{"project_id":["The project id must be an integer."]}}';
         $array = [
             'member_id'=>1,
             'project_id'=>'ddd',
@@ -142,10 +152,12 @@ class MemberProjectControllerTest extends TestCase
             'project_id'=>$array['project_id'],
             'role'=>$array['role'],
            ]);
+         $this->assertSame($json, $response->getContent());
     }
 
     public function testEditMemberProjectWithNotValidMemberId()
     {
+        $json = '{"message":"The given data was invalid.","errors":{"member_id":["The member id must be an integer."]}}';
         $array = [
             'member_id'=>'eeee',
             'project_id'=>1,
@@ -158,10 +170,12 @@ class MemberProjectControllerTest extends TestCase
             'project_id'=>$array['project_id'],
             'role'=>$array['role'],
            ]);
+         $this->assertSame($json, $response->getContent());
     }
 
     public function testEditMemberProjectWithNotValidProjectId()
     {
+        $json = '{"message":"The given data was invalid.","errors":{"project_id":["The project id must be an integer."]}}';
         $array = [
             'member_id'=>1,
             'project_id'=>'ddd',
@@ -174,5 +188,6 @@ class MemberProjectControllerTest extends TestCase
             'project_id'=>$array['project_id'],
             'role'=>$array['role'],
            ]);
+         $this->assertSame($json, $response->getContent());
     }
 }

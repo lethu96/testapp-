@@ -25,7 +25,7 @@ class StoreEditMemberProject extends FormRequest
     {
         return [
             'project_id'=>'integer',
-            'meber_id'=>'integer'
+            'member_id'=>'integer'
         ];
     }
 }
