@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Feature;
 
 use Tests\TestCase;
@@ -13,36 +12,33 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Http\Response;
-use Lang;
-use File;
 
 class MemberControllerTest extends TestCase
 {
     use DatabaseMigrations;
     use WithoutMiddleware;
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
+
     public function testCreateMemberHaveAvatar()
     {
         $stub = public_path().'/img/aaa.jpg';
-        $name = str_random(8).'.jpg';
+        $name = 'imgtest'.'.jpg';
         $path = public_path().'/img/test/'.$name;
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpg', filesize($path), null, true);
+        $json = '{"name":"thu","phone_number":"0978716945","information":"inter",'.
+        '"birthday":"1996-12-12","position_id":1,"gender":"female","avatar":"imgtest.jpg","id":2}';
         $newMember = Factory(Member::class)->create([
-        'name' => 'thu',
-        'information' => 'inter',
-        'phone_number' => '0978716945',
-        'birthday' => '1996-12-12',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => $file,
+            'name' => 'thu',
+            'information' => 'inter',
+            'phone_number' => '0978716945',
+            'birthday' => '1996-12-12',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => $file,
         ])->toArray();
         $response = $this->json('POST', 'members/create', $newMember);
         $this->assertEquals(200, $response->status());
+        $this->assertSame($json, $response->getContent());
         $this->assertDatabaseHas('members', [
             'name' => $newMember['name'],
             'information' => $newMember['information'],
@@ -61,13 +57,13 @@ class MemberControllerTest extends TestCase
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpeg', filesize($path), null, true);
         $newMember = [
-        'name' => 'thuuu',
-        'information' => 'interu',
-        'phone_number' => '09716945',
-        'birthday' => '1996-12-10',
-        'position_id' => 3,
-        'gender' => 'female',
-        'avatar' => $file,
+            'name' => 'thuuu',
+            'information' => 'interu',
+            'phone_number' => '09716945',
+            'birthday' => '1996-12-10',
+            'position_id' => 3,
+            'gender' => 'female',
+            'avatar' => $file,
         ];
         $response = $this->json('POST', 'members/create', $newMember);
         $this->assertEquals(422, $response->status()) ;
@@ -89,13 +85,13 @@ class MemberControllerTest extends TestCase
         copy($stub, $path);
         $file  = new UploadedFile($path, $name, 'image/jpg', filesize($path), null, true) ;
         $newMember = [
-        'name' => 'thuuu',
-        'information' => 'interu',
-        'phone_number' => '09716945',
-        'birthday' => '1996-12-10',
-        'position_id' => 3,
-        'gender' => 'female',
-        'avatar' => $file,
+            'name' => 'thuuu',
+            'information' => 'interu',
+            'phone_number' => '09716945',
+            'birthday' => '1996-12-10',
+            'position_id' => 3,
+            'gender' => 'female',
+            'avatar' => $file,
         ];
         $response = $this->json('POST', 'members/create', $newMember);
         $this->assertEquals(200, $response->status());
@@ -117,13 +113,13 @@ class MemberControllerTest extends TestCase
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpg', filesize($path), null, true);
         $newMember = [
-        'name' => 'thuuu',
-        'information' => 'interu',
-        'phone_number' => '09716945',
-        'birthday' => '1996-12-10',
-        'position_id' => 3,
-        'gender' => 'female',
-        'avatar' => $file,
+            'name' => 'thuuu',
+            'information' => 'interu',
+            'phone_number' => '09716945',
+            'birthday' => '1996-12-10',
+            'position_id' => 3,
+            'gender' => 'female',
+            'avatar' => $file,
         ];
         $response = $this->json('POST', 'members/create', $newMember);
         $this->assertEquals(422, $response->status());
@@ -140,40 +136,33 @@ class MemberControllerTest extends TestCase
     public function testEditMemberSuccessHaveImage()
     {
         $stub = public_path().'/img/vnvd.jpg';
-        $name = str_random(8).'.jpg';
+        $name = 'imgtest'.'.jpg';
         $path = public_path().'/img/test/'.$name;
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpg', filesize($path), null, true);
-        $array = [
-        'id' => 1,
-        'name' => 'thuuu',
-        'information' => 'interu',
-        'phone_number' => '09716945',
-        'birthday' => '1996-12-10',
-        'position_id' => 3,
-        'gender' => 'female',
-        'avatar' => $file,
-        ];
-
+        $json = '{"id":1,"name":"thu","information":"inter","phone_number":"0978716945",'.
+        '"birthday":"1996-12-12","avatar":"imgtest.jpg","position_id":1,"gender":"female"}';
+        $newMember = Factory(Member::class)->create([
+            'name' => 'thu',
+            'information' => 'inter',
+            'phone_number' => '0978716945',
+            'birthday' => '1996-12-12',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => $file,
+        ])->toArray();
         $array1 = Factory(Member::class)->create([
-        'name' => 't',
-        'information' => 'in',
-        'phone_number' => '0945',
-        'birthday' => '1996-12-08',
-        'position_id' => 1,
-        'gender' => 'male',
-        'avatar' => 'uht.png',
+            'name' => 't',
+            'information' => 'in',
+            'phone_number' => '0945',
+            'birthday' => '1996-12-08',
+            'position_id' => 1,
+            'gender' => 'male',
+            'avatar' => 'uht.png',
         ]);
-        $response = $this->json('PUT', 'members/update', $array);
+        $response = $this->json('PUT', 'members/update', $newMember);
+        $this->assertSame($json, $response->getContent());
         $response->assertStatus(200, $response->status());
-        $this->assertDatabaseHas('members', [
-        'name' => $array['name'],
-        'information' => $array['information'],
-        'phone_number' => $array['phone_number'],
-        'birthday' => $array['birthday'],
-        'position_id' => $array['position_id'],
-        'gender' => $array['gender'],
-        ]);
     }
 
     public function testEditMemberWithHaveImageNotImage()
@@ -184,34 +173,34 @@ class MemberControllerTest extends TestCase
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpg', filesize($path), null, true);
         $array = [
-        'id' => 1,
-        'name' => 'thuuu',
-        'information' => 'interu',
-        'phone_number' => '09716945',
-        'birthday' => '1996-12-10',
-        'position_id' => 3,
-        'gender' => 'female',
-        'avatar' => $file,
+            'id' => 1,
+            'name' => 'thuuu',
+            'information' => 'interu',
+            'phone_number' => '09716945',
+            'birthday' => '1996-12-10',
+            'position_id' => 3,
+            'gender' => 'female',
+            'avatar' => $file,
         ];
 
         $array1 = Factory(Member::class)->create([
-        'name' => 't',
-        'information' => 'in',
-        'phone_number' => '0945',
-        'birthday' => '1996-12-08',
-        'position_id' => 1,
-        'gender' => 'male',
-        'avatar' => 'uht.png',
+            'name' => 't',
+            'information' => 'in',
+            'phone_number' => '0945',
+            'birthday' => '1996-12-08',
+            'position_id' => 1,
+            'gender' => 'male',
+            'avatar' => 'uht.png',
         ]);
         $response = $this->json('PUT', 'members/update', $array);
         $response->assertStatus(422, $response->status());
         $this->assertDatabaseMissing('members', [
-        'name' => $array['name'],
-        'information' => $array['information'],
-        'phone_number' => $array['phone_number'],
-        'birthday' => $array['birthday'],
-        'position_id' => $array['position_id'],
-        'gender' => $array['gender'],
+            'name' => $array['name'],
+            'information' => $array['information'],
+            'phone_number' => $array['phone_number'],
+            'birthday' => $array['birthday'],
+            'position_id' => $array['position_id'],
+            'gender' => $array['gender'],
         ]);
     }
 
@@ -223,14 +212,14 @@ class MemberControllerTest extends TestCase
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpeg', filesize($path), null, true);
         $array = [
-        'id' => 1,
-        'name' => 'thuuu',
-        'information' => 'interu',
-        'phone_number' => '09716945',
-        'birthday' => '1996-12-10',
-        'position_id' => 3,
-        'gender' => 'female',
-        'avatar' => $file,
+            'id' => 1,
+            'name' => 'thuuu',
+            'information' => 'interu',
+            'phone_number' => '09716945',
+            'birthday' => '1996-12-10',
+            'position_id' => 3,
+            'gender' => 'female',
+            'avatar' => $file,
         ];
         $array1 = Factory(Member::class)->create([
         'name' => 't',
@@ -299,7 +288,7 @@ class MemberControllerTest extends TestCase
         ]);
     }
 
-    public function testAddMemberWithValidName()
+    public function testAddMemberWithNotValidName()
     {
         $array = [
         'name' => 'xincha+_)',
@@ -397,7 +386,7 @@ class MemberControllerTest extends TestCase
             ]);
     }
 
-    public function testAddMemberWithPhoneNumberValid()
+    public function testAddMemberWithPhoneNumberNotValid()
     {
         $array = [
         'name' => 'halo',
@@ -466,7 +455,7 @@ class MemberControllerTest extends TestCase
             ]);
     }
 
-    public function testAddMemberWithBirthdayValidDate()
+    public function testAddMemberWithBirthdayNotValidDate()
     {
         $array = [
         'name' => 'halo',
@@ -489,7 +478,7 @@ class MemberControllerTest extends TestCase
             ]);
     }
 
-    public function testAddMemberWithBirthdayValidBefore()
+    public function testAddMemberWithBirthdayNotValidBefore()
     {
         $array = [
         'name' => 'halo',
@@ -512,7 +501,7 @@ class MemberControllerTest extends TestCase
             ]);
     }
 
-    public function testAddMemberWithBirthdayValidDateAfter()
+    public function testAddMemberWithBirthdayNotValidDateAfter()
     {
         $array = [
         'name' => 'halo',
@@ -558,7 +547,7 @@ class MemberControllerTest extends TestCase
             ]);
     }
 
-    public function testAddMemberWithPositionValid()
+    public function testAddMemberWithPositionNotValid()
     {
         $array = [
         'name' => 'halo',
@@ -604,7 +593,7 @@ class MemberControllerTest extends TestCase
             ]);
     }
 
-    public function testAddMemberWithGenderValid()
+    public function testAddMemberWithGenderNotValid()
     {
         $array = [
         'name' => 'halo',
@@ -627,7 +616,7 @@ class MemberControllerTest extends TestCase
             ]);
     }
 
-    public function testEditMemberWithValidName()
+    public function testEditMemberWithNotValidName()
     {
          $array = [
         'name' => 'xincha+_)',
@@ -705,7 +694,7 @@ class MemberControllerTest extends TestCase
             ]);
     }
 
-    public function testEditMemberWithPhoneNumberValid()
+    public function testEditMemberWithPhoneNumberNotValid()
     {
         $array = [
         'name' => 'halo',
@@ -753,7 +742,7 @@ class MemberControllerTest extends TestCase
             ]);
     }
 
-    public function testEditMemberWithBirthdayValidDate()
+    public function testEditMemberWithBirthdayNotValidDate()
     {
         $array = [
         'name' => 'halo',
@@ -777,7 +766,7 @@ class MemberControllerTest extends TestCase
             ]);
     }
 
-    public function testEditMemberWithBirthdayValidBefore()
+    public function testEditMemberWithBirthdayNotValidBefore()
     {
          $array = [
         'name' => 'halo',
@@ -801,7 +790,7 @@ class MemberControllerTest extends TestCase
             ]);
     }
 
-    public function testEditMemberWithBirthdayValidDateAfter()
+    public function testEditMemberWithBirthdayNotValidDateAfter()
     {
         $array = [
         'name' => 'halo',
@@ -825,7 +814,7 @@ class MemberControllerTest extends TestCase
             ]);
     }
 
-    public function testEditMemberWithPositionValid()
+    public function testEditMemberWithPositionNotValid()
     {
          $array = [
         'name' => 'halo',
@@ -849,7 +838,7 @@ class MemberControllerTest extends TestCase
             ]);
     }
 
-    public function testEditMemberWithGenderValid()
+    public function testEditMemberWithGenderNotValid()
     {
         $array = [
         'name' => 'halo',

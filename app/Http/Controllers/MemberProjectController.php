@@ -19,7 +19,7 @@ class MemberProjectController extends Controller
     {
         $data = $request->all();
         $newMp = new MemberProject();
-        $newMp->meber_id = $data['meber_id'];
+        $newMp->member_id = $data['member_id'];
         $newMp->project_id = $data['project_id'];
         $newMp->role = $data['role'];
         $newMp->save();
@@ -30,14 +30,14 @@ class MemberProjectController extends Controller
     {
         $data = $request->all();
         if ($editMp = MemberProject::find($data['id'])) {
-            $editMp->meber_id = $data['meber_id'];
+            $editMp->member_id = $data['member_id'];
             $editMp->project_id = $data['project_id'];
             $editMp->role = $data['role'];
             $editMp->save();
             return $editMp;
         }
         return response()->json([
-                'message' => 'Doesnt Exit Item'
+                'message' => 'Member does not exist: '.$data['id']
             ]);
     }
 
@@ -50,7 +50,7 @@ class MemberProjectController extends Controller
             return $listMemberProject;
         }
         return response()->json([
-                'message' => 'Doesnt Exit Item'
-            ]);
+                'status' => '404'
+            ],404);
     }
 }

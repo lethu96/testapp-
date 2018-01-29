@@ -8,12 +8,12 @@ use App\Project;
 
 class MemberProject extends Model
 {
-    protected $table="member_projects";
+    protected $table = "member_projects";
     protected $hidden = array('created_at', 'updated_at');
 
     public function member()
     {
-        return $this->hasMany('App\Member', 'meber_id', 'id');
+        return $this->hasMany('App\Member', 'member_id', 'id');
     }
     
     public function project()

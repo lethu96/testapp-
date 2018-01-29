@@ -25,8 +25,8 @@ class ProjectController extends Controller
             return $listProject;
         }
         return response()->json([
-                'message' => 'Doesnt Exit Item'
-            ]);
+                'status' => '404'
+            ],404);
     }
 
     public function store(StoreCreateProject $request)
@@ -55,7 +55,7 @@ class ProjectController extends Controller
             return $editProject;
         }
         return response()->json([
-                'message' => 'Doesnt Exit Item'
+            'message' => 'Member does not exist: '.$data['id']
             ]);
     }
 }

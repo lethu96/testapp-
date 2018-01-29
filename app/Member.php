@@ -8,7 +8,7 @@ use App\MemberProject;
 
 class Member extends Model
 {
-    protected $table="members";
+    protected $table = "members";
     protected $hidden = array('created_at', 'updated_at');
 
     public function positon()
@@ -18,6 +18,6 @@ class Member extends Model
     
     public function memberProject()
     {
-        return $this->belongsTo('App\MemberProject', 'meber_id', 'id');
+        return $this->belongsTo('App\MemberProject', 'member_id', 'id');
     }
 }

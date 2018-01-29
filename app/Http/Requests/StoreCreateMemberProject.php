@@ -25,7 +25,7 @@ class StoreCreateMemberProject extends FormRequest
     {
         return [
             'project_id'=>'required|integer',
-            'meber_id'=>'required|integer'
+            'member_id'=>'required|integer'
         ];
     }
 }

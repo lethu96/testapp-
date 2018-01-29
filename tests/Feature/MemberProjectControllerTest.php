@@ -14,15 +14,6 @@ class MemberProjectControllerTest extends TestCase
 {
     use DatabaseMigrations;
     use WithoutMiddleware;
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
-    {
-        $this->assertTrue(true);
-    }
 
     public function testListMemberProjectSuccess()
     {
@@ -37,7 +28,7 @@ class MemberProjectControllerTest extends TestCase
         $response = $this->call('DELETE', 'member_projects/destroy', $array);
         $this->assertEquals(200, $response->status());
         $this->assertDatabaseMissing('projects', [
-            'meber_id'=>$array['meber_id'],
+            'member_id'=>$array['member_id'],
             'project_id'=>$array['project_id'],
             'role'=>$array['role'],
         ]);
@@ -45,12 +36,12 @@ class MemberProjectControllerTest extends TestCase
 
     public function testEditMemberProjectSuccess()
     {
-        $json = '{"id":1,"meber_id":1,"project_id":1,"role":"haha"}';
+        $json = '{"id":1,"member_id":1,"project_id":1,"role":"pm"}';
         $array1 = [
             'id'=>1,
-            'meber_id'=>1,
+            'member_id'=>1,
             'project_id'=>1,
-            'role'=>'haha',
+            'role'=>'pm',
         ];
         $array = Factory(MemberProject::class)->create()->toArray();
         $response=$this->json('PUT', 'member_projects/update', $array1);
@@ -61,12 +52,12 @@ class MemberProjectControllerTest extends TestCase
 
     public function testAddMemberProjecSuccess()
     {
-        $json = '{"meber_id":1,"project_id":1,"role":"haha","id":1}';
+        $json = '{"member_id":1,"project_id":1,"role":"pm","id":1}';
         $array1 = [
             'id'=>1,
-            'meber_id'=>1,
+            'member_id'=>1,
             'project_id'=>1,
-            'role'=>'haha',
+            'role'=>'pm',
         ];
         $response = $this->json('POST', 'member_projects/create', $array1);
         $this->assertSame($json, $response->getContent());
@@ -76,10 +67,10 @@ class MemberProjectControllerTest extends TestCase
 
     public function testAddMemberProjecSuccessWithRoleNull()
     {
-        $json = '{"meber_id":1,"project_id":1,"role":"","id":1}';
+        $json = '{"member_id":1,"project_id":1,"role":"","id":1}';
         $array1 = [
             'id'=>1,
-            'meber_id'=>1,
+            'member_id'=>1,
             'project_id'=>1,
             'role'=>'',
         ];
@@ -92,14 +83,14 @@ class MemberProjectControllerTest extends TestCase
     public function testAddMemberProjectWithMemberIdRequired()
     {
         $array = [
-            'meber_id'=>'',
+            'member_id'=>'',
             'project_id'=>1,
-            'role'=>'haha',
+            'role'=>'pm',
         ];
         $response = $this->json('POST', 'member_projects/create', $array);
         $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('projects', [
-            'meber_id'=>$array['meber_id'],
+            'member_id'=>$array['member_id'],
             'project_id'=>$array['project_id'],
             'role'=>$array['role'],
             ]);
@@ -108,78 +99,78 @@ class MemberProjectControllerTest extends TestCase
     public function testAddMemberProjectWithProjectIdRequired()
     {
         $array = [
-        'meber_id'=>1,
+        'member_id'=>1,
         'project_id'=>'',
-        'role'=>'haha',
+        'role'=>'pm',
         ];
         $response = $this->json('POST', 'member_projects/create', $array);
         $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('projects', [
-            'meber_id'=>$array['meber_id'],
+            'member_id'=>$array['member_id'],
             'project_id'=>$array['project_id'],
             'role'=>$array['role'],
             ]);
     }
 
-    public function testAddMemberProjectWithValidMemberId()
+    public function testAddMemberProjectWithNotValidMemberId()
     {
         $array = [
-            'meber_id'=>'eeee',
+            'member_id'=>'eeee',
             'project_id'=>1,
-            'role'=>'haha',
+            'role'=>'pm',
         ];
         $response=$this->json('POST', 'member_projects/create', $array);
         $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('projects', [
-            'meber_id'=>$array['meber_id'],
+            'member_id'=>$array['member_id'],
             'project_id'=>$array['project_id'],
             'role'=>$array['role'],
            ]);
     }
 
-    public function testAddMemberProjectWithValidProjectId()
+    public function testAddMemberProjectWithNotValidProjectId()
     {
         $array = [
-            'meber_id'=>1,
+            'member_id'=>1,
             'project_id'=>'ddd',
-            'role'=>'haha',
+            'role'=>'pm',
         ];
         $response = $this->json('POST', 'member_projects/create', $array);
         $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('projects', [
-            'meber_id'=>$array['meber_id'],
+            'member_id'=>$array['member_id'],
             'project_id'=>$array['project_id'],
             'role'=>$array['role'],
            ]);
     }
 
-    public function testEditMemberProjectWithValidMemberId()
+    public function testEditMemberProjectWithNotValidMemberId()
     {
         $array = [
-            'meber_id'=>'eeee',
+            'member_id'=>'eeee',
             'project_id'=>1,
-            'role'=>'haha',
+            'role'=>'pm',
         ];
         $response = $this->json('PUT', 'member_projects/update', $array);
         $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('projects', [
-            'meber_id'=>$array['meber_id'],
+            'member_id'=>$array['member_id'],
             'project_id'=>$array['project_id'],
             'role'=>$array['role'],
            ]);
     }
 
-    public function testEditMemberProjectWithValidProjectId()
+    public function testEditMemberProjectWithNotValidProjectId()
     {
         $array = [
-            'meber_id'=>1,
+            'member_id'=>1,
             'project_id'=>'ddd',
-            'role'=>'haha',
+            'role'=>'pm',
         ];
         $response = $this->json('PUT', 'member_projects/update', $array);
         $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('projects', [
-            'meber_id'=>$array['meber_id'],
+            'member_id'=>$array['member_id'],
             'project_id'=>$array['project_id'],
             'role'=>$array['role'],
            ]);

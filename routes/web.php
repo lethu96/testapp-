@@ -14,6 +14,9 @@ Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
+Route::apiResources([
+    'members' => 'MemberController'
+]);
 Route::get('member_projects', 'MemberProjectController@index');
 Route::put('member_projects/update', 'MemberProjectController@update');
 Route::post('member_projects/create', 'MemberProjectController@store');

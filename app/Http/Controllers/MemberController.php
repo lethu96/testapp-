@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCreateMember;
-use App\Http\Requests\StoreEidtMember;
 use App\Member;
 use App\User;
 use App\Position;
@@ -14,8 +13,8 @@ class MemberController extends Controller
 {
     public function index(Request $request)
     {
-        $listMember = Member::all()->toArray();
-        return $listMember ;
+        $listMember= Member::all()->toArray();
+        return $listMember;
     }
 
     public function destroy(Request $request)
@@ -27,8 +26,8 @@ class MemberController extends Controller
             return $listMember ;
         }
         return response()->json([
-                'message' => 'Doesnt Exit Item'
-            ]);
+                'status' => '404'
+            ],404);
     }
 
     public function update(StoreCreateMember $request)
@@ -44,13 +43,13 @@ class MemberController extends Controller
             if ($request->hasFile('avatar')) {
                 $file = $request->avatar;
                 $file->move("img", $file->getClientOriginalName());
-                $memberEdit->avatar = mt_rand(1000, 10000).'-'.$file->getClientOriginalName();
+                $memberEdit->avatar = $file->getClientOriginalName();
             }
             $memberEdit->save();
             return $memberEdit;
         }
         return response()->json([
-                'message' => 'Doesnt Exit Item'
+                'message' => 'Member does not exist: '.$data['id']
             ]);
     }
 
@@ -67,8 +66,7 @@ class MemberController extends Controller
         if ($request->hasFile('avatar')) {
             $file = $request->avatar;
             $file->move("img", $file->getClientOriginalName());
-            $newMember->avatar = mt_rand(1000, 10000).'-'.$file
-            ->getClientOriginalName();
+            $newMember->avatar = $file->getClientOriginalName();
         }
         $newMember->save();
         return $newMember;

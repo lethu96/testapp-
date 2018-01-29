@@ -14,21 +14,26 @@ class ProjectControllerTest extends TestCase
 {
     use DatabaseMigrations;
     use WithoutMiddleware;
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
-    {
-        $this->assertTrue(true);
-    }
 
     public function testListProjectSuccess()
     {
         $project = factory(Project::class)->create();
         $response = $this->get('project');
         $response->assertStatus(200);
+    }
+
+    public function testEditNotId(){
+        $array1 = [
+        'id' => '',
+        'name' => 'test',
+        'information' => 'tr',
+        'deadline' => '2018-02-25',
+        'type' => 'single',
+        'status' => 'planned',
+        ];
+        $response = $this->json('DELETE', 'project/destroy', $array1);
+
+        $response->assertStatus(404, $response->status());
     }
 
     public function testDeleteProjectSuccess()
@@ -84,7 +89,7 @@ class ProjectControllerTest extends TestCase
     public function testAddProjectFailWithNameNull()
     {
         $array = [
-            'name' => 'thu123$#%',
+            'name' => '',
             'information' => 'traniing',
             'deadline' => '2018-01-22',
             'type' => 'lab',
@@ -121,7 +126,7 @@ class ProjectControllerTest extends TestCase
            ]);
     }
 
-    public function testAddProjectWithNameValid()
+    public function testAddProjectWithNameNotValid()
     {
         $array = [
             'name' => 'thu123$#%',
@@ -173,7 +178,7 @@ class ProjectControllerTest extends TestCase
            ]);
     }
 
-    public function testAddProjectWithValidDeadline()
+    public function testAddProjectWithNotValidDeadline()
     {
         $array = [
             'name' => 'thu12',
@@ -213,7 +218,7 @@ class ProjectControllerTest extends TestCase
            ]);
     }
 
-    public function testAddProjecWithValidType()
+    public function testAddProjecWithNotValidType()
     {
         $array = [
             'name' => 'thu12',
@@ -253,7 +258,7 @@ class ProjectControllerTest extends TestCase
            ]);
     }
 
-    public function testAddProjecWithValidStatus()
+    public function testAddProjecWithNotValidStatus()
     {
         $array = [
             'name' => 'thu12',
@@ -273,7 +278,7 @@ class ProjectControllerTest extends TestCase
         ]);
     }
 
-    public function testEditProjectWithValidName()
+    public function testEditProjectWithNotValidName()
     {
         $array1 = [
             'name' => 'thu123$#%',
@@ -343,7 +348,7 @@ class ProjectControllerTest extends TestCase
            ]);
     }
 
-    public function testEditProjectWithValidDate()
+    public function testEditProjectWithNotValidDate()
     {
         $array1 = [
             'name' => 'thu',
@@ -385,7 +390,7 @@ class ProjectControllerTest extends TestCase
            ]);
     }
 
-    public function testEditProjectWithValidType()
+    public function testEditProjectWithNotValidType()
     {
         $array1 = [
             'name' => 'thu123$#%',
@@ -406,7 +411,7 @@ class ProjectControllerTest extends TestCase
            ]);
     }
 
-    public function testEidtProjectWithValidStatus()
+    public function testEidtProjectWithNotValidStatus()
     {
         $array1 = [
             'name' => 'thu123$#%',

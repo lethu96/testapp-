@@ -12,6 +12,8 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
+        'api/members/{id}/update',
+        'members/{id}/update',
         'project/update',
         'project/create',
         'project/destroy',

@@ -7,7 +7,7 @@ use App\MemberProject;
 
 class Project extends Model
 {
-    protected $table="projects";
+    protected $table = "projects";
     protected $hidden = array('created_at', 'updated_at');
     
     public function projectMember()
