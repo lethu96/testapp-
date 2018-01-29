@@ -23,7 +23,7 @@ class MemberProjectController extends Controller
         $newMp->project_id = $data['project_id'];
         $newMp->role = $data['role'];
         $newMp->save();
-        return $newMp;
+        return response()->json($newMp);
     }
 
     public function update(StoreCreateMemberProject $request)
@@ -34,7 +34,7 @@ class MemberProjectController extends Controller
             $editMp->project_id = $data['project_id'];
             $editMp->role = $data['role'];
             $editMp->save();
-            return $editMp;
+            return response()->json($editMp);
         }
         return response()->json([
                 'message' => 'Member does not exist: '.$data['id']
@@ -53,6 +53,6 @@ class MemberProjectController extends Controller
         }
         return response()->json([
                 'status' => '404'
-            ],404);
+            ], 404);
     }
 }

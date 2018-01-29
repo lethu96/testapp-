@@ -23,13 +23,13 @@ class MemberController extends Controller
         if ($member = Member::find($id)) {
             $member->delete();
             $listMember = Member::all() ->toArray();
-                    return response()->json([
+            return response()->json([
                 'message' => 'Delete success '.$id
             ]);
         }
         return response()->json([
                 'status' => '404'
-            ],404);
+            ], 404);
     }
 
     public function update(StoreCreateMember $request)
@@ -48,7 +48,7 @@ class MemberController extends Controller
                 $memberEdit->avatar = $file->getClientOriginalName();
             }
             $memberEdit->save();
-            return $memberEdit;
+            return response()->json($memberEdit);
         }
         return response()->json([
                 'message' => 'Member does not exist: '.$data['id']
@@ -71,6 +71,6 @@ class MemberController extends Controller
             $newMember->avatar = $file->getClientOriginalName();
         }
         $newMember->save();
-        return $newMember;
+        return response()->json($newMember);
     }
 }

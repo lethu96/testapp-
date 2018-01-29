@@ -56,7 +56,8 @@ class MemberControllerTest extends TestCase
         $path = public_path().'/img/test/'.$name;
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpeg', filesize($path), null, true);
-        $json = '{"message":"The given data was invalid.","errors":{"avatar":["The avatar may not be greater than 10240 kilobytes."]}}';
+        $json = '{"message":"The given data was invalid.",'.'"errors":'.
+        '{"avatar":["The avatar may not be greater than 10240 kilobytes."]}}';
         $newMember = Factory(Member::class)->create([
             'id'=>1,
             'name' => 'thu',
@@ -110,7 +111,8 @@ class MemberControllerTest extends TestCase
         $path = public_path().'/img/test/'.$name;
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpg', filesize($path), null, true);
-        $json = '{"message":"The given data was invalid.","errors":{"avatar":["The avatar must be an image.","The avatar must be a file of type: gif, png, jpeg."]}}';
+        $json = '{"message":"The given data was invalid.","errors":{"avatar":'.
+        '["The avatar must be an image.","The avatar must be a file of type: gif, png, jpeg."]}}';
         $newMember = [
             'name' => 'thuuu',
             'information' => 'interu',
@@ -164,7 +166,8 @@ class MemberControllerTest extends TestCase
         $path = public_path().'/img/test/'.$name;
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpg', filesize($path), null, true);
-        $json = '{"message":"The given data was invalid.","errors":{"avatar":["The avatar must be an image.","The avatar must be a file of type: gif, png, jpeg."]}}';
+        $json = '{"message":"The given data was invalid.","errors":{"avatar":'.
+        '["The avatar must be an image.","The avatar must be a file of type: gif, png, jpeg."]}}';
         $array = [
             'id' => 1,
             'name' => 'thuuu',
@@ -197,7 +200,8 @@ class MemberControllerTest extends TestCase
         $path = public_path().'/img/test/'.$name;
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpeg', filesize($path), null, true);
-         $json = '{"message":"The given data was invalid.","errors":{"avatar":["The avatar may not be greater than 10240 kilobytes."]}}';
+         $json = '{"message":"The given data was invalid.","errors":'.
+         '{"avatar":["The avatar may not be greater than 10240 kilobytes."]}}';
         $array = [
             'id' => 1,
             'name' => 'thuuu',
@@ -240,7 +244,8 @@ class MemberControllerTest extends TestCase
 
     public function testAddMemberWithNameRequire()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"name":["The name field is required."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"name":["The name field is required."]}}';
         $array = [
         'name' => '',
         'information' => 'inter',
@@ -257,7 +262,8 @@ class MemberControllerTest extends TestCase
 
     public function testAddMemberWithNotValidName()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"name":["The name format is invalid."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"name":["The name format is invalid."]}}';
         $array = [
         'name' => 'xincha+_)',
         'information' => 'inter',
@@ -274,7 +280,8 @@ class MemberControllerTest extends TestCase
 
     public function testAddMemberWithNameMax50()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"name":["The name format is invalid.","The name may not be greater than 50 characters."]}}';
+        $json = '{"message":"The given data was invalid.","errors":{"name":'.
+        '["The name format is invalid.","The name may not be greater than 50 characters."]}}';
         $array = [
         'name' => 'xinchaodaylathuxinchaodaylathuxinchaodaylathuxinchaodaylathu
         xinchaodaylathuxinchaodaylathu',
@@ -292,7 +299,8 @@ class MemberControllerTest extends TestCase
 
     public function testAddMemberWithInformationMax300()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"information":["The information may not be greater than 300 characters."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"information":["The information may not be greater than 300 characters."]}}';
         $array = [
         'name' => 'xinchao',
         'information' => 'interinterinterinterinterinterinterinterinterinterinter
@@ -322,7 +330,8 @@ class MemberControllerTest extends TestCase
 
     public function testAddMemberWithPhoneNumberRequired()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"phone_number":["The phone number field is required."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"phone_number":["The phone number field is required."]}}';
         $array = [
         'name' => 'halo',
         'information' => 'inter',
@@ -339,7 +348,8 @@ class MemberControllerTest extends TestCase
 
     public function testAddMemberWithPhoneNumberNotValid()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"phone_number":["The phone number format is invalid."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"phone_number":["The phone number format is invalid."]}}';
         $array = [
         'name' => 'halo',
         'information' => 'inter',
@@ -364,7 +374,8 @@ class MemberControllerTest extends TestCase
 
     public function testAddMemberWithPhoneNumberMax20()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"phone_number":["The phone number may not be greater than 20 characters."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"phone_number":["The phone number may not be greater than 20 characters."]}}';
         $array = [
         'name' => 'halo',
         'information' => 'inter',
@@ -389,7 +400,8 @@ class MemberControllerTest extends TestCase
 
     public function testAddMemberWithBirthdayRequired()
     {
-    $json = '{"message":"The given data was invalid.","errors":{"birthday":["The birthday field is required."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"birthday":["The birthday field is required."]}}';
         $array = [
         'name' => 'halo',
         'information' => 'inter',
@@ -414,7 +426,8 @@ class MemberControllerTest extends TestCase
 
     public function testAddMemberWithBirthdayNotValidDate()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"birthday":["The birthday is not a valid date.","The birthday must be a date before now."]}}';
+        $json = '{"message":"The given data was invalid.","errors":{"birthday":'.
+        '["The birthday is not a valid date.","The birthday must be a date before now."]}}';
         $array = [
         'name' => 'halo',
         'information' => 'inter',
@@ -439,7 +452,8 @@ class MemberControllerTest extends TestCase
 
     public function testAddMemberWithBirthdayNotValidBefore()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"birthday":["The birthday must be a date before now."]}}';
+        $json = '{"message":"The given data was invalid.","errors":{"birthday"'.
+        ':["The birthday must be a date before now."]}}';
         $array = [
         'name' => 'halo',
         'information' => 'inter',
@@ -464,7 +478,8 @@ class MemberControllerTest extends TestCase
 
     public function testAddMemberWithBirthdayNotValidDateAfter()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"birthday":["The birthday must be a date after 60 year ago."]}}';
+        $json = '{"message":"The given data was invalid.","errors":{"birthday"'.
+        ':["The birthday must be a date after 60 year ago."]}}';
         $array = [
         'name' => 'halo',
         'information' => 'inter',
@@ -489,7 +504,8 @@ class MemberControllerTest extends TestCase
 
     public function testAddMemberWithPositionRequired()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"position_id":["The position id field is required."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"position_id":["The position id field is required."]}}';
         $array = [
         'name' => 'halo',
         'information' => 'inter',
@@ -514,7 +530,8 @@ class MemberControllerTest extends TestCase
 
     public function testAddMemberWithPositionNotValid()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"position_id":["The position id must be an integer."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"position_id":["The position id must be an integer."]}}';
         $array = [
         'name' => 'halo',
         'information' => 'inter',
@@ -539,7 +556,8 @@ class MemberControllerTest extends TestCase
 
     public function testAddMemberWithGenderRequired()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"gender":["The gender field is required."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"gender":["The gender field is required."]}}';
         $array = [
         'name' => 'halo',
         'information' => 'inter',
@@ -564,7 +582,9 @@ class MemberControllerTest extends TestCase
 
     public function testAddMemberWithGenderNotValid()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"position_id":["The position id must be an integer."],"gender":["The selected gender is invalid."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"position_id":["The position id must be an integer."],"gender":'.
+        '["The selected gender is invalid."]}}';
         $array = [
         'name' => 'halo',
         'information' => 'inter',
@@ -589,7 +609,8 @@ class MemberControllerTest extends TestCase
 
     public function testEditMemberWithNotValidName()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"name":["The name format is invalid."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"name":["The name format is invalid."]}}';
          $array = [
         'name' => 'xincha+_)',
         'information' => 'inter',
@@ -615,7 +636,8 @@ class MemberControllerTest extends TestCase
 
     public function testEditMemberWithNameMax50()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"name":["The name format is invalid.","The name may not be greater than 50 characters."]}}';
+        $json = '{"message":"The given data was invalid.","errors":{"name":'.
+        '["The name format is invalid.","The name may not be greater than 50 characters."]}}';
          $array = [
         'name' => 'xinchaodaylathuxinchaodaylathuxinchaodaylathuxinchaodaylathu
          xinchaodaylathuxinchaodaylathu',
@@ -642,7 +664,8 @@ class MemberControllerTest extends TestCase
 
     public function testEditMemberWithInformationMax300()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"information":["The information may not be greater than 300 characters."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"information":["The information may not be greater than 300 characters."]}}';
         $array = [
         'name' => 'xinchao',
         'information' => 'interinterinterinterinterinterinterinterinterinterinter
@@ -673,7 +696,8 @@ class MemberControllerTest extends TestCase
 
     public function testEditMemberWithPhoneNumberNotValid()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"phone_number":["The phone number format is invalid."]}}';
+        $json = '{"message":"The given data was invalid.","errors":{"phone_number"'.
+        ':["The phone number format is invalid."]}}';
         $array = [
         'name' => 'halo',
         'information' => 'inter',
@@ -699,7 +723,8 @@ class MemberControllerTest extends TestCase
 
     public function testEditMemberWithPhoneNumberMax20()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"phone_number":["The phone number may not be greater than 20 characters."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"phone_number":["The phone number may not be greater than 20 characters."]}}';
         $array = [
         'name' => 'halo',
         'information' => 'inter',
@@ -725,7 +750,8 @@ class MemberControllerTest extends TestCase
 
     public function testEditMemberWithBirthdayNotValidDate()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"birthday":["The birthday is not a valid date.","The birthday must be a date before now."]}}';
+        $json = '{"message":"The given data was invalid.","errors":{"birthday":'.
+        '["The birthday is not a valid date.","The birthday must be a date before now."]}}';
         $array = [
         'name' => 'halo',
         'information' => 'inter',
@@ -751,7 +777,8 @@ class MemberControllerTest extends TestCase
 
     public function testEditMemberWithBirthdayNotValidBefore()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"birthday":["The birthday must be a date before now."]}}';
+        $json = '{"message":"The given data was invalid.","errors":{"birthday"'.
+        ':["The birthday must be a date before now."]}}';
          $array = [
         'name' => 'halo',
         'information' => 'inter',
@@ -777,7 +804,8 @@ class MemberControllerTest extends TestCase
 
     public function testEditMemberWithBirthdayNotValidDateAfter()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"birthday":["The birthday must be a date after 60 year ago."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"birthday":["The birthday must be a date after 60 year ago."]}}';
         $array = [
         'name' => 'halo',
         'information' => 'inter',
@@ -803,7 +831,8 @@ class MemberControllerTest extends TestCase
 
     public function testEditMemberWithPositionNotValid()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"position_id":["The position id must be an integer."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"position_id":["The position id must be an integer."]}}';
          $array = [
         'name' => 'halo',
         'information' => 'inter',
@@ -829,7 +858,9 @@ class MemberControllerTest extends TestCase
 
     public function testEditMemberWithGenderNotValid()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"position_id":["The position id must be an integer."],"gender":["The selected gender is invalid."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"position_id":["The position id must be an integer."],"gender":'.
+        '["The selected gender is invalid."]}}';
         $array = [
         'name' => 'halo',
         'information' => 'inter',

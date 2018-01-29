@@ -28,7 +28,7 @@ class ProjectController extends Controller
         }
         return response()->json([
                 'status' => '404'
-            ],404);
+            ], 404);
     }
 
     public function store(StoreCreateProject $request)
@@ -41,7 +41,7 @@ class ProjectController extends Controller
         $newProject->type = $data['type'];
         $newProject->status = $data['status'];
         $newProject->save();
-        return $newProject;
+        return response()->json($newProject);
     }
 
     public function update(StoreCreateProject $request)
@@ -54,7 +54,7 @@ class ProjectController extends Controller
             $editProject->type = $data['type'];
             $editProject->status = $data['status'];
             $editProject->save();
-            return $editProject;
+            return response()->json($editProject);
         }
         return response()->json([
             'message' => 'Member does not exist: '.$data['id']

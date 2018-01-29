@@ -85,7 +85,8 @@ class MemberProjectControllerTest extends TestCase
 
     public function testAddMemberProjectWithMemberIdRequired()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"member_id":["The member id field is required."]}}';
+        $json = '{"message":"The given data was invalid.","errors":{"member_id":'.
+        '["The member id field is required."]}}';
         $array = [
             'member_id'=>'',
             'project_id'=>1,
@@ -103,7 +104,8 @@ class MemberProjectControllerTest extends TestCase
 
     public function testAddMemberProjectWithProjectIdRequired()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"project_id":["The project id field is required."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"project_id":["The project id field is required."]}}';
         $array = [
         'member_id'=>1,
         'project_id'=>'',
@@ -121,7 +123,8 @@ class MemberProjectControllerTest extends TestCase
 
     public function testAddMemberProjectWithNotValidMemberId()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"member_id":["The member id must be an integer."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"member_id":["The member id must be an integer."]}}';
         $array = [
             'member_id'=>'eeee',
             'project_id'=>1,
@@ -139,7 +142,8 @@ class MemberProjectControllerTest extends TestCase
 
     public function testAddMemberProjectWithNotValidProjectId()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"project_id":["The project id must be an integer."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"project_id":["The project id must be an integer."]}}';
         $array = [
             'member_id'=>1,
             'project_id'=>'ddd',
@@ -157,7 +161,8 @@ class MemberProjectControllerTest extends TestCase
 
     public function testEditMemberProjectWithNotValidMemberId()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"member_id":["The member id must be an integer."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"member_id":["The member id must be an integer."]}}';
         $array = [
             'member_id'=>'eeee',
             'project_id'=>1,
@@ -175,7 +180,8 @@ class MemberProjectControllerTest extends TestCase
 
     public function testEditMemberProjectWithNotValidProjectId()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"project_id":["The project id must be an integer."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+        '{"project_id":["The project id must be an integer."]}}';
         $array = [
             'member_id'=>1,
             'project_id'=>'ddd',
