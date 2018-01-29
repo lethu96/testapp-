@@ -40,13 +40,14 @@ class MemberControllerTest extends TestCase
         $this->assertEquals(200, $response->status());
         $this->assertSame($json, $response->getContent());
         $this->assertDatabaseHas('members', [
-            'name' => $newMember['name'],
-            'information' => $newMember['information'],
-            'phone_number' => $newMember['phone_number'],
-            'birthday' => $newMember['birthday'],
-            'position_id' => $newMember['position_id'],
-            'gender' => $newMember['gender']
+                'name' => $newMember['name'],
+                'information' => $newMember['information'],
+                'phone_number' => $newMember['phone_number'],
+                'birthday' => $newMember['birthday'],
+                'position_id' => $newMember['position_id'],
+                'gender' => $newMember['gender']
             ]);
+        unlink($path);
     }
 
     public function testCreateMemberHaveAvatarMorethan10MB()
@@ -71,6 +72,7 @@ class MemberControllerTest extends TestCase
         $response = $this->json('POST', 'members/create', $newMember);
         $this->assertEquals(422, $response->status()) ;
         $this->assertSame($json, $response->getContent());
+        unlink($path);
     }
 
     public function testCreateMemberHaveAvatarLessThan10MB()
@@ -95,13 +97,14 @@ class MemberControllerTest extends TestCase
         $this->assertEquals(200, $response->status());
         $this->assertSame($json, $response->getContent());
         $this->assertDatabaseHas('members', [
-            'name' => $newMember['name'],
-            'information' => $newMember['information'],
-            'phone_number' => $newMember['phone_number'],
-            'birthday' => $newMember['birthday'],
-            'position_id' => $newMember['position_id'],
-            'gender' => $newMember['gender']
+                'name' => $newMember['name'],
+                'information' => $newMember['information'],
+                'phone_number' => $newMember['phone_number'],
+                'birthday' => $newMember['birthday'],
+                'position_id' => $newMember['position_id'],
+                'gender' => $newMember['gender']
             ]);
+        unlink($path);
     }
 
     public function testCreateMemberHaveAvatarNotImage()
@@ -125,6 +128,7 @@ class MemberControllerTest extends TestCase
         $response = $this->json('POST', 'members/create', $newMember);
         $this->assertEquals(422, $response->status());
         $this->assertSame($json, $response->getContent());
+        unlink($path);
     }
 
     public function testEditMemberSuccessHaveImage()
@@ -157,6 +161,7 @@ class MemberControllerTest extends TestCase
         $response = $this->json('PUT', 'members/update', $newMember);
         $this->assertSame($json, $response->getContent());
         $response->assertStatus(200, $response->status());
+        unlink($path);
     }
 
     public function testEditMemberWithHaveImageNotImage()
@@ -191,6 +196,7 @@ class MemberControllerTest extends TestCase
         $response = $this->json('PUT', 'members/update', $array);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
+        unlink($path);
     }
 
     public function testEditMemberWithHaveImageMax10MB()
@@ -200,7 +206,7 @@ class MemberControllerTest extends TestCase
         $path = public_path().'/img/test/'.$name;
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpeg', filesize($path), null, true);
-         $json = '{"message":"The given data was invalid.","errors":'.
+        $json = '{"message":"The given data was invalid.","errors":'.
          '{"avatar":["The avatar may not be greater than 10240 kilobytes."]}}';
         $array = [
             'id' => 1,
@@ -213,17 +219,18 @@ class MemberControllerTest extends TestCase
             'avatar' => $file,
         ];
         $array1 = Factory(Member::class)->create([
-        'name' => 't',
-        'information' => 'in',
-        'phone_number' => '0945',
-        'birthday' => '1996-12-08',
-        'position_id' => 1,
-        'gender' => 'male',
-        'avatar' => 'uht.png',
+            'name' => 't',
+            'information' => 'in',
+            'phone_number' => '0945',
+            'birthday' => '1996-12-08',
+            'position_id' => 1,
+            'gender' => 'male',
+            'avatar' => 'uht.png',
         ]);
         $response = $this->json('PUT', 'members/update', $array);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
+        unlink($path);
     }
 
     public function testListMemberSuccess()
@@ -242,18 +249,18 @@ class MemberControllerTest extends TestCase
         $this->assertSame($json, $response->getContent());
     }
 
-    public function testAddMemberWithNameRequire()
+    public function testAddMemberWithNameEmpty()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"name":["The name field is required."]}}';
+            '{"name":["The name field is Empty."]}}';
         $array = [
-        'name' => '',
-        'information' => 'inter',
-        'phone_number' => '0978716945',
-        'birthday' => '1996-12-12',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => '',
+            'information' => 'inter',
+            'phone_number' => '0978716945',
+            'birthday' => '1996-12-12',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
         ];
         $response = $this->json('POST', 'members/create', $array);
         $response->assertStatus(422, $response->status());
@@ -263,57 +270,57 @@ class MemberControllerTest extends TestCase
     public function testAddMemberWithNotValidName()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"name":["The name format is invalid."]}}';
+            '{"name":["The name format is invalid."]}}';
         $array = [
-        'name' => 'xincha+_)',
-        'information' => 'inter',
-        'phone_number' => '0978716945',
-        'birthday' => '1996-12-12',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'xincha+_)',
+            'information' => 'inter',
+            'phone_number' => '0978716945',
+            'birthday' => '1996-12-12',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
         ];
         $response = $this->json('POST', 'members/create', $array);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
     }
 
-    public function testAddMemberWithNameMax50()
+    public function testAddMemberWithNameMax50Character()
     {
         $json = '{"message":"The given data was invalid.","errors":{"name":'.
-        '["The name format is invalid.","The name may not be greater than 50 characters."]}}';
+            '["The name format is invalid.","The name may not be greater than 50 characters."]}}';
         $array = [
-        'name' => 'xinchaodaylathuxinchaodaylathuxinchaodaylathuxinchaodaylathu
-        xinchaodaylathuxinchaodaylathu',
-        'information' => 'inter',
-        'phone_number' => '0978716945',
-        'birthday' => '1996-12-12',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'xinchaodaylathuxinchaodaylathuxinchaodaylathuxinchaodaylathu
+            xinchaodaylathuxinchaodaylathu',
+            'information' => 'inter',
+            'phone_number' => '0978716945',
+            'birthday' => '1996-12-12',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
         ];
         $response = $this->json('POST', 'members/create', $array);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
     }
 
-    public function testAddMemberWithInformationMax300()
+    public function testAddMemberWithInformationMax300Character()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"information":["The information may not be greater than 300 characters."]}}';
+            '{"information":["The information may not be greater than 300 characters."]}}';
         $array = [
-        'name' => 'xinchao',
-        'information' => 'interinterinterinterinterinterinterinterinterinterinter
-        interinterinterinterinterinterinterinterinterinterinterinterinterinter
-        interinterinterinterinterinterinterinterinterinterinterinterinterinter
-        interinterinterinterinterinterinterinterinterinterinterinterinterinter
-        interinterinterinterinterinterinterinterinterinterinterinterinterinter
-        interinterinterinterinterinterinterinterinterinter',
-        'phone_number' => '0978716945',
-        'birthday' => '1996-12-12',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'xinchao',
+            'information' => 'interinterinterinterinterinterinterinterinterinterinter
+            interinterinterinterinterinterinterinterinterinterinterinterinterinter
+            interinterinterinterinterinterinterinterinterinterinterinterinterinter
+            interinterinterinterinterinterinterinterinterinterinterinterinterinter
+            interinterinterinterinterinterinterinterinterinterinterinterinterinter
+            interinterinterinterinterinterinterinterinterinter',
+            'phone_number' => '0978716945',
+            'birthday' => '1996-12-12',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
         ];
         $response = $this->json('POST', 'members/create', $array);
         $response->assertStatus(422, $response->status());
@@ -328,18 +335,18 @@ class MemberControllerTest extends TestCase
         $this->assertSame($json, $response->getContent());
     }
 
-    public function testAddMemberWithPhoneNumberRequired()
+    public function testAddMemberWithPhoneNumberEmpty()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"phone_number":["The phone number field is required."]}}';
+            '{"phone_number":["The phone number field is Empty."]}}';
         $array = [
-        'name' => 'halo',
-        'information' => 'inter',
-        'phone_number' => '',
-        'birthday' => '1996-12-12',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'halo',
+            'information' => 'inter',
+            'phone_number' => '',
+            'birthday' => '1996-12-12',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
         ];
         $response = $this->json('POST', 'members/create', $array);
         $response->assertStatus(422, $response->status());
@@ -349,25 +356,25 @@ class MemberControllerTest extends TestCase
     public function testAddMemberWithPhoneNumberNotValid()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"phone_number":["The phone number format is invalid."]}}';
+            '{"phone_number":["The phone number format is invalid."]}}';
         $array = [
-        'name' => 'halo',
-        'information' => 'inter',
-        'phone_number' => '098273%',
-        'birthday' => '1996-12-12',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'halo',
+            'information' => 'inter',
+            'phone_number' => '098273%',
+            'birthday' => '1996-12-12',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
         ];
         $response = $this->json('POST', 'members/create', $array);
         $response->assertStatus(422, $response->status());
         $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
         $this->assertSame($json, $response->getContent());
     }
@@ -375,41 +382,41 @@ class MemberControllerTest extends TestCase
     public function testAddMemberWithPhoneNumberMax20()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"phone_number":["The phone number may not be greater than 20 characters."]}}';
+            '{"phone_number":["The phone number may not be greater than 20 characters."]}}';
         $array = [
-        'name' => 'halo',
-        'information' => 'inter',
-        'phone_number' => '012345678909876543212',
-        'birthday' => '1996-12-12',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'halo',
+            'information' => 'inter',
+            'phone_number' => '012345678909876543212',
+            'birthday' => '1996-12-12',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
         ];
         $response = $this->json('POST', 'members/create', $array);
         $response->assertStatus(422, $response->status());
         $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
         $this->assertSame($json, $response->getContent());
     }
 
-    public function testAddMemberWithBirthdayRequired()
+    public function testAddMemberWithBirthdayEmpty()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"birthday":["The birthday field is required."]}}';
+            '{"birthday":["The birthday field is Empty."]}}';
         $array = [
-        'name' => 'halo',
-        'information' => 'inter',
-        'phone_number' => '0123456',
-        'birthday' => '',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'halo',
+            'information' => 'inter',
+            'phone_number' => '0123456',
+            'birthday' => '',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
          ];
          $response = $this->json('POST', 'members/create', $array);
          $response->assertStatus(422, $response->status());
@@ -429,23 +436,23 @@ class MemberControllerTest extends TestCase
         $json = '{"message":"The given data was invalid.","errors":{"birthday":'.
         '["The birthday is not a valid date.","The birthday must be a date before now."]}}';
         $array = [
-        'name' => 'halo',
-        'information' => 'inter',
-        'phone_number' => '0123456',
-        'birthday' => '2017h',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'halo',
+            'information' => 'inter',
+            'phone_number' => '0123456',
+            'birthday' => '2017h',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
          ];
          $response = $this->json('POST', 'members/create', $array);
          $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
          $this->assertSame($json, $response->getContent());
     }
@@ -455,23 +462,23 @@ class MemberControllerTest extends TestCase
         $json = '{"message":"The given data was invalid.","errors":{"birthday"'.
         ':["The birthday must be a date before now."]}}';
         $array = [
-        'name' => 'halo',
-        'information' => 'inter',
-        'phone_number' => '0123456',
-        'birthday' => '2018-02-02',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'halo',
+            'information' => 'inter',
+            'phone_number' => '0123456',
+            'birthday' => '2018-02-02',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
          ];
          $response = $this->json('POST', 'members/create', $array);
          $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
         $this->assertSame($json, $response->getContent());
     }
@@ -479,51 +486,51 @@ class MemberControllerTest extends TestCase
     public function testAddMemberWithBirthdayNotValidDateAfter()
     {
         $json = '{"message":"The given data was invalid.","errors":{"birthday"'.
-        ':["The birthday must be a date after 60 year ago."]}}';
+            ':["The birthday must be a date after 60 year ago."]}}';
         $array = [
-        'name' => 'halo',
-        'information' => 'inter',
-        'phone_number' => '0123456',
-        'birthday' => '1957-10-10',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'halo',
+            'information' => 'inter',
+            'phone_number' => '0123456',
+            'birthday' => '1957-10-10',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
         ];
         $response = $this->json('POST', 'members/create', $array);
         $response->assertStatus(422, $response->status());
         $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
         $this->assertSame($json, $response->getContent());
     }
 
-    public function testAddMemberWithPositionRequired()
+    public function testAddMemberWithPositionEmpty()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"position_id":["The position id field is required."]}}';
+            '{"position_id":["The position id field is Empty."]}}';
         $array = [
-        'name' => 'halo',
-        'information' => 'inter',
-        'phone_number' => '0123456',
-        'birthday' => '1996-12-12',
-        'position_id' => '',
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'halo',
+            'information' => 'inter',
+            'phone_number' => '0123456',
+            'birthday' => '1996-12-12',
+            'position_id' => '',
+            'gender' => 'female',
+            'avatar' => '',
         ];
         $response = $this->json('POST', 'members/create', $array);
         $response->assertStatus(422, $response->status());
         $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
         $this->assertSame($json, $response->getContent());
     }
@@ -531,51 +538,51 @@ class MemberControllerTest extends TestCase
     public function testAddMemberWithPositionNotValid()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"position_id":["The position id must be an integer."]}}';
+            '{"position_id":["The position id must be an integer."]}}';
         $array = [
-        'name' => 'halo',
-        'information' => 'inter',
-        'phone_number' => '0123456',
-        'birthday' => '1996-12-12',
-        'position_id' => 'ha',
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'halo',
+            'information' => 'inter',
+            'phone_number' => '0123456',
+            'birthday' => '1996-12-12',
+            'position_id' => 'ha',
+            'gender' => 'female',
+            'avatar' => '',
         ];
         $response = $this->json('POST', 'members/create', $array);
         $response->assertStatus(422, $response->status());
         $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
         $this->assertSame($json, $response->getContent());
     }
 
-    public function testAddMemberWithGenderRequired()
+    public function testAddMemberWithGenderEmpty()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"gender":["The gender field is required."]}}';
+        '{"gender":["The gender field is Empty."]}}';
         $array = [
-        'name' => 'halo',
-        'information' => 'inter',
-        'phone_number' => '0123456',
-        'birthday' => '1996-12-12',
-        'position_id' => 1,
-        'gender' => '',
-        'avatar' => '',
+            'name' => 'halo',
+            'information' => 'inter',
+            'phone_number' => '0123456',
+            'birthday' => '1996-12-12',
+            'position_id' => 1,
+            'gender' => '',
+            'avatar' => '',
          ];
          $response = $this->json('POST', 'members/create', $array);
          $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
         $this->assertSame($json, $response->getContent());
     }
@@ -583,26 +590,26 @@ class MemberControllerTest extends TestCase
     public function testAddMemberWithGenderNotValid()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"position_id":["The position id must be an integer."],"gender":'.
-        '["The selected gender is invalid."]}}';
+            '{"position_id":["The position id must be an integer."],"gender":'.
+            '["The selected gender is invalid."]}}';
         $array = [
-        'name' => 'halo',
-        'information' => 'inter',
-        'phone_number' => '0123456',
-        'birthday' => '1996-12-12',
-        'position_id' => 'ha',
-        'gender' => 'emale',
-        'avatar' => '',
+            'name' => 'halo',
+            'information' => 'inter',
+            'phone_number' => '0123456',
+            'birthday' => '1996-12-12',
+            'position_id' => 'ha',
+            'gender' => 'emale',
+            'avatar' => '',
          ];
          $response = $this->json('POST', 'members/create', $array);
          $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
          $this->assertSame($json, $response->getContent());
     }
@@ -610,26 +617,26 @@ class MemberControllerTest extends TestCase
     public function testEditMemberWithNotValidName()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"name":["The name format is invalid."]}}';
+            '{"name":["The name format is invalid."]}}';
          $array = [
-        'name' => 'xincha+_)',
-        'information' => 'inter',
-        'phone_number' => '0978716945',
-        'birthday' => '1996-12-12',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'xincha+_)',
+            'information' => 'inter',
+            'phone_number' => '0978716945',
+            'birthday' => '1996-12-12',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
          ];
          $array1 = Factory(Member::class)->create()->toArray();
          $response = $this->json('PUT', 'members/update', $array);
          $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
          $this->assertSame($json, $response->getContent());
     }
@@ -637,27 +644,27 @@ class MemberControllerTest extends TestCase
     public function testEditMemberWithNameMax50()
     {
         $json = '{"message":"The given data was invalid.","errors":{"name":'.
-        '["The name format is invalid.","The name may not be greater than 50 characters."]}}';
+            '["The name format is invalid.","The name may not be greater than 50 characters."]}}';
          $array = [
-        'name' => 'xinchaodaylathuxinchaodaylathuxinchaodaylathuxinchaodaylathu
-         xinchaodaylathuxinchaodaylathu',
-        'information' => 'inter',
-        'phone_number' => '0978716945',
-        'birthday' => '1996-12-12',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'xinchaodaylathuxinchaodaylathuxinchaodaylathuxinchaodaylathu
+             xinchaodaylathuxinchaodaylathu',
+            'information' => 'inter',
+            'phone_number' => '0978716945',
+            'birthday' => '1996-12-12',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
          ];
          $array1 = Factory(Member::class)->create()->toArray();
          $response = $this->json('PUT', 'members/update', $array);
          $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
          $this->assertSame($json, $response->getContent());
     }
@@ -665,31 +672,31 @@ class MemberControllerTest extends TestCase
     public function testEditMemberWithInformationMax300()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"information":["The information may not be greater than 300 characters."]}}';
+            '{"information":["The information may not be greater than 300 characters."]}}';
         $array = [
-        'name' => 'xinchao',
-        'information' => 'interinterinterinterinterinterinterinterinterinterinter
-        interinterinterinterinterinterinterinterinterinterinterinterinterinter
-        interinterinterinterinterinterinterinterinterinterinterinterinterinter
-        interinterinterinterinterinterinterinterinterinterinterinterinterinter
-        interinterinterinterinterinterinterinterinterinterinterinterinterinter
-        interinterinterinterinterinterinterinterinterinter',
-        'phone_number' => '0978716945',
-        'birthday' => '1996-12-12',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'xinchao',
+            'information' => 'interinterinterinterinterinterinterinterinterinterinter
+            interinterinterinterinterinterinterinterinterinterinterinterinterinter
+            interinterinterinterinterinterinterinterinterinterinterinterinterinter
+            interinterinterinterinterinterinterinterinterinterinterinterinterinter
+            interinterinterinterinterinterinterinterinterinterinterinterinterinter
+            interinterinterinterinterinterinterinterinterinter',
+            'phone_number' => '0978716945',
+            'birthday' => '1996-12-12',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
         ];
         $array1 = Factory(Member::class)->create()->toArray();
         $response = $this->json('PUT', 'members/update', $array);
         $response->assertStatus(422, $response->status());
         $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
         $this->assertSame($json, $response->getContent());
     }
@@ -697,26 +704,26 @@ class MemberControllerTest extends TestCase
     public function testEditMemberWithPhoneNumberNotValid()
     {
         $json = '{"message":"The given data was invalid.","errors":{"phone_number"'.
-        ':["The phone number format is invalid."]}}';
+            ':["The phone number format is invalid."]}}';
         $array = [
-        'name' => 'halo',
-        'information' => 'inter',
-        'phone_number' => '098273%',
-        'birthday' => '1996-12-12',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'halo',
+            'information' => 'inter',
+            'phone_number' => '098273%',
+            'birthday' => '1996-12-12',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
         ];
         $array1 = Factory(Member::class)->create()->toArray();
         $response = $this->json('PUT', 'members/update', $array);
         $response->assertStatus(422, $response->status());
         $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
         $this->assertSame($json, $response->getContent());
     }
@@ -724,26 +731,26 @@ class MemberControllerTest extends TestCase
     public function testEditMemberWithPhoneNumberMax20()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"phone_number":["The phone number may not be greater than 20 characters."]}}';
+            '{"phone_number":["The phone number may not be greater than 20 characters."]}}';
         $array = [
-        'name' => 'halo',
-        'information' => 'inter',
-        'phone_number' => '012345678909876543212',
-        'birthday' => '1996-12-12',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'halo',
+            'information' => 'inter',
+            'phone_number' => '012345678909876543212',
+            'birthday' => '1996-12-12',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
         ];
          $array1 = Factory(Member::class)->create()->toArray();
          $response = $this->json('PUT', 'members/update', $array);
          $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
          $this->assertSame($json, $response->getContent());
     }
@@ -751,26 +758,26 @@ class MemberControllerTest extends TestCase
     public function testEditMemberWithBirthdayNotValidDate()
     {
         $json = '{"message":"The given data was invalid.","errors":{"birthday":'.
-        '["The birthday is not a valid date.","The birthday must be a date before now."]}}';
+            '["The birthday is not a valid date.","The birthday must be a date before now."]}}';
         $array = [
-        'name' => 'halo',
-        'information' => 'inter',
-        'phone_number' => '0123456',
-        'birthday' => '2017h',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'halo',
+            'information' => 'inter',
+            'phone_number' => '0123456',
+            'birthday' => '2017h',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
         ];
          $array1 = Factory(Member::class)->create()->toArray();
          $response = $this->json('PUT', 'members/update', $array);
          $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
          $this->assertSame($json, $response->getContent());
     }
@@ -778,26 +785,26 @@ class MemberControllerTest extends TestCase
     public function testEditMemberWithBirthdayNotValidBefore()
     {
         $json = '{"message":"The given data was invalid.","errors":{"birthday"'.
-        ':["The birthday must be a date before now."]}}';
+            ':["The birthday must be a date before now."]}}';
          $array = [
-        'name' => 'halo',
-        'information' => 'inter',
-        'phone_number' => '0123456',
-        'birthday' => '2018-02-02',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'halo',
+            'information' => 'inter',
+            'phone_number' => '0123456',
+            'birthday' => '2018-02-02',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
          ];
          $array1 = Factory(Member::class)->create()->toArray();
          $response = $this->json('PUT', 'members/update', $array);
          $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
          $this->assertSame($json, $response->getContent());
     }
@@ -805,26 +812,26 @@ class MemberControllerTest extends TestCase
     public function testEditMemberWithBirthdayNotValidDateAfter()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"birthday":["The birthday must be a date after 60 year ago."]}}';
+            '{"birthday":["The birthday must be a date after 60 year ago."]}}';
         $array = [
-        'name' => 'halo',
-        'information' => 'inter',
-        'phone_number' => '0123456',
-        'birthday' => '1957-10-10',
-        'position_id' => 1,
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'halo',
+            'information' => 'inter',
+            'phone_number' => '0123456',
+            'birthday' => '1957-10-10',
+            'position_id' => 1,
+            'gender' => 'female',
+            'avatar' => '',
         ];
         $array1 = Factory(Member::class)->create()->toArray();
         $response = $this->json('PUT', 'members/update', $array);
         $response->assertStatus(422, $response->status());
         $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
         $this->assertSame($json, $response->getContent());
     }
@@ -832,26 +839,26 @@ class MemberControllerTest extends TestCase
     public function testEditMemberWithPositionNotValid()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"position_id":["The position id must be an integer."]}}';
+            '{"position_id":["The position id must be an integer."]}}';
          $array = [
-        'name' => 'halo',
-        'information' => 'inter',
-        'phone_number' => '0123456',
-        'birthday' => '1996-12-12',
-        'position_id' => 'ha',
-        'gender' => 'female',
-        'avatar' => '',
+            'name' => 'halo',
+            'information' => 'inter',
+            'phone_number' => '0123456',
+            'birthday' => '1996-12-12',
+            'position_id' => 'ha',
+            'gender' => 'female',
+            'avatar' => '',
          ];
          $array1 = Factory(Member::class)->create()->toArray();
          $response = $this->json('PUT', 'members/update', $array);
          $response->assertStatus(422, $response->status());
          $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
          $this->assertSame($json, $response->getContent());
     }
@@ -859,27 +866,27 @@ class MemberControllerTest extends TestCase
     public function testEditMemberWithGenderNotValid()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"position_id":["The position id must be an integer."],"gender":'.
-        '["The selected gender is invalid."]}}';
+            '{"position_id":["The position id must be an integer."],"gender":'.
+            '["The selected gender is invalid."]}}';
         $array = [
-        'name' => 'halo',
-        'information' => 'inter',
-        'phone_number' => '0123456',
-        'birthday' => '1996-12-12',
-        'position_id' => 'ha',
-        'gender' => 'emale',
-        'avatar' => '',
+            'name' => 'halo',
+            'information' => 'inter',
+            'phone_number' => '0123456',
+            'birthday' => '1996-12-12',
+            'position_id' => 'ha',
+            'gender' => 'emale',
+            'avatar' => '',
         ];
         $array1 = Factory(Member::class)->create()->toArray();
         $response = $this->json('PUT', 'members/update', $array);
         $response->assertStatus(422, $response->status());
         $this->assertDatabaseMissing('members', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'phone_number' => $array['phone_number'],
-            'birthday' => $array['birthday'],
-            'position_id' => $array['position_id'],
-            'gender' => $array['gender'],
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'phone_number' => $array['phone_number'],
+                'birthday' => $array['birthday'],
+                'position_id' => $array['position_id'],
+                'gender' => $array['gender'],
             ]);
         $this->assertSame($json, $response->getContent());
     }

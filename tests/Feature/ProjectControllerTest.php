@@ -25,15 +25,14 @@ class ProjectControllerTest extends TestCase
     public function testEditNotId()
     {
         $array1 = [
-        'id' => '',
-        'name' => 'test',
-        'information' => 'tr',
-        'deadline' => '2018-02-25',
-        'type' => 'single',
-        'status' => 'planned',
+            'id' => '',
+            'name' => 'test',
+            'information' => 'tr',
+            'deadline' => '2018-02-25',
+            'type' => 'single',
+            'status' => 'planned',
         ];
         $response = $this->json('DELETE', 'project/destroy', $array1);
-
         $response->assertStatus(404, $response->status());
     }
 
@@ -45,25 +44,25 @@ class ProjectControllerTest extends TestCase
         $this->assertEquals(200, $response->status());
         $this->assertSame($json, $response->getContent());
         $this->assertDatabaseMissing('projects', [
-        'name' => $array['name'],
-        'information' => $array['information'],
-        'deadline' => $array['deadline'],
-        'type' => $array['type'],
-        'status' => $array['status']
+            'name' => $array['name'],
+            'information' => $array['information'],
+            'deadline' => $array['deadline'],
+            'type' => $array['type'],
+            'status' => $array['status']
         ]);
     }
 
     public function testEditProjectSuccess()
     {
         $json = '{"id":1,"name":"test","information":"tr",'.
-        '"deadline":"2018-02-25","type":"single","status":"planned"}';
+            '"deadline":"2018-02-25","type":"single","status":"planned"}';
         $array1 = [
-        'id' => 1,
-        'name' => 'test',
-        'information' => 'tr',
-        'deadline' => '2018-02-25',
-        'type' => 'single',
-        'status' => 'planned',
+            'id' => 1,
+            'name' => 'test',
+            'information' => 'tr',
+            'deadline' => '2018-02-25',
+            'type' => 'single',
+            'status' => 'planned',
         ];
         $array = Factory(Project::class)->create()->toArray();
         $response = $this->json('PUT', 'project/update', $array1);
@@ -75,7 +74,7 @@ class ProjectControllerTest extends TestCase
     public function testAddProjecSuccess()
     {
         $json = '{"name":"testapp","information":"traniing",'.
-        '"deadline":"2018-02-25","type":"lab","status":"planned","id":1}';
+            '"deadline":"2018-02-25","type":"lab","status":"planned","id":1}';
         $array = [
             'name' => 'testapp',
             'information' => 'traniing',
@@ -92,8 +91,8 @@ class ProjectControllerTest extends TestCase
     public function testAddProjectFailWithNameNull()
     {
         $json = '{"message":"The given data was invalid.","errors":{"name":'.
-        '["The name field is required."],"deadline":["The deadline must be a '.
-        'date after now."]}}';
+            '["The name field is required."],"deadline":["The deadline must be a '.
+            'date after now."]}}';
         $array = [
             'name' => '',
             'information' => 'traniing',
@@ -104,19 +103,19 @@ class ProjectControllerTest extends TestCase
         $response = $this->json('POST', 'project/create', $array);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
-         $this->assertDatabaseMissing('projects', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'deadline' => $array['deadline'],
-            'type' => $array['type'],
-            'status' => $array['status']
-           ]);
+        $this->assertDatabaseMissing('projects', [
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'deadline' => $array['deadline'],
+                'type' => $array['type'],
+                'status' => $array['status']
+            ]);
     }
 
     public function testAddProjectWithNameMax10()
     {
         $json = '{"message":"The given data was invalid.","errors":{"name":'.
-        '["The name may not be greater than 10 characters."]}}';
+            '["The name may not be greater than 10 characters."]}}';
         $array = [
             'name' => 'xinchaooooo',
             'information' => 'traniing',
@@ -127,13 +126,13 @@ class ProjectControllerTest extends TestCase
         $response = $this->json('POST', 'project/create', $array);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
-         $this->assertDatabaseMissing('projects', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'deadline' => $array['deadline'],
-            'type' => $array['type'],
-            'status' => $array['status']
-           ]);
+        $this->assertDatabaseMissing('projects', [
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'deadline' => $array['deadline'],
+                'type' => $array['type'],
+                'status' => $array['status']
+            ]);
     }
 
     public function testAddProjectWithNameNotValid()
@@ -151,20 +150,20 @@ class ProjectControllerTest extends TestCase
         $response = $this->json('POST', 'project/create', $array);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
-         $this->assertDatabaseMissing('projects', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'deadline' => $array['deadline'],
-            'type' => $array['type'],
-            'status' => $array['status']
-           ]);
+        $this->assertDatabaseMissing('projects', [
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'deadline' => $array['deadline'],
+                'type' => $array['type'],
+                'status' => $array['status']
+            ]);
     }
 
     public function testAddProjecInformationMax300()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"information":["The information may not be greater than 300 '.
-        'characters."],"deadline":["The deadline must be a date after now."]}}';
+            '{"information":["The information may not be greater than 300 '.
+            'characters."],"deadline":["The deadline must be a date after now."]}}';
         $array = [
             'name' => 'thu',
             'information' => 'traniinggggggggggggggggggggggggggggggggggggggg
@@ -187,19 +186,19 @@ class ProjectControllerTest extends TestCase
         $response = $this->json('POST', 'project/create', $array);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
-         $this->assertDatabaseMissing('projects', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'deadline' => $array['deadline'],
-            'type' => $array['type'],
-            'status' => $array['status']
-           ]);
+        $this->assertDatabaseMissing('projects', [
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'deadline' => $array['deadline'],
+                'type' => $array['type'],
+                'status' => $array['status']
+            ]);
     }
 
     public function testAddProjectWithNotValidDeadline()
     {
         $json = '{"message":"The given data was invalid.","errors":{"deadline":'.
-        '["The deadline is not a valid date."]}}';
+            '["The deadline is not a valid date."]}}';
         $array = [
             'name' => 'thu12',
             'information' => 'traniing',
@@ -210,19 +209,19 @@ class ProjectControllerTest extends TestCase
         $response = $this->json('POST', 'project/create', $array);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
-         $this->assertDatabaseMissing('projects', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'deadline' => $array['deadline'],
-            'type' => $array['type'],
-            'status' => $array['status']
-           ]);
+        $this->assertDatabaseMissing('projects', [
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'deadline' => $array['deadline'],
+                'type' => $array['type'],
+                'status' => $array['status']
+            ]);
     }
 
     public function testAddProjecFailTypeRequired()
     {
         $json = '{"message":"The given data was invalid.","errors":{"deadline":'.
-        '["The deadline is not a valid date."],"type":["The type field is required."]}}';
+            '["The deadline is not a valid date."],"type":["The type field is required."]}}';
         $array = [
             'name' => 'thu12',
             'information' => 'traniing',
@@ -233,19 +232,19 @@ class ProjectControllerTest extends TestCase
         $response = $this->json('POST', 'project/create', $array);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
-         $this->assertDatabaseMissing('projects', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'deadline' => $array['deadline'],
-            'type' => $array['type'],
-            'status' => $array['status']
-           ]);
+        $this->assertDatabaseMissing('projects', [
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'deadline' => $array['deadline'],
+                'type' => $array['type'],
+                'status' => $array['status']
+            ]);
     }
 
     public function testAddProjecWithNotValidType()
     {
         $json = '{"message":"The given data was invalid.","errors":{"deadline":'.
-        '["The deadline is not a valid date."],"type":["The selected type is invalid."]}}';
+            '["The deadline is not a valid date."],"type":["The selected type is invalid."]}}';
         $array = [
             'name' => 'thu12',
             'information' => 'traniing',
@@ -256,19 +255,19 @@ class ProjectControllerTest extends TestCase
         $response = $this->json('POST', 'project/create', $array);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
-         $this->assertDatabaseMissing('projects', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'deadline' => $array['deadline'],
-            'type' => $array['type'],
-            'status' => $array['status']
-           ]);
+        $this->assertDatabaseMissing('projects', [
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'deadline' => $array['deadline'],
+                'type' => $array['type'],
+                'status' => $array['status']
+            ]);
     }
 
     public function testAddProjectWithStatusRequired()
     {
         $json = '{"message":"The given data was invalid.","errors":{"deadline"'.
-        ':["The deadline is not a valid date."],"status":["The status field is required."]}}';
+            ':["The deadline is not a valid date."],"status":["The status field is required."]}}';
         $array = [
             'name' => 'thu12',
             'information' => 'traniing',
@@ -279,20 +278,20 @@ class ProjectControllerTest extends TestCase
         $response = $this->json('POST', 'project/create', $array);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
-         $this->assertDatabaseMissing('projects', [
-            'name' => $array['name'],
-            'information' => $array['information'],
-            'deadline' => $array['deadline'],
-            'type' => $array['type'],
-            'status' => $array['status']
-           ]);
+        $this->assertDatabaseMissing('projects', [
+                'name' => $array['name'],
+                'information' => $array['information'],
+                'deadline' => $array['deadline'],
+                'type' => $array['type'],
+                'status' => $array['status']
+            ]);
     }
 
     public function testAddProjecWithNotValidStatus()
     {
         $json = '{"message":"The given data was invalid.","errors":{"deadline":'.
-        '["The deadline is not a valid date."],"type":["The selected '.
-        'type is invalid."],"status":["The selected status is invalid."]}}';
+            '["The deadline is not a valid date."],"type":["The selected '.
+            'type is invalid."],"status":["The selected status is invalid."]}}';
         $array = [
             'name' => 'thu12',
             'information' => 'traniing',
@@ -304,19 +303,19 @@ class ProjectControllerTest extends TestCase
         $response->assertStatus(422);
         $this->assertSame($json, $response->getContent());
         $this->assertDatabaseMissing('projects', [
-        'name' => $array['name'],
-        'information' => $array['information'],
-        'deadline' => $array['deadline'],
-        'type' => $array['type'],
-        'status' => $array['status']
+            'name' => $array['name'],
+            'information' => $array['information'],
+            'deadline' => $array['deadline'],
+            'type' => $array['type'],
+            'status' => $array['status']
         ]);
     }
 
     public function testEditProjectWithNotValidName()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"name":["The name format is invalid."],"deadline":["The '.
-        'deadline must be a date after now."]}}';
+            '{"name":["The name format is invalid."],"deadline":["The '.
+            'deadline must be a date after now."]}}';
         $array1 = [
             'name' => 'thu123$#%',
             'information' => 'traniing',
@@ -328,44 +327,44 @@ class ProjectControllerTest extends TestCase
         $response=$this->json('PUT', 'project/update', $array1);
         $this->assertSame($json, $response->getContent());
         $response->assertStatus(422, $response->status());
-         $this->assertDatabaseMissing('projects', [
-            'name' => $array1['name'],
-            'information' => $array1['information'],
-            'deadline' => $array1['deadline'],
-            'type' => $array1['type'],
-            'status' => $array1['status']
-           ]);
+        $this->assertDatabaseMissing('projects', [
+                'name' => $array1['name'],
+                'information' => $array1['information'],
+                'deadline' => $array1['deadline'],
+                'type' => $array1['type'],
+                'status' => $array1['status']
+            ]);
     }
 
     public function testEditProjectWithNameMax10()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-        '{"name":["The name may not be greater than 10 characters."],'.
-        '"deadline":["The deadline must be a date after now."]}}';
+            '{"name":["The name may not be greater than 10 characters."],'.
+            '"deadline":["The deadline must be a date after now."]}}';
         $array1 = [
-        'name' => 'thuthuthuthuthuthu',
-        'information' => 'traniing',
-        'deadline' => '2018-01-22',
-        'type' => 'lab',
-        'status' => 'planned',
+            'name' => 'thuthuthuthuthuthu',
+            'information' => 'traniing',
+            'deadline' => '2018-01-22',
+            'type' => 'lab',
+            'status' => 'planned',
         ];
         $array = Factory(Project::class)->create()->toArray();
         $response = $this->json('PUT', 'project/update', $array1);
         $this->assertSame($json, $response->getContent());
         $response->assertStatus(422, $response->status());
         $this->assertDatabaseMissing('projects', [
-        'name' => $array1['name'],
-        'information' => $array1['information'],
-        'deadline' => $array1['deadline'],
-        'type' => $array1['type'],
-        'status' => $array1['status']
+            'name' => $array1['name'],
+            'information' => $array1['information'],
+            'deadline' => $array1['deadline'],
+            'type' => $array1['type'],
+            'status' => $array1['status']
         ]);
     }
 
     public function testEidtProjectWithInformationMax300()
     {
         $json = '{"message":"The given data was invalid.","errors":{'.
-        '"information":["The information may not be greater than 300 characters."]}}';
+            '"information":["The information may not be greater than 300 characters."]}}';
         $array1 = [
             'name' => 'thu',
             'information' => 'traniingtraniingtraniingtraniingtraniingtraniing
@@ -384,19 +383,19 @@ class ProjectControllerTest extends TestCase
         $response = $this->json('PUT', 'project/update', $array1);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
-         $this->assertDatabaseMissing('projects', [
-            'name' => $array1['name'],
-            'information' => $array1['information'],
-            'deadline' => $array1['deadline'],
-            'type' => $array1['type'],
-            'status' => $array1['status']
-           ]);
+        $this->assertDatabaseMissing('projects', [
+                'name' => $array1['name'],
+                'information' => $array1['information'],
+                'deadline' => $array1['deadline'],
+                'type' => $array1['type'],
+                'status' => $array1['status']
+            ]);
     }
 
     public function testEditProjectWithNotValidDate()
     {
         $json = '{"message":"The given data was invalid.","errors":{"deadline":'.
-        '["The deadline is not a valid date."]}}';
+            '["The deadline is not a valid date."]}}';
         $array1 = [
             'name' => 'thu',
             'information' => 'traniing',
@@ -408,19 +407,19 @@ class ProjectControllerTest extends TestCase
         $response = $this->json('PUT', 'project/update', $array1);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
-         $this->assertDatabaseMissing('projects', [
-            'name' => $array1['name'],
-            'information' => $array1['information'],
-            'deadline' => $array1['deadline'],
-            'type' => $array1['type'],
-            'status' => $array1['status']
-           ]);
+        $this->assertDatabaseMissing('projects', [
+                'name' => $array1['name'],
+                'information' => $array1['information'],
+                'deadline' => $array1['deadline'],
+                'type' => $array1['type'],
+                'status' => $array1['status']
+            ]);
     }
 
     public function testEidtProjectWithDateNotFeature()
     {
         $json = '{"message":"The given data was invalid.","errors":{"deadline":'.
-        '["The deadline must be a date after now."]}}';
+            '["The deadline must be a date after now."]}}';
         $array1 = [
             'name' => 'thu',
             'information' => 'traniing',
@@ -432,20 +431,20 @@ class ProjectControllerTest extends TestCase
         $response = $this->json('PUT', 'project/update', $array1);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
-         $this->assertDatabaseMissing('projects', [
-            'name' => $array1['name'],
-            'information' => $array1['information'],
-            'deadline' => $array1['deadline'],
-            'type' => $array1['type'],
-            'status' => $array1['status']
-           ]);
+        $this->assertDatabaseMissing('projects', [
+                'name' => $array1['name'],
+                'information' => $array1['information'],
+                'deadline' => $array1['deadline'],
+                'type' => $array1['type'],
+                'status' => $array1['status']
+            ]);
     }
 
     public function testEditProjectWithNotValidType()
     {
         $json = '{"message":"The given data was invalid.","errors":{"name":'.
-        '["The name format is invalid."],"deadline":["The deadline must be '.
-        'a date after now."],"type":["The selected type is invalid."]}}';
+            '["The name format is invalid."],"deadline":["The deadline must be '.
+            'a date after now."],"type":["The selected type is invalid."]}}';
         $array1 = [
             'name' => 'thu123$#%',
             'information' => 'traniing',
@@ -457,20 +456,20 @@ class ProjectControllerTest extends TestCase
         $response = $this->json('PUT', 'project/update', $array1);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
-         $this->assertDatabaseMissing('projects', [
-            'name' => $array1['name'],
-            'information' => $array1['information'],
-            'deadline' => $array1['deadline'],
-            'type' => $array1['type'],
-            'status' => $array1['status']
-           ]);
+        $this->assertDatabaseMissing('projects', [
+                'name' => $array1['name'],
+                'information' => $array1['information'],
+                'deadline' => $array1['deadline'],
+                'type' => $array1['type'],
+                'status' => $array1['status']
+            ]);
     }
 
     public function testEidtProjectWithNotValidStatus()
     {
         $json = '{"message":"The given data was invalid.","errors":{"name":'.
-        '["The name format is invalid."],"deadline":["The deadline must be'.
-        ' a date after now."],"status":["The selected status is invalid."]}}';
+            '["The name format is invalid."],"deadline":["The deadline must be'.
+            'a date after now."],"status":["The selected status is invalid."]}}';
         $array1 = [
             'name' => 'thu123$#%',
             'information' => 'traniing',
@@ -482,12 +481,12 @@ class ProjectControllerTest extends TestCase
         $response = $this->json('PUT', 'project/update', $array1);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
-         $this->assertDatabaseMissing('projects', [
-            'name' => $array1['name'],
-            'information' => $array1['information'],
-            'deadline' => $array1['deadline'],
-            'type' => $array1['type'],
-            'status' => $array1['status']
-           ]);
+        $this->assertDatabaseMissing('projects', [
+                'name' => $array1['name'],
+                'information' => $array1['information'],
+                'deadline' => $array1['deadline'],
+                'type' => $array1['type'],
+                'status' => $array1['status']
+            ]);
     }
 }
