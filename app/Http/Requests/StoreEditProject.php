@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Response;
 
-class StoreCreateProject extends FormRequest
+class StoreEditProject extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,16 +24,16 @@ class StoreCreateProject extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|regex:/^[A-Za-z0-9,\-\.]+$/|max:10',
+            'name'=>'regex:/^[A-Za-z0-9,\-\.]+$/|max:10',
             'information'=>'max:300',
             'deadline'=>'date|after:now',
-            'type'=>'required|in: "lab", "single", "acceptance"',
-            'status'=>'required|in: "planned", "onhold", "doing", "done","cancelled"',
+            'type'=>'in: "lab", "single", "acceptance"',
+            'position_id'=>'integer',
+            'status'=>'in: "planned", "onhold", "doing", "done","cancelled"',
         ];
     }
-    
     public function response(array $errors)
     {
-        return response()->json(['error' => $errors], 422);
+        return response()->json(['error' => $errors]);
     }
 }

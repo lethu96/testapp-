@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCreateMember;
-use App\Http\Requests\StoreEditMember;
 use App\Member;
 use App\User;
 use App\Position;
@@ -12,65 +11,66 @@ use DB;
 
 class MemberController extends Controller
 {
-    public function listMember(Request $request)
+    public function index(Request $request)
     {
         $listMember= Member::all()->toArray();
-        return $listMember ;
+        return $listMember;
     }
 
-    public function deleteMember($id)
+    public function destroy(Request $request)
     {
-        $member=Member::find($id);
-        $member ->delete();
-        return "xóa thành công" ;
-    }
-
-    public function getCreateMember()
-    {
-        return view('test');
-    }
-
-    public function getEditMember($id)
-    {
-        $item = Member::find($id)->toArray();
-        return view('editmember', ['id'=>$id, 'item'=>$item]);
-    }
-
-    public function editMember(StoreCreateMember $request)
-    {
-        $data=$request->all();
-        $memberEdit=Member::find($data['id']);
-        $memberEdit->name=$data['name'];
-        $memberEdit->phone_number=$data['phone_number'];
-        $memberEdit->information=$data['information'];
-        $memberEdit->birthday=$data['birthday'];
-        $memberEdit->position_id=$data['position_id'];
-        $memberEdit->gender=$data['gender'];
-        if ($request->hasFile('avatar')) {
-            $file = $request->avatar;
-            $file->move("img", $file->getClientOriginalName());
-            $memberEdit->avatar = $file->getClientOriginalName();
+        $id = $request->id;
+        if ($member = Member::find($id)) {
+            $member->delete();
+            $listMember = Member::all() ->toArray();
+            return response()->json([
+                'message' => 'Delete success Member '.$id
+            ]);
         }
-        $memberEdit->save();
-        return $memberEdit;
+        return response()->json([
+                'status' => '404'
+            ], 404);
     }
 
-    public function addMember(StoreCreateMember $request)
+    public function update(StoreCreateMember $request)
     {
-        $data=$request->all();
-        $newMember=new Member();
-        $newMember->name=$data['name'];
-        $newMember->phone_number=$data['phone_number'];
-        $newMember->information=$data['information'];
-        $newMember->birthday=$data['birthday'];
-        $newMember->position_id=$data['position_id'];
-        $newMember->gender=$data['gender'];
+        $data = $request->all();
+        if ($memberEdit = Member::find($data['id'])) {
+            $memberEdit->name = $data['name'];
+            $memberEdit->phone_number = $data['phone_number'];
+            $memberEdit->information = $data['information'];
+            $memberEdit->birthday = $data['birthday'];
+            $memberEdit->position_id = $data['position_id'];
+            $memberEdit->gender = $data['gender'];
+            if ($request->hasFile('avatar')) {
+                $file = $request->avatar;
+                $file->move("img", $file->getClientOriginalName());
+                $memberEdit->avatar = $file->getClientOriginalName();
+            }
+            $memberEdit->save();
+            return response()->json($memberEdit);
+        }
+        return response()->json([
+                'message' => 'Member does not exist: '.$data['id']
+            ]);
+    }
+
+    public function store(StoreCreateMember $request)
+    {
+        $data = $request->all();
+        $newMember = new Member();
+        $newMember->name = $data['name'];
+        $newMember->phone_number = $data['phone_number'];
+        $newMember->information = $data['information'];
+        $newMember->birthday = $data['birthday'];
+        $newMember->position_id = $data['position_id'];
+        $newMember->gender = $data['gender'];
         if ($request->hasFile('avatar')) {
             $file = $request->avatar;
             $file->move("img", $file->getClientOriginalName());
             $newMember->avatar = $file->getClientOriginalName();
         }
         $newMember->save();
-        return $newMember;
+        return response()->json($newMember);
     }
 }

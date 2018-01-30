@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TestRequest extends FormRequest
+class StoreEditMember extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,13 @@ class TestRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|regex:/^[A-Za-z0-9,\-\.]+$/|max:50',
+            'name' => 'regex:/^[A-Za-z0-9,\-\.]+$/|max:50',
             'information' =>'max:300',
-            'phone_number'=>'required|regex:/^[\(\)\-\.\+\/0-9]+$/|max:20',
-            'birthday'=>'required|date|before:yesterday|after:60 year ago',
-            'position_id'=>'required',
-            'avatar'=>'required|mimes:png,jpeg,gif|max:10240',
-            'gender'=>'required|in:"male","female"'
+            'phone_number'=>'regex:/^[\(\)\-\.\+\/0-9]+$/|max:20',
+            'birthday'=>'date|before:now|after:60 year ago',
+            'position_id'=>'integer',
+            'avatar'=>'mimes:gif,png,jpeg|max:10240',
+            'gender'=>'in:"male","female"'
         ];
     }
 }
