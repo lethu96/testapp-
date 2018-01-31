@@ -9,6 +9,9 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use App\Project;
+use App\Member;
+use App\Position;
 
 class MemberProjectControllerTest extends TestCase
 {
@@ -24,7 +27,7 @@ class MemberProjectControllerTest extends TestCase
 
     public function testDeleteMemberProjectSuccess()
     {
-        $json = '{"message":"Delete success 1"}';
+        $json = '{"message":"Delete Item Sucess"}';
         $array = Factory(MemberProject::class)->create()->toArray();
         $response = $this->call('DELETE', 'member_projects/destroy', $array);
         $this->assertEquals(200, $response->status());
@@ -38,12 +41,17 @@ class MemberProjectControllerTest extends TestCase
 
     public function testEditMemberProjectSuccess()
     {
-        $json = '{"id":1,"member_id":1,"project_id":1,"role":"pm"}';
+        $json = '{"member_id":1,"project_id":2,"role":"pm"}';
+        $position = Factory(Position::class)->create();
+        $member = Factory(Member::class)->create();
+        $project = Factory(Project::class)->create();
+        $project2 = Factory(Project::class, 2)->create();
         $array1 = [
-            'id' => 1,
             'member_id' => 1,
             'project_id' => 1,
             'role' => 'pm',
+            'new_member_id'=>1,
+            'new_project_id'=>2
         ];
         $array = Factory(MemberProject::class)->create()->toArray();
         $response = $this->json('PUT', 'member_projects/update', $array1);
@@ -54,9 +62,11 @@ class MemberProjectControllerTest extends TestCase
 
     public function testAddMemberProjecSuccess()
     {
-        $json = '{"member_id":1,"project_id":1,"role":"pm","id":1}';
+        $json = '{"member_id":1,"project_id":1,"role":"pm"}';
+        $position = Factory(Position::class)->create();
+        $member = Factory(Member::class)->create();
+        $project = Factory(Project::class)->create();
         $array1 = [
-            'id' => 1,
             'member_id' => 1,
             'project_id' => 1,
             'role' => 'pm',
@@ -69,7 +79,7 @@ class MemberProjectControllerTest extends TestCase
 
     public function testAddMemberProjecSuccessWithRoleNull()
     {
-        $json = '{"member_id":1,"project_id":1,"role":"","id":1}';
+        $json = '{"message":"The given data was invalid.","errors":{"role":["The role field is required."]}}';
         $array1 = [
             'id' => 1,
             'member_id' => 1,
@@ -78,9 +88,7 @@ class MemberProjectControllerTest extends TestCase
         ];
         $response = $this->json('POST', 'member_projects/create', $array1);
         $this->assertSame($json, $response->getContent());
-        $response->assertStatus(200, $response->status());
-        $this->assertSame($json, $response->getContent());
-        $response->assertSuccessful();
+        $response->assertStatus(422, $response->status());
     }
 
     public function testAddMemberProjectWithMemberIdRequired()

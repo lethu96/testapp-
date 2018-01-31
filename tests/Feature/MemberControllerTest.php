@@ -12,6 +12,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Http\Response;
+use App\Position;
 
 class MemberControllerTest extends TestCase
 {
@@ -20,13 +21,14 @@ class MemberControllerTest extends TestCase
 
     public function testCreateMemberHaveAvatar()
     {
-        $stub = public_path().'/img/aaa.jpg';
-        $name = 'imgtest'.'.jpg';
+        $stub = public_path().'/img/vnvd.jpg';
+        $name = 'vnvd'.'.jpg';
         $path = public_path().'/img/test/'.$name;
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpg', filesize($path), null, true);
-        $json = '{"name":"thu","phone_number":"0978716945","information":"inter",'.
-        '"birthday":"1996-12-12","position_id":1,"gender":"female","avatar":"imgtest.jpg","id":2}';
+        $json = '{"information":"inter","name":"thu","phone_number":"0978716945",'.
+            '"birthday":"1996-12-12","position_id":1,"gender":"female","avatar":"vnvd.jpg","id":2}';
+        $position = Factory(Position::class)->create();
         $newMember = Factory(Member::class)->create([
             'name' => 'thu',
             'information' => 'inter',
@@ -47,7 +49,6 @@ class MemberControllerTest extends TestCase
                 'position_id' => $newMember['position_id'],
                 'gender' => $newMember['gender']
             ]);
-        unlink($path);
     }
 
     public function testCreateMemberHaveAvatarMorethan10MB()
@@ -58,7 +59,7 @@ class MemberControllerTest extends TestCase
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpeg', filesize($path), null, true);
         $json = '{"message":"The given data was invalid.",'.'"errors":'.
-        '{"avatar":["The avatar may not be greater than 10240 kilobytes."]}}';
+            '{"avatar":["The avatar may not be greater than 10240 kilobytes."]}}';
         $newMember = Factory(Member::class)->create([
             'id'=>1,
             'name' => 'thu',
@@ -72,7 +73,6 @@ class MemberControllerTest extends TestCase
         $response = $this->json('POST', 'members/create', $newMember);
         $this->assertEquals(422, $response->status()) ;
         $this->assertSame($json, $response->getContent());
-        unlink($path);
     }
 
     public function testCreateMemberHaveAvatarLessThan10MB()
@@ -82,8 +82,9 @@ class MemberControllerTest extends TestCase
         $path = public_path().'/img/test/'.$name;
         copy($stub, $path);
         $file  = new UploadedFile($path, $name, 'image/jpg', filesize($path), null, true) ;
-        $json = '{"name":"thu","phone_number":"0978716945","information":"inter",'.
-        '"birthday":"1996-12-12","position_id":1,"gender":"female","avatar":"imgtest.jpg","id":2}';
+        $json = '{"information":"inter","name":"thu","phone_number":"0978716945",'.
+            '"birthday":"1996-12-12","position_id":1,"gender":"female","avatar":"imgtest.jpg","id":2}';
+        $position=Factory(Position::class)->create();
         $newMember = Factory(Member::class)->create([
             'name' => 'thu',
             'information' => 'inter',
@@ -104,7 +105,6 @@ class MemberControllerTest extends TestCase
                 'position_id' => $newMember['position_id'],
                 'gender' => $newMember['gender']
             ]);
-        unlink($path);
     }
 
     public function testCreateMemberHaveAvatarNotImage()
@@ -115,7 +115,7 @@ class MemberControllerTest extends TestCase
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpg', filesize($path), null, true);
         $json = '{"message":"The given data was invalid.","errors":{"avatar":'.
-        '["The avatar must be an image.","The avatar must be a file of type: gif, png, jpeg."]}}';
+            '["The avatar must be a file of type: gif, png, jpeg."]}}';
         $newMember = [
             'name' => 'thuuu',
             'information' => 'interu',
@@ -128,7 +128,6 @@ class MemberControllerTest extends TestCase
         $response = $this->json('POST', 'members/create', $newMember);
         $this->assertEquals(422, $response->status());
         $this->assertSame($json, $response->getContent());
-        unlink($path);
     }
 
     public function testEditMemberSuccessHaveImage()
@@ -139,7 +138,8 @@ class MemberControllerTest extends TestCase
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpg', filesize($path), null, true);
         $json = '{"id":1,"name":"thu","information":"inter","phone_number":"0978716945",'.
-        '"birthday":"1996-12-12","avatar":"imgtest.jpg","position_id":1,"gender":"female"}';
+            '"birthday":"1996-12-12","avatar":"imgtest.jpg","position_id":1,"gender":"female"}';
+        $position=Factory(Position::class)->create();
         $newMember = Factory(Member::class)->create([
             'name' => 'thu',
             'information' => 'inter',
@@ -161,7 +161,6 @@ class MemberControllerTest extends TestCase
         $response = $this->json('PUT', 'members/update', $newMember);
         $this->assertSame($json, $response->getContent());
         $response->assertStatus(200, $response->status());
-        unlink($path);
     }
 
     public function testEditMemberWithHaveImageNotImage()
@@ -172,7 +171,7 @@ class MemberControllerTest extends TestCase
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpg', filesize($path), null, true);
         $json = '{"message":"The given data was invalid.","errors":{"avatar":'.
-        '["The avatar must be an image.","The avatar must be a file of type: gif, png, jpeg."]}}';
+            '["The avatar must be a file of type: gif, png, jpeg."]}}';
         $array = [
             'id' => 1,
             'name' => 'thuuu',
@@ -196,7 +195,6 @@ class MemberControllerTest extends TestCase
         $response = $this->json('PUT', 'members/update', $array);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
-        unlink($path);
     }
 
     public function testEditMemberWithHaveImageMax10MB()
@@ -207,7 +205,7 @@ class MemberControllerTest extends TestCase
         copy($stub, $path);
         $file = new UploadedFile($path, $name, 'image/jpeg', filesize($path), null, true);
         $json = '{"message":"The given data was invalid.","errors":'.
-         '{"avatar":["The avatar may not be greater than 10240 kilobytes."]}}';
+            '{"avatar":["The avatar may not be greater than 10240 kilobytes."]}}';
         $array = [
             'id' => 1,
             'name' => 'thuuu',
@@ -230,7 +228,6 @@ class MemberControllerTest extends TestCase
         $response = $this->json('PUT', 'members/update', $array);
         $response->assertStatus(422, $response->status());
         $this->assertSame($json, $response->getContent());
-        unlink($path);
     }
 
     public function testListMemberSuccess()
@@ -242,7 +239,7 @@ class MemberControllerTest extends TestCase
 
     public function testDeleteMemberSuccess()
     {
-        $json = '{"message":"Delete success 1"}';
+        $json = '{"message":"Delete success Member 1"}';
         $array = Factory(Member::class)->create()->toArray();
         $response = $this->call('DELETE', 'members/destroy', $array);
         $this->assertEquals(200, $response->status());
@@ -252,7 +249,7 @@ class MemberControllerTest extends TestCase
     public function testAddMemberWithNameEmpty()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-            '{"name":["The name field is Empty."]}}';
+            '{"name":["The name field is required."]}}';
         $array = [
             'name' => '',
             'information' => 'inter',
@@ -338,7 +335,7 @@ class MemberControllerTest extends TestCase
     public function testAddMemberWithPhoneNumberEmpty()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-            '{"phone_number":["The phone number field is Empty."]}}';
+            '{"phone_number":["The phone number field is required."]}}';
         $array = [
             'name' => 'halo',
             'information' => 'inter',
@@ -408,7 +405,7 @@ class MemberControllerTest extends TestCase
     public function testAddMemberWithBirthdayEmpty()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-            '{"birthday":["The birthday field is Empty."]}}';
+            '{"birthday":["The birthday field is required."]}}';
         $array = [
             'name' => 'halo',
             'information' => 'inter',
@@ -434,7 +431,7 @@ class MemberControllerTest extends TestCase
     public function testAddMemberWithBirthdayNotValidDate()
     {
         $json = '{"message":"The given data was invalid.","errors":{"birthday":'.
-        '["The birthday is not a valid date.","The birthday must be a date before now."]}}';
+            '["The birthday is not a valid date.","The birthday must be a date before now."]}}';
         $array = [
             'name' => 'halo',
             'information' => 'inter',
@@ -460,7 +457,7 @@ class MemberControllerTest extends TestCase
     public function testAddMemberWithBirthdayNotValidBefore()
     {
         $json = '{"message":"The given data was invalid.","errors":{"birthday"'.
-        ':["The birthday must be a date before now."]}}';
+            ':["The birthday must be a date before now."]}}';
         $array = [
             'name' => 'halo',
             'information' => 'inter',
@@ -512,7 +509,7 @@ class MemberControllerTest extends TestCase
     public function testAddMemberWithPositionEmpty()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-            '{"position_id":["The position id field is Empty."]}}';
+            '{"position_id":["The position id field is required."]}}';
         $array = [
             'name' => 'halo',
             'information' => 'inter',
@@ -563,8 +560,8 @@ class MemberControllerTest extends TestCase
 
     public function testAddMemberWithGenderEmpty()
     {
-        $json = '{"message":"The given data was invalid.","errors":'.
-        '{"gender":["The gender field is Empty."]}}';
+        $json = '{"message":"The given data was invalid.","errors":{"gender":'.
+            '["The gender field is required."]}}';
         $array = [
             'name' => 'halo',
             'information' => 'inter',

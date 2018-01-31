@@ -26,10 +26,10 @@ class StoreCreateMember extends FormRequest
         return [
             'name' => 'required|regex:/^[A-Za-z0-9,\ \-\.]+$/|max:50',
             'information' =>'max:300',
-            'phone_number'=>'required|regex:/^[\(\)\-\.\+\/0-9]+$/|max:20',
+            'phone_number'=>'required|regex:/^[\(\)\-\ \.\+\/0-9]+$/|max:20',
             'birthday'=>'required|date|before:now|after:60 year ago',
             'position_id'=>'required|integer',
-            'avatar'=>'image|mimes:gif,png,jpeg|max:10240',
+            'avatar'=>'mimes:gif,png,jpeg|max:10240',
             'gender'=>'required|in:"male","female"'
         ];
     }

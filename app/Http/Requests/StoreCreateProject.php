@@ -27,7 +27,7 @@ class StoreCreateProject extends FormRequest
         return [
             'name'=>'required|regex:/^[A-Za-z0-9,\-\.]+$/|max:10',
             'information'=>'max:300',
-            'deadline'=>'date|after:now',
+            'deadline'=>'date|after:now|nullable',
             'type'=>'required|in: "lab", "single", "acceptance"',
             'status'=>'required|in: "planned", "onhold", "doing", "done","cancelled"',
         ];

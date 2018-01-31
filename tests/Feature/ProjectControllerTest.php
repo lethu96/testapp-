@@ -28,7 +28,7 @@ class ProjectControllerTest extends TestCase
             'id' => '',
             'name' => 'test',
             'information' => 'tr',
-            'deadline' => '2018-02-25',
+            'deadline' => '2019-02-25',
             'type' => 'single',
             'status' => 'planned',
         ];
@@ -38,7 +38,7 @@ class ProjectControllerTest extends TestCase
 
     public function testDeleteProjectSuccess()
     {
-        $json = '{"message":"Delete success 1"}';
+        $json = '{"message":"Delete success project 1"}';
         $array = Factory(Project::class)->create()->toArray();
         $response = $this->call('DELETE', 'project/destroy', $array);
         $this->assertEquals(200, $response->status());
@@ -55,12 +55,12 @@ class ProjectControllerTest extends TestCase
     public function testEditProjectSuccess()
     {
         $json = '{"id":1,"name":"test","information":"tr",'.
-            '"deadline":"2018-02-25","type":"single","status":"planned"}';
+            '"deadline":"2019-02-25","type":"single","status":"planned"}';
         $array1 = [
             'id' => 1,
             'name' => 'test',
             'information' => 'tr',
-            'deadline' => '2018-02-25',
+            'deadline' => '2019-02-25',
             'type' => 'single',
             'status' => 'planned',
         ];
@@ -74,11 +74,11 @@ class ProjectControllerTest extends TestCase
     public function testAddProjecSuccess()
     {
         $json = '{"name":"testapp","information":"traniing",'.
-            '"deadline":"2018-02-25","type":"lab","status":"planned","id":1}';
+            '"deadline":"2019-02-25","type":"lab","status":"planned","id":1}';
         $array = [
             'name' => 'testapp',
             'information' => 'traniing',
-            'deadline' => '2018-02-25',
+            'deadline' => '2019-02-25',
             'type' => 'lab',
             'status' => 'planned',
         ];
@@ -90,13 +90,11 @@ class ProjectControllerTest extends TestCase
 
     public function testAddProjectFailWithNameNull()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"name":'.
-            '["The name field is required."],"deadline":["The deadline must be a '.
-            'date after now."]}}';
+        $json = '{"message":"The given data was invalid.","errors":{"name":["The name field is required."]}}';
         $array = [
             'name' => '',
             'information' => 'traniing',
-            'deadline' => '2018-01-22',
+            'deadline' => '2019-01-22',
             'type' => 'lab',
             'status' => 'planned',
         ];
@@ -119,7 +117,7 @@ class ProjectControllerTest extends TestCase
         $array = [
             'name' => 'xinchaooooo',
             'information' => 'traniing',
-            'deadline' => '2018-02-22',
+            'deadline' => '2019-02-22',
             'type' => 'lab',
             'status' => 'planned',
         ];
@@ -137,13 +135,11 @@ class ProjectControllerTest extends TestCase
 
     public function testAddProjectWithNameNotValid()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"name":'.
-        '["The name format is invalid."],"deadline":["The deadline must be a'.
-        ' date after now."]}}';
+        $json = '{"message":"The given data was invalid.","errors":{"name":["The name format is invalid."]}}';
         $array = [
             'name' => 'thu123$#%',
             'information' => 'traniing',
-            'deadline' => '2018-01-22',
+            'deadline' => '2019-01-22',
             'type' => 'lab',
             'status' => 'planned',
         ];
@@ -162,8 +158,7 @@ class ProjectControllerTest extends TestCase
     public function testAddProjecInformationMax300()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-            '{"information":["The information may not be greater than 300 '.
-            'characters."],"deadline":["The deadline must be a date after now."]}}';
+            '{"information":["The information may not be greater than 300 characters."]}}';
         $array = [
             'name' => 'thu',
             'information' => 'traniinggggggggggggggggggggggggggggggggggggggg
@@ -179,7 +174,7 @@ class ProjectControllerTest extends TestCase
             gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
             gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
             gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg',
-            'deadline' => '2018-01-22',
+            'deadline' => '2019-01-22',
             'type' => 'lab',
             'status' => 'planned',
         ];
@@ -313,13 +308,11 @@ class ProjectControllerTest extends TestCase
 
     public function testEditProjectWithNotValidName()
     {
-        $json = '{"message":"The given data was invalid.","errors":'.
-            '{"name":["The name format is invalid."],"deadline":["The '.
-            'deadline must be a date after now."]}}';
+        $json = '{"message":"The given data was invalid.","errors":{"name":["The name format is invalid."]}}';
         $array1 = [
             'name' => 'thu123$#%',
             'information' => 'traniing',
-            'deadline' => '2018-01-22',
+            'deadline' => '2019-01-22',
             'type' => 'lab',
             'status' => 'planned',
         ];
@@ -339,12 +332,11 @@ class ProjectControllerTest extends TestCase
     public function testEditProjectWithNameMax10()
     {
         $json = '{"message":"The given data was invalid.","errors":'.
-            '{"name":["The name may not be greater than 10 characters."],'.
-            '"deadline":["The deadline must be a date after now."]}}';
+        '{"name":["The name may not be greater than 10 characters."]}}';
         $array1 = [
             'name' => 'thuthuthuthuthuthu',
             'information' => 'traniing',
-            'deadline' => '2018-01-22',
+            'deadline' => '2019-01-22',
             'type' => 'lab',
             'status' => 'planned',
         ];
@@ -375,7 +367,7 @@ class ProjectControllerTest extends TestCase
             traniingtraniingtraniingtraniingtraniingtraniingtraniingtraniing
             traniingtraniingtraniingtraniingtraniingtraniingtraniingtraniing
             traniingtraniingtraniingtraniingtraniing',
-            'deadline' => '2018-02-02',
+            'deadline' => '2019-02-02',
             'type' => 'lab',
             'status' => 'planned',
         ];
@@ -416,39 +408,15 @@ class ProjectControllerTest extends TestCase
             ]);
     }
 
-    public function testEidtProjectWithDateNotFeature()
-    {
-        $json = '{"message":"The given data was invalid.","errors":{"deadline":'.
-            '["The deadline must be a date after now."]}}';
-        $array1 = [
-            'name' => 'thu',
-            'information' => 'traniing',
-            'deadline' => '2018-01-22',
-            'type' => 'lab',
-            'status' => 'planned',
-        ];
-        $array = Factory(Project::class)->create()->toArray();
-        $response = $this->json('PUT', 'project/update', $array1);
-        $response->assertStatus(422, $response->status());
-        $this->assertSame($json, $response->getContent());
-        $this->assertDatabaseMissing('projects', [
-                'name' => $array1['name'],
-                'information' => $array1['information'],
-                'deadline' => $array1['deadline'],
-                'type' => $array1['type'],
-                'status' => $array1['status']
-            ]);
-    }
-
     public function testEditProjectWithNotValidType()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"name":'.
-            '["The name format is invalid."],"deadline":["The deadline must be '.
-            'a date after now."],"type":["The selected type is invalid."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+            '{"name":["The name format is invalid."],"type":["The selected'.
+            ' type is invalid."]}}';
         $array1 = [
             'name' => 'thu123$#%',
             'information' => 'traniing',
-            'deadline' => '2018-01-22',
+            'deadline' => '2019-01-22',
             'type' => 'lap',
             'status' => 'planned',
         ];
@@ -467,13 +435,13 @@ class ProjectControllerTest extends TestCase
 
     public function testEidtProjectWithNotValidStatus()
     {
-        $json = '{"message":"The given data was invalid.","errors":{"name":'.
-            '["The name format is invalid."],"deadline":["The deadline must be'.
-            'a date after now."],"status":["The selected status is invalid."]}}';
+        $json = '{"message":"The given data was invalid.","errors":'.
+            '{"name":["The name format is invalid."],"status":["The selected '.
+            'status is invalid."]}}';
         $array1 = [
             'name' => 'thu123$#%',
             'information' => 'traniing',
-            'deadline' => '2018-01-22',
+            'deadline' => '2019-01-22',
             'type' => 'lab',
             'status' => 'plan',
         ];
