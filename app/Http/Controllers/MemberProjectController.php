@@ -27,8 +27,8 @@ class MemberProjectController extends Controller
         if ($countCreate > 0) {
             return response()->json(['message'=>'this member_id and project_id have exit']);
         }
-            $countMemberId = DB::table('members')->where('id', $data['member_id'])->count();
-            $countProjectId = DB::table('projects')->where('id', $data['project_id'])->count();
+        $countMemberId = DB::table('members')->where('id', $data['member_id'])->count();
+        $countProjectId = DB::table('projects')->where('id', $data['project_id'])->count();
         if ($countMemberId>0 && $countProjectId >0) {
                 $newMp->member_id = $data['member_id'];
                 $newMp->project_id = $data['project_id'];
@@ -52,10 +52,8 @@ class MemberProjectController extends Controller
             if ($newcountEdit > 0) {
                 return response()->json(['message' => 'Member Project have exit'], 404);
             } else {
-                $countMemberId = DB::table('members')->where('id', $data['new_member_id'])
-                                                    ->count();
-                $countProjectId = DB::table('projects')->where('id', $data['new_project_id'])
-                                                        ->count();
+                $countMemberId = DB::table('members')->where('id', $data['new_member_id'])->count();
+                $countProjectId = DB::table('projects')->where('id', $data['new_project_id'])->count();
                 if ($countMemberId > 0 && $countProjectId > 0) {
                     MemberProject::where('member_id', $memberId)
                                 ->where('project_id', $projectId)->delete();
@@ -73,6 +71,7 @@ class MemberProjectController extends Controller
             return response()->json(['message' => 'dont exit Member Project you find'], 404);
         }
     }
+
     public function destroy(Request $request)
     {
         $data = $request->all();
@@ -82,13 +81,13 @@ class MemberProjectController extends Controller
             $countDelete = MemberProject::where('member_id', $memberId)
             ->where('project_id', $projectId)->count();
             if ($countDelete > 0) {
-                    MemberProject::where('member_id', $memberId)
+                MemberProject::where('member_id', $memberId)
                 ->where('project_id', $projectId)->delete();
-                     return response()->json([
-                        'message' => 'Delete Item Sucess'
-                     ]);
+                return response()->json([
+                    'message' => 'Delete Item Sucess'
+                ]);
             }
-             return response()->json(['message' => 'dont exit memberproject you find'], 404);
+            return response()->json(['message' => 'dont exit memberproject you find'], 404);
         }
         return response()->json(['message' => 'please enter member_id and project_id you want delete']);
     }

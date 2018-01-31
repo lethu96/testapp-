@@ -15,9 +15,12 @@ class CreateMemberProjectsTable extends Migration
     public function up()
     {
         Schema::create('member_projects', function (Blueprint $table) {
-            $table->integer('member_id');
-            $table->integer('project_id');
-            $table->string('role')->nullable();
+            $table->integer('member_id')->unsigned();
+            $table->integer('project_id')->unsigned();
+            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+            $table->primary(['member_id', 'project_id']);
+            $table->string('role');
             $table->timestamps();
         });
     }
