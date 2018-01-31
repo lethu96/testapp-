@@ -26,9 +26,7 @@ class ProjectController extends Controller
                 'message' => 'Delete success project '.$id
             ]);
         }
-        return response()->json([
-                'status' => '404'
-            ], 404);
+        return response()->json(['message' => 'Dont exit projec'.$id], 404);
     }
 
     public function store(StoreCreateProject $request)
@@ -36,8 +34,16 @@ class ProjectController extends Controller
         $data = $request->all();
         $newProject = new Project();
         $newProject->name = $data['name'];
-        $newProject->information = $data['information'];
-        $newProject->deadline = $data['deadline'];
+        if (isset($data['information'])) {
+            $newProject->information = $data['information'];
+        } else {
+            $newProject->information ="null";
+        }
+        if (isset($data['deadline'])) {
+            $newProject->deadline = $data['deadline'];
+        } else {
+            $newProject->deadline ="null";
+        }
         $newProject->type = $data['type'];
         $newProject->status = $data['status'];
         $newProject->save();
@@ -48,16 +54,22 @@ class ProjectController extends Controller
     {
         $data = $request->all();
         if ($editProject = Project::find($data['id'])) {
+            if (isset($data['information'])) {
+                $editProject->information = $data['information'];
+            } else {
+                $editProject->information ="null";
+            }
+            if (isset($data['deadline'])) {
+                $editProject->deadline = $data['deadline'];
+            } else {
+                $editProject->deadline = "null";
+            }
             $editProject->name = $data['name'];
-            $editProject->information = $data['information'];
-            $editProject->deadline = $data['deadline'];
             $editProject->type = $data['type'];
             $editProject->status = $data['status'];
             $editProject->save();
             return response()->json($editProject);
         }
-        return response()->json([
-            'message' => 'Member does not exist: '.$data['id']
-            ]);
+        return response()->json(['message' => 'Project does not exist: '.$data['id']]);
     }
 }

@@ -34,8 +34,8 @@ $factory->define(App\Project::class, function (Faker $faker) {
 
 $factory->define(App\MemberProject::class, function (Faker $faker) {
     return [
-        'member_id' =>$faker->randomDigit,
-        'project_id' => $faker->randomDigit,
+        'member_id' =>1,
+        'project_id' => 1,
         'role' => $faker->name,
     ];
 });
@@ -46,8 +46,14 @@ $factory->define(App\Member::class, function (Faker $faker) {
         'phone_number'=>$faker->randomDigit,
         'information'=>$faker->name,
         'birthday'=>$faker->dateTimeBetween('-7300 days', '+1 days'),
-        'position_id'=>$faker->randomDigit,
+        'position_id'=>1,
         'gender'=>'male',
         'avatar'=> str_random(30)
+    ];
+});
+$factory->define(App\Position::class, function (Faker $faker) {
+    return [
+        'name'=>$faker->name,
+        'description'=>str_random(30)
     ];
 });

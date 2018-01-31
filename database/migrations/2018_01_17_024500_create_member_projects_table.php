@@ -15,7 +15,6 @@ class CreateMemberProjectsTable extends Migration
     public function up()
     {
         Schema::create('member_projects', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('member_id');
             $table->integer('project_id');
             $table->string('role')->nullable();
