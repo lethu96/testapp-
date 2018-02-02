@@ -39,7 +39,7 @@ class MemberController extends Controller
             if (isset($data['information'])) {
                 $memberEdit->information = $data['information'];
             } else {
-                $memberEdit->information =null;
+                $memberEdit->information = null;
             }
             $memberEdit->birthday = $data['birthday'];
             $countPosition = DB::table('positions')->where('id', $data['position_id'])->count();
@@ -69,7 +69,7 @@ class MemberController extends Controller
         if (isset($data['information'])) {
             $newMember->information = $data['information'];
         } else {
-            $newMember->information =null;
+            $newMember->information = null;
         }
         $newMember->name = $data['name'];
         $newMember->phone_number = $data['phone_number'];

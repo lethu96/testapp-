@@ -37,12 +37,12 @@ class ProjectController extends Controller
         if (isset($data['information'])) {
             $newProject->information = $data['information'];
         } else {
-            $newProject->information =null;
+            $newProject->information = null;
         }
         if (isset($data['deadline'])) {
             $newProject->deadline = $data['deadline'];
         } else {
-            $newProject->deadline =null;
+            $newProject->deadline = null;
         }
         $newProject->type = $data['type'];
         $newProject->status = $data['status'];
@@ -57,7 +57,7 @@ class ProjectController extends Controller
             if (isset($data['information'])) {
                 $editProject->information = $data['information'];
             } else {
-                $editProject->information =null;
+                $editProject->information = null;
             }
             if (isset($data['deadline'])) {
                 $editProject->deadline = $data['deadline'];
