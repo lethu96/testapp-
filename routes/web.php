@@ -14,6 +14,7 @@ Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/display-item','ProjectController@index');
 Route::post('/add-item','ProjectController@store');
 Route::get('/list', 'MemberController@listMember');
@@ -28,3 +29,5 @@ Route::post('/editm', 'MemberController@editMember');
 Route::get('/editproject/{id}', 'ProjectController@getEditProject');
 Route::post('/editproject', 'ProjectController@editProject');
 Route::get('listproject','ProjectController@index');
+
+

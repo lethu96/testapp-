@@ -12,13 +12,16 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'editmp',
-        'addmp',
-        'editmember',
-        'editproject',
-        'editproject/{id}',
-        'create' ,
-        'createproject'
-        
+        'api/members/{id}/update',
+        'members/{id}/update',
+        'project/update',
+        'project/create',
+        'project/destroy',
+        'members/destroy',
+        'members/create',
+        'members/update',
+        'member_projects/create',
+        'member_projects/update',
+        'member_projects/destroy',
     ];
 }
