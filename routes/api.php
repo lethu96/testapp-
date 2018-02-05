@@ -14,6 +14,5 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    Route::get('/list', 'MemberController@listMember');
-    Route::get('/listdele/{id}', 'MemberController@deleteMember');
 });
+Route::resource('project', 'ProjectController');

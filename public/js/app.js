@@ -59271,24 +59271,6 @@ var Master = function (_Component) {
                   { to: 'display-item' },
                   'Project'
                 )
-              ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'li',
-                null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  __WEBPACK_IMPORTED_MODULE_1_react_router__["Link"],
-                  { to: 'display-item-member' },
-                  'Member'
-                )
-              ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'li',
-                null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  __WEBPACK_IMPORTED_MODULE_1_react_router__["Link"],
-                  { to: 'display-item' },
-                  'Member Project'
-                )
               )
             )
           )
@@ -59351,7 +59333,7 @@ var CreateProject = function (_Component) {
         key: 'handleChange1',
         value: function handleChange1(e) {
             this.setState({
-                title: e.target.value
+                name: e.target.value
             });
         }
     }, {
@@ -59394,7 +59376,7 @@ var CreateProject = function (_Component) {
                 status: this.state.status
             };
 
-            var uri = __WEBPACK_IMPORTED_MODULE_2__MyGlobleSetting__["a" /* default */].url + '/api/project';
+            var uri = 'http://test.thu/project/create';
             axios.post(uri, project).then(function (response) {
                 __WEBPACK_IMPORTED_MODULE_1_react_router__["browserHistory"].push('/display-item');
             });
@@ -59481,7 +59463,7 @@ var CreateProject = function (_Component) {
                                     null,
                                     'Project type:'
                                 ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: 'form-control', onChange: this.handleChange4s })
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: 'form-control', onChange: this.handleChange4 })
                             )
                         )
                     ),
@@ -59550,120 +59532,120 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var DisplayProject = function (_Component) {
-    _inherits(DisplayProject, _Component);
+  _inherits(DisplayProject, _Component);
 
-    function DisplayProject(props) {
-        _classCallCheck(this, DisplayProject);
+  function DisplayProject(props) {
+    _classCallCheck(this, DisplayProject);
 
-        var _this = _possibleConstructorReturn(this, (DisplayProject.__proto__ || Object.getPrototypeOf(DisplayProject)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (DisplayProject.__proto__ || Object.getPrototypeOf(DisplayProject)).call(this, props));
 
-        _this.state = { value: '', project: '' };
-        return _this;
+    _this.state = { value: '', project: '' };
+    return _this;
+  }
+
+  _createClass(DisplayProject, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('http://localhost:8000/project').then(function (response) {
+        _this2.setState({ project: response.data });
+      }).catch(function (error) {
+        console.log(error);
+      });
     }
-
-    _createClass(DisplayProject, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var _this2 = this;
-
-            __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(__WEBPACK_IMPORTED_MODULE_4__MyGlobleSetting__["a" /* default */].url + '/api/project').then(function (response) {
-                _this2.setState({ project: response.data });
-            }).catch(function (error) {
-                console.log(error);
-            });
-        }
-    }, {
-        key: 'tabRow',
-        value: function tabRow() {
-            if (this.state.project instanceof Array) {
-                return this.state.project.map(function (object, i) {
-                    return i;
-                });
-            }
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'div',
+  }, {
+    key: 'tabRow',
+    value: function tabRow() {
+      if (this.state.project instanceof Array) {
+        return this.state.project.map(function (object, i) {
+          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__TableRow__["a" /* default */], { obj: object, key: i });
+        });
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'h1',
+          null,
+          'Project'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'row' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'col-md-10' }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'col-md-2' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_2_react_router__["Link"],
+              { to: '/add-item' },
+              'Create Projects'
+            )
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'table',
+          { className: 'table table-hover' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'thead',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'tr',
+              null,
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'td',
                 null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'h1',
-                    null,
-                    'Project'
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    { className: 'row' },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'col-md-10' }),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'div',
-                        { className: 'col-md-2' },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            __WEBPACK_IMPORTED_MODULE_2_react_router__["Link"],
-                            { to: '/add-item' },
-                            'Create Projects'
-                        )
-                    )
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'table',
-                    { className: 'table table-hover' },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'thead',
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'tr',
-                            null,
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'td',
-                                null,
-                                'ID'
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'td',
-                                null,
-                                'Name'
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'td',
-                                null,
-                                'Information'
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'td',
-                                null,
-                                'Deadline'
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'td',
-                                null,
-                                'Type'
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'td',
-                                null,
-                                'Status'
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'td',
-                                { width: '200px' },
-                                'Actions'
-                            )
-                        )
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'tbody',
-                        null,
-                        this.tabRow()
-                    )
-                )
-            );
-        }
-    }]);
+                'ID'
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'td',
+                null,
+                'Name'
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'td',
+                null,
+                'Information'
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'td',
+                null,
+                'Deadline'
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'td',
+                null,
+                'Type'
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'td',
+                null,
+                'Status'
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'td',
+                { width: '200px' },
+                'Actions'
+              )
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'tbody',
+            null,
+            this.tabRow()
+          )
+        )
+      );
+    }
+  }]);
 
-    return DisplayProject;
+  return DisplayProject;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["a"] = (DisplayProject);
@@ -59706,7 +59688,7 @@ var TableRow = function (_Component) {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
       event.preventDefault();
-      var uri = __WEBPACK_IMPORTED_MODULE_2__MyGlobleSetting__["a" /* default */].url + ('/api/project/' + this.props.obj.id);
+      var uri = __WEBPACK_IMPORTED_MODULE_2__MyGlobleSetting__["a" /* default */].url + '/api/project/${this.props.obj.id}';
       axios.delete(uri);
       __WEBPACK_IMPORTED_MODULE_1_react_router__["browserHistory"].push('/display-item');
     }
@@ -59724,12 +59706,27 @@ var TableRow = function (_Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'td',
           null,
-          this.props.obj.title
+          this.props.obj.name
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'td',
           null,
-          this.props.obj.body
+          this.props.obj.information
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'td',
+          null,
+          this.props.obj.deadline
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'td',
+          null,
+          this.props.obj.type
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'td',
+          null,
+          this.props.obj.status
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'td',
@@ -59739,7 +59736,7 @@ var TableRow = function (_Component) {
             { onSubmit: this.handleSubmit },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_1_react_router__["Link"],
-              { to: "edit/" + this.props.obj.id, className: 'btn btn-primary' },
+              { to: "/edit-item/" + this.props.obj.id, className: 'btn btn-primary' },
               'Edit'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'submit', value: 'Delete', className: 'btn btn-danger' })
@@ -59752,7 +59749,7 @@ var TableRow = function (_Component) {
   return TableRow;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* unused harmony default export */ var _unused_webpack_default_export = (TableRow);
+/* harmony default export */ __webpack_exports__["a"] = (TableRow);
 
 /***/ }),
 /* 285 */

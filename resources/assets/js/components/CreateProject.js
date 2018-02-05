@@ -17,7 +17,7 @@ class CreateProject extends Component {
 
     handleChange1(e){
         this.setState({
-            title: e.target.value
+            name: e.target.value
         })
     }
 
@@ -55,7 +55,7 @@ class CreateProject extends Component {
             status: this.state.status
     }
 
-    let uri = MyGlobleSetting.url + '/api/project';
+    let uri = 'http://test.thu/project/create';
     axios.post(uri, project).then((response) => {
       browserHistory.push('/display-item');
     });
@@ -97,7 +97,7 @@ class CreateProject extends Component {
             <div className="col-md-6">
               <div className="form-group">
                 <label>Project type:</label>
-                <input type="text" className="form-control" onChange={this.handleChange4s} />
+                <input type="text" className="form-control" onChange={this.handleChange4} />
               </div>
             </div>
             </div>
