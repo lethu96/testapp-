@@ -18,10 +18,10 @@ import DisplayProject from './components/DisplayProject';
 
 
 render(
-  <Router history={browserHistory}>
-      <Route path="/" component={Master} >
-        <Route path="/add-item" component={CreateProject} />
-        <Route path="/display-item" component={DisplayProject} />
-      </Route>
+    <Router history={browserHistory}>
+        <Route path="/" component={Master} >
+            <Route path="/add-item" component={CreateProject} />
+            <Route path="/display-item" component={DisplayProject} />
+        </Route>
     </Router>,
-        document.getElementById('crud-app'));
+document.getElementById('crud-app'));
