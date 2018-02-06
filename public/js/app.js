@@ -59739,9 +59739,9 @@ var TableRow = function (_Component) {
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var MyGlobalSettings = function MyGlobalSettings() {
-  _classCallCheck(this, MyGlobalSettings);
+    _classCallCheck(this, MyGlobalSettings);
 
-  this.url = 'http://localhost:8000';
+    this.url = 'http://localhost:8000';
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (new MyGlobalSettings());

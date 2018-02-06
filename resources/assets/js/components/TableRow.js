@@ -3,7 +3,7 @@ import { Link, browserHistory } from 'react-router';
 import MyGlobalSettings from './MyGlobalSettings';
 
 
-class TableRow extends Component 
+class TableRow extends Component
 {
     constructor(props)
     {
@@ -19,7 +19,8 @@ class TableRow extends Component
         browserHistory.push('/display-item');
     }
 
-    render() {
+    render()
+    {
         return (
             <tr>
                 <td>

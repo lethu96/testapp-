@@ -24,4 +24,5 @@ render(
             <Route path="/display-item" component={DisplayProject} />
         </Route>
     </Router>,
-document.getElementById('crud-app'));
+    document.getElementById('crud-app')
+);
