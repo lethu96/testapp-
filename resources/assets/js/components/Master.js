@@ -10,14 +10,14 @@ class Master extends Component
             <div className="container">
                 <nav className="navbar navbar-default">
                     <div className="container-fluid">
-                    <ul className="nav navbar-nav">
-                    <li><Link to="display-item">Project</Link></li>
-                    </ul>
+                        <ul className="nav navbar-nav">
+                            <li><Link to="display-item">Project</Link></li>
+                        </ul>
                     </div>
                 </nav>
                 <div>
-                {this.props.children}
-            </div>
+                    {this.props.children}
+                </div>
             </div>
         )
     }

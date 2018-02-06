@@ -41,7 +41,7 @@ class DisplayProject extends Component
                         <Link to="/add-item">Create Projects</Link>
                     </div>
                 </div><br />
-                 <table className="table table-hover">
+                <table className="table table-hover">
                     <thead>
                         <tr>
                             <td>ID</td>
@@ -56,9 +56,9 @@ class DisplayProject extends Component
                     <tbody>
                         {this.tabRow()}
                     </tbody>
-            </table>
+                </table>
         </div>
         )
-        }
     }
+}
 export default DisplayProject;
