@@ -1,52 +1,58 @@
 import React, {Component} from 'react';
 import {browserHistory} from 'react-router';
-import MyGlobleSetting from './MyGlobleSetting';
 
 
-class CreateProject extends Component 
+class CreateProject extends Component
 {
-    constructor(props){
+    constructor(props)
+    {
         super(props);
         this.state = {name: '', information: '', deadline: '', type: '', status: ''};
-        this.handleChange1 = this.handleChange1.bind(this);
-        this.handleChange2 = this.handleChange2.bind(this);
-        this.handleChange3 = this.handleChange3.bind(this);
-        this.handleChange4 = this.handleChange4.bind(this);
-        this.handleChange5 = this.handleChange5.bind(this);
+        this.ChangeProjectName = this.ChangeProjectName.bind(this);
+        this.ChangeProjectInformation = this.ChangeProjectInformation.bind(this);
+        this.ChangeProjectDeadline = this.ChangeProjectDeadline.bind(this);
+        this.ChangeProjectType = this.ChangeProjectType.bind(this);
+        this.ChangeProjectStatus = this.ChangeProjectStatus.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange1(e){
+    ChangeProjectName(e)
+    {
         this.setState({
             name: e.target.value
         })
     }
 
-    handleChange2(e){
+    ChangeProjectInformation(e)
+    {
         this.setState({
             information: e.target.value
         })
     }
 
-    handleChange3(e){
+    ChangeProjectDeadline(e)
+    {
         this.setState({
             deadline: e.target.value
         })
     }
 
-    handleChange4(e){
+    ChangeProjectType(e)
+    {
         this.setState({
             type: e.target.value
         })
     }
 
-    handleChange5(e){
+    ChangeProjectStatus(e)
+    {
         this.setState({
             status: e.target.value
         })
     }
 
-    handleSubmit(e){
+    handleSubmit(e)
+    {
         e.preventDefault();
         const project = {
             name: this.state.name,
@@ -54,68 +60,65 @@ class CreateProject extends Component
             deadline: this.state.deadline,
             type: this.state.type,
             status: this.state.status
+        }
+        let uri = 'http://test.thu/project/create';
+        axios.post(uri, project).then((response) => {
+            browserHistory.push('/display-item');
+        });
     }
 
-    let uri = 'http://test.thu/project/create';
-    axios.post(uri, project).then((response) => {
-      browserHistory.push('/display-item');
-    });
-  }
-
-
-    render() {
-      return (
-      <div>
-        <h1>Create project</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <label>Project name:</label>
-                <input type="text" className="form-control" onChange={this.handleChange1} />
-              </div>
+    render()
+    {
+        return (
+            <div>
+                <h1>Create project</h1>
+                <form onSubmit={this.handleSubmit}>
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label>Project name:</label>
+                                <input type="text" className="form-control" onChange={this.ChangeProjectName} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label>Project information:</label>
+                                <input type="text" className="form-control" onChange={this.ChangeProjectInformation} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label>Project deadline:</label>
+                                <input type="text" className="form-control" onChange={this.ChangeProjectDeadline} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label>Project type:</label>
+                                <input type="text" className="form-control" onChange={this.ChangeProjectType} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label>Project status:</label>
+                                <input type="text" className="form-control" onChange={this.ChangeProjectStatus} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <button className="btn btn-primary">Add project</button>
+                    </div>
+                </form>
             </div>
-            </div>
-
-         <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <label>Project information:</label>
-                <input type="text" className="form-control" onChange={this.handleChange2} />
-              </div>
-            </div>
-            </div>
-
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <label>Project deadline:</label>
-                <input type="text" className="form-control" onChange={this.handleChange3} />
-              </div>
-            </div>
-            </div>
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <label>Project type:</label>
-                <input type="text" className="form-control" onChange={this.handleChange4} />
-              </div>
-            </div>
-            </div>
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <label>Project status:</label>
-                <input type="text" className="form-control" onChange={this.handleChange5} />
-              </div>
-            </div>
-            </div>
-            <div className="form-group">
-              <button className="btn btn-primary">Add project</button>
-            </div>
-        </form>
-  </div>
-      )
+        )
     }
 }
 export default CreateProject;

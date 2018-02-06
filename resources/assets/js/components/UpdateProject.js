@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router';
-import MyGlobleSetting from './MyGlobleSetting';
+import MyGlobalSettings from './MyGlobalSettings';
 
 
 class UpdateProject extends Component
