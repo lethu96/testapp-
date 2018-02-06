@@ -44,28 +44,18 @@ class ProjectController extends Controller
         return response()->json($newProject);
     }
 
-    public function update(StoreCreateProject $request)
+    public function update(StoreCreateProject $request, $id)
     {
-        $data = $request->all();
-        if ($editProject = Project::find($data['id'])) {
-            if (isset($data['information'])) {
-                $editProject->information = $data['information'];
-            } else {
-                $editProject->information =null;
-            }
-            if (isset($data['deadline'])) {
-                $editProject->deadline = $data['deadline'];
-            } else {
-                $editProject->deadline = null;
-            }
-            $editProject->name = $data['name'];
-            $editProject->type = $data['type'];
-            $editProject->status = $data['status'];
-            $editProject->save();
-            return response()->json($editProject);
-        }
-        return response()->json(['message' => 'Project does not exist: '.$data['id']]);
+            $project = Project::find($id);
+            $project->deadline = $data['deadline'];
+            $project->information = $data['information'];
+            $project->name = $data['name'];
+            $project->type = $data['type'];
+            $project->status = $data['status'];
+            $project->save();
+             return response()->json('Project Updated Successfully.');
     }
+
     public function edit($id)
     {
         $project = Project::find($id);

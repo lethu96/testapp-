@@ -3,16 +3,17 @@ import {browserHistory} from 'react-router';
 import MyGlobleSetting from './MyGlobleSetting';
 
 
-class CreateProject extends Component {
-  constructor(props){
-    super(props);
-    this.state = {name: '', information: '', deadline: '', type: '', status: ''};
-    this.handleChange1 = this.handleChange1.bind(this);
-    this.handleChange2 = this.handleChange2.bind(this);
-    this.handleChange3 = this.handleChange3.bind(this);
-    this.handleChange4 = this.handleChange4.bind(this);
-    this.handleChange5 = this.handleChange5.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+class CreateProject extends Component 
+{
+    constructor(props){
+        super(props);
+        this.state = {name: '', information: '', deadline: '', type: '', status: ''};
+        this.handleChange1 = this.handleChange1.bind(this);
+        this.handleChange2 = this.handleChange2.bind(this);
+        this.handleChange3 = this.handleChange3.bind(this);
+        this.handleChange4 = this.handleChange4.bind(this);
+        this.handleChange5 = this.handleChange5.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange1(e){

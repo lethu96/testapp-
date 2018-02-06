@@ -16,6 +16,8 @@ Route::get('/', function () {
 });
 Route::resource('project','ProjectController');
 Route::get('project', 'ProjectController@index');
+Route::get('project/edit/{id}','ProjectController@edit');
+Route::put('edit-item/{id}', 'ProjectController@update');
 
 Route::get('member_projects', 'MemberProjectController@index');
 Route::put('member_projects/update', 'MemberProjectController@update');
@@ -32,7 +34,7 @@ Route::delete('members/destroy', [
   'uses'=> 'MemberController@destroy',
  ]);
 
-Route::put('project/update', 'ProjectController@update');
+
 Route::post('project/create', 'ProjectController@store');
 Route::delete('project/destroy', [
   'as'=> 'project',

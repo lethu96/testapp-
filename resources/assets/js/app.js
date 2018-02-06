@@ -15,6 +15,7 @@ import { Router, Route, browserHistory } from 'react-router';
 import Master from './components/Master';
 import CreateProject from './components/CreateProject';
 import DisplayProject from './components/DisplayProject';
+import UpdateProject from './components/UpdateProject';
 
 
 render(
@@ -22,6 +23,7 @@ render(
       <Route path="/" component={Master} >
         <Route path="/add-item" component={CreateProject} />
         <Route path="/display-item" component={DisplayProject} />
+        <Route path="/edit-item/:id" component={UpdateProject} />
       </Route>
     </Router>,
         document.getElementById('crud-app'));
