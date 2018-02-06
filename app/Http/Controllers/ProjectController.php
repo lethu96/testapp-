@@ -16,7 +16,7 @@ class ProjectController extends Controller
         return $listProject;
     }
 
-    public function destroy(Request $request,$id)
+    public function destroy($id)
     {
         $project = Project::find($id);
         $project->delete();
@@ -72,8 +72,4 @@ class ProjectController extends Controller
         return response()->json($project);
     }
 
-    public function show($id)
-    {
-        //
-    }
 }

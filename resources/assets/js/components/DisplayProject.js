@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router';
 import TableRow from './TableRow';
-import MyGlobleSetting from './MyGlobleSetting';
 
 class DisplayProject extends Component {
   constructor(props) {

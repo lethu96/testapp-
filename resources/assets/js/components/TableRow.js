@@ -4,16 +4,16 @@ import MyGlobleSetting from './MyGlobleSetting';
 
 
 class TableRow extends Component {
-  constructor(props) {
-      super(props);
-      this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  handleSubmit(event) {
-    event.preventDefault();
-    let uri = MyGlobleSetting.url + '/api/project/${this.props.obj.id}';
-    axios.delete(uri);
-      browserHistory.push('/display-item');
-  }
+    constructor(props) {
+        super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleSubmit(event) {
+        event.preventDefault();
+        let uri = MyGlobleSetting.url + '/api/project/${this.props.obj.id}';
+        axios.delete(uri);
+        browserHistory.push('/display-item');
+    }
   render() {
     return (
         <tr>
