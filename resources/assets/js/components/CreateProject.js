@@ -38,7 +38,7 @@ class CreateProject extends Component
         })
     }
 
-    ChangeProjectStatus(e) 
+    ChangeProjectStatus(e) {
         this.setState({
             status: e.target.value
         })
