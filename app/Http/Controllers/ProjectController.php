@@ -16,17 +16,11 @@ class ProjectController extends Controller
         return $listProject;
     }
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $id = $request->id;
-        if ($project = Project::find($id)) {
-            $project->delete();
-            $listProject = Project::all()->toArray();
-            return response()->json([
-                'message' => 'Delete success project '.$id
-            ]);
-        }
-        return response()->json(['message' => 'Dont exit projec'.$id], 404);
+        $project = Project::find($id);
+        $project->delete();
+        return response()->json('Project Deleted Successfully.');
     }
 
     public function store(StoreCreateProject $request)
@@ -72,4 +66,10 @@ class ProjectController extends Controller
         }
         return response()->json(['message' => 'Project does not exist: '.$data['id']]);
     }
+    public function edit($id)
+    {
+        $project = Project::find($id);
+        return response()->json($project);
+    }
+
 }
