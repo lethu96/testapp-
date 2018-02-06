@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
-import MyGlobleSetting from './MyGlobleSetting';
+import MyGlobalSettings from './MyGlobalSettings';
 
 
 class TableRow extends Component {
@@ -10,7 +10,7 @@ class TableRow extends Component {
     }
     handleSubmit(event) {
         event.preventDefault();
-        let uri = MyGlobleSetting.url + '/api/project/${this.props.obj.id}';
+        let uri = MyGlobalSettings.url + '/api/project/${this.props.project.id}';
         axios.delete(uri);
         browserHistory.push('/display-item');
     }
@@ -18,26 +18,26 @@ class TableRow extends Component {
     return (
         <tr>
           <td>
-            {this.props.obj.id}
+            {this.props.project.id}
           </td>
           <td>
-            {this.props.obj.name}
+            {this.props.project.name}
           </td>
           <td>
-            {this.props.obj.information}
+            {this.props.project.information}
           </td>
           <td>
-            {this.props.obj.deadline}
+            {this.props.project.deadline}
           </td>
           <td>
-            {this.props.obj.type}
+            {this.props.project.type}
           </td>
           <td>
-            {this.props.obj.status}
+            {this.props.project.status}
           </td>
           <td>
           <form onSubmit={this.handleSubmit}>
-            <Link to={"/edit-item/"+this.props.obj.id} className="btn btn-primary">Edit</Link>
+            <Link to={"/edit-item/"+this.props.project.id} className="btn btn-primary">Edit</Link>
            <input type="submit" value="Delete" className="btn btn-danger"/>
          </form>
           </td>

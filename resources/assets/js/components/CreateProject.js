@@ -3,24 +3,24 @@ import {browserHistory} from 'react-router';
 
 class CreateProject extends Component
 {
-    constructor(props){
-    super(props);
-    this.state = {name: '', information: '', deadline: '', type: '', status: ''};
-    this.ChangeProjectName = this.ChangeProjectName.bind(this);
-    this.ChangeProjectInformation = this.ChangeProjectInformation.bind(this);
-    this.ChangeProjectDeadline = this.ChangeProjectDeadline.bind(this);
-    this.ChangeProjectType = this.ChangeProjectType.bind(this);
-    this.ChangeProjectStatus = this.ChangeProjectStatus.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    constructor(props) {
+        super(props);
+        this.state = {name: '', information: '', deadline: '', type: '', status: ''};
+        this.ChangeProjectName = this.ChangeProjectName.bind(this);
+        this.ChangeProjectInformation = this.ChangeProjectInformation.bind(this);
+        this.ChangeProjectDeadline = this.ChangeProjectDeadline.bind(this);
+        this.ChangeProjectType = this.ChangeProjectType.bind(this);
+        this.ChangeProjectStatus = this.ChangeProjectStatus.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    ChangeProjectName(e){
+    ChangeProjectName(e) {
         this.setState({
             name: e.target.value
         })
     }
 
-    ChangeProjectInformation(e){
+    ChangeProjectInformation(e) {
         this.setState({
             information: e.target.value
         })
@@ -32,19 +32,19 @@ class CreateProject extends Component
         })
     }
 
-    ChangeProjectType(e){
+    ChangeProjectType(e) {
         this.setState({
             type: e.target.value
         })
     }
 
-    ChangeProjectStatus(e){
+    ChangeProjectStatus(e) 
         this.setState({
             status: e.target.value
         })
     }
 
-    handleSubmit(e){
+    handleSubmit(e) {
         e.preventDefault();
         const project = {
             name: this.state.name,

@@ -3,11 +3,13 @@ import axios from 'axios';
 import { Link } from 'react-router';
 import TableRow from './TableRow';
 
-class DisplayProject extends Component {
-  constructor(props) {
-       super(props);
-       this.state = {value: '', project: ''};
-     }
+class DisplayProject extends Component 
+{
+    constructor(props) {
+        super(props);
+        this.state = {value: '', project: ''};
+    }
+
      componentDidMount(){
        axios.get('http://localhost:8000/project')
        .then(response => {
@@ -17,10 +19,11 @@ class DisplayProject extends Component {
          console.log(error);
        })
      }
+
      tabRow(){
        if(this.state.project instanceof Array){
          return this.state.project.map(function(object, i){
-             return <TableRow obj={object} key={i} />;
+             return <TableRow project={object} key={i} />;
          })
        }
      }

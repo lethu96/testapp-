@@ -1,6 +1,6 @@
-class MyGlobleSetting {
+class MyGlobalSettings {
   constructor() {
     this.url = 'http://localhost:8000';
   }
 }
-export default (new MyGlobleSetting);
+export default (new MyGlobalSettings);
