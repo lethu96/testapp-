@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
-import MyGlobleSetting from './MyGlobleSetting';
+import MyGlobalSettings from './MyGlobalSettings';
 
 
 class TableRowMember extends Component

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router';
 import TableRowMember from './TableRowMember';
-import MyGlobleSetting from './MyGlobleSetting';
+
 
 class DisplayMember extends Component
 {

@@ -14,7 +14,7 @@ class MemberController extends Controller
     public function index(Request $request)
     {
         $listMember= Member::all()->toArray();
-        return response()->json($listMember);
+        return $listMember;
     }
 
     public function destroy(Request $request)

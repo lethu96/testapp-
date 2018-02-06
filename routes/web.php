@@ -14,6 +14,8 @@ Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
+Route::resource('member', 'MemberController');
+Route::get('member', 'MemberController@index');
 Route::resource('project','ProjectController');
 Route::get('project', 'ProjectController@index');
 Route::get('project/edit/{id}','ProjectController@edit');

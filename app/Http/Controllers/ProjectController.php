@@ -59,7 +59,7 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $project = Project::find($id);
-        return response()->json($project);
+        return $project;
     }
 
 }
