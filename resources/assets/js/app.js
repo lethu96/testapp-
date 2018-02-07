@@ -25,4 +25,4 @@ render(
             <Route path="/edit-item/:id" component={UpdateProject} />
         </Route>
     </Router>,
-        document.getElementById('crud-app'));
+document.getElementById('crud-app'));

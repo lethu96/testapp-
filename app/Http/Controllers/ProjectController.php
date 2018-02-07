@@ -20,7 +20,7 @@ class ProjectController extends Controller
     {
         $project = Project::findOrFail($id);
         $project->delete();
-         return response()->json('Project Deleted Successfully.');
+        return response()->json('Project Deleted Successfully.');
     }
 
     public function store(StoreCreateProject $request)
@@ -38,15 +38,15 @@ class ProjectController extends Controller
 
     public function update(StoreCreateProject $request, $id)
     {
-            $project = Project::find($id);
-            $data = $request->all();
-            $project->deadline = $data['deadline'];
-            $project->information = $data['information'];
-            $project->name = $data['name'];
-            $project->type = $data['type'];
-            $project->status = $data['status'];
-            $project->save();
-             return response()->json('Project Updated Successfully.');
+        $project = Project::find($id);
+        $data = $request->all();
+        $project->deadline = $data['deadline'];
+        $project->information = $data['information'];
+        $project->name = $data['name'];
+        $project->type = $data['type'];
+        $project->status = $data['status'];
+        $project->save();
+        return response()->json('Project Updated Successfully.');
     }
 
     public function edit($id)

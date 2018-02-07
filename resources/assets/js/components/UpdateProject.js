@@ -31,7 +31,7 @@ class UpdateProject extends Component
         axios.get('http://localhost:8000/project/edit/' + current_id)
         .then(response=> {
             this.setState({ name: response.data.name, information: response.data.information,
-            deadline: response.data.deadline, type: response.data.type, status: response.data.status});
+                deadline: response.data.deadline, type: response.data.type, status: response.data.status});
         })
         .catch(function (error) {
             console.log(error);
@@ -93,60 +93,60 @@ class UpdateProject extends Component
     render()
     {
         return (
-        <div>
-            <h1>Update Project</h1>
-            <div className="row">
-                <div className="col-md-10"></div>
-                <div className="col-md-2">
-                    <Link to="/display-item" className="btn btn-success">Return to Project</Link>
+            <div>
+                <h1>Update Project</h1>
+                <div className="row">
+                    <div className="col-md-10"></div>
+                    <div className="col-md-2">
+                        <Link to="/display-item" className="btn btn-success">Return to Project</Link>
+                    </div>
                 </div>
+                <form onSubmit={this.handleSubmit} name="_method" value="PUT">
+                    <div className="form-group">
+                        <label>Project Name</label>
+                        <input type="text"
+                        className="form-control"
+                        value={this.state.name}
+                        onChange={this.handleChangeName} />
+                    </div>
+                    <div className="form-group">
+                        <label name="product_body">Project Information</label>
+                        <textarea className="form-control"
+                        onChange={this.handleChangeInformation} value={this.state.information}></textarea>
+                    </div>
+                    <div className="form-group">
+                        <label>Project Deadline</label>
+                        <input type="date"
+                        className="form-control"
+                        value={this.state.deadline}
+                        onChange={this.handleChangeDeadline} />
+                    </div>
+                    <div className="form-group">
+                        <label>Project Type</label>
+                        <select value={this.state.type} className="form-control" onChange={this.handleChangeType}>
+                            <option value="">---Option---</option>
+                            <option value="lab">Lab</option>
+                            <option value="single">Single</option>
+                            <option value="acceptance">Acceptance</option>
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label>Project Status</label>
+                        <select value={this.state.status} className="form-control" onChange={this.handleChangeStatus}>
+                            <option value="">---Option---</option>
+                            <option value="planned">Planned</option>
+                            <option value="onhold">Onhold</option>
+                            <option value="doing">Doing</option>
+                            <option value="done">Done</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <button className="btn btn-primary">Update</button>
+                    </div>
+                </form>
             </div>
-            <form onSubmit={this.handleSubmit} name="_method" value="PUT">
-                <div className="form-group">
-                    <label>Project Name</label>
-                    <input type="text"
-                    className="form-control"
-                    value={this.state.name}
-                    onChange={this.handleChangeName} />
-                </div>
-                <div className="form-group">
-                    <label name="product_body">Project Information</label>
-                    <textarea className="form-control"
-                    onChange={this.handleChangeInformation} value={this.state.information}></textarea>  
-                </div>
-                <div className="form-group">
-                    <label>Project Deadline</label>
-                    <input type="date"
-                    className="form-control"
-                    value={this.state.deadline}
-                    onChange={this.handleChangeDeadline} />
-                </div>
-                <div className="form-group">
-                    <label>Project Type</label>
-                    <select value={this.state.type} className="form-control" onChange={this.handleChangeType}>
-                        <option value="">---Option---</option>
-                        <option value="lab">Lab</option>
-                        <option value="single">Single</option>
-                        <option value="acceptance">Acceptance</option>
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label>Project Status</label>
-                    <select value={this.state.status} className="form-control" onChange={this.handleChangeStatus}>
-                        <option value="">---Option---</option>
-                        <option value="planned">Planned</option>
-                        <option value="onhold">Onhold</option>
-                        <option value="doing">Doing</option>
-                        <option value="done">Done</option>
-                        <option value="cancelled">Cancelled</option>
-                    </select>
-                </div>
-                <div className="form-group">
-                    <button className="btn btn-primary">Update</button>
-                </div>
-            </form>
-        </div>
-    )
-  }
+        )
+    }
 }
 export default UpdateProject;

@@ -11,7 +11,7 @@ class Member extends Model
     protected $table = "members";
     protected $hidden = array('created_at', 'updated_at');
 
-    public function positon()
+    public function position()
     {
         return $this->belongsTo('App\Position', 'position_id', 'id');
     }

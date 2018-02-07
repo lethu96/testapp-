@@ -13,7 +13,10 @@ class MemberController extends Controller
 {
     public function index(Request $request)
     {
-        $listMember= Member::all()->toArray();
+        $listMember= Member::all();
+        foreach ($listMember as $key => $position_name) {
+            $position_name->position->name;
+        }
         return response()->json($listMember);
     }
 
@@ -88,5 +91,4 @@ class MemberController extends Controller
         }
         return response()->json(['message' => 'Dont exit Position_id'], 404);
     }
-
 }

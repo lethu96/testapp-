@@ -15,17 +15,18 @@ class DisplayProject extends Component
     {
         axios.get('http://localhost:8000/project')
         .then(response => {
-            this.setState({ project: response.data });})
+                this.setState({ project: response.data });
+            })
             .catch(function (error) {
                 console.log(error);
-       })
+            })
     }
 
     tabRow()
     {
-       if (this.state.project instanceof Array) {
-                return this.state.project.map(function(object, i) {
-                    return <TableRow project={object} key={i} />;
+        if (this.state.project instanceof Array) {
+            return this.state.project.map(function (object, i) {
+                return <TableRow project={object} key={i} />;
             })
         }
     }

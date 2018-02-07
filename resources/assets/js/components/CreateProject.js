@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {browserHistory} from 'react-router';
 
 
-class CreateProject extends Component 
+class CreateProject extends Component
 {
     constructor(props)
     {
@@ -21,7 +21,6 @@ class CreateProject extends Component
         this.handleChangeStatus = this.handleChangeStatus.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
 
     handleChangeName(e)
     {
@@ -72,9 +71,7 @@ class CreateProject extends Component
             }
         )
         .then(
-            (response) => {
-                browserHistory.push('/display-item');
-            }
+            (response) => {browserHistory.push('/display-item');}
         );
     }
 
