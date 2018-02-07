@@ -14,7 +14,7 @@ class MemberController extends Controller
     public function index(Request $request)
     {
         $listMember= Member::all()->toArray();
-        return $listMember;
+        return response()->json($listMember);
     }
 
     public function destroy(Request $request)
@@ -81,11 +81,12 @@ class MemberController extends Controller
             if ($request->hasFile('avatar')) {
                 $file = $request->avatar;
                 $file->move("img", $file->getClientOriginalName());
-                $newMember->avatar = $file->getClientOriginalName();
+                $newMember->avatar ="img/".$file->getClientOriginalName();
             }
             $newMember->save();
             return response()->json($newMember);
         }
         return response()->json(['message' => 'Dont exit Position_id'], 404);
     }
+
 }

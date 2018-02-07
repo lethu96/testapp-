@@ -1,22 +1,11 @@
 import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
-import MyGlobalSettings from './MyGlobalSettings';
-
 
 class TableRow extends Component
 {
     constructor(props)
     {
         super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleSubmit(event)
-    {
-        event.preventDefault();
-        let uri = MyGlobalSettings.url + '/api/project/${this.props.project.id}';
-        axios.delete(uri);
-        browserHistory.push('/display-item');
     }
 
     render()
@@ -44,7 +33,7 @@ class TableRow extends Component
                 <td>
                     <form onSubmit={this.handleSubmit}>
                         <Link to={"/edit-item/"+this.props.project.id} className="btn btn-primary">Edit</Link>
-                        <input type="submit" value="Delete" className="btn btn-danger"/>
+                        <Link to={"/delete-item/"+this.props.project.id} className="btn btn-danger">Delete</Link>
                     </form>
                 </td>
             </tr>
