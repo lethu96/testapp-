@@ -1,22 +1,28 @@
 
 /**
  * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
+ * includes React and other helpers. It's a great starting point while
+ * building robust, powerful web applications using React + Laravel.
  */
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+import React from 'react';
+import { render } from 'react-dom';
+import { Router, Route, browserHistory } from 'react-router';
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+import Master from './components/Master';
+import CreateProject from './components/CreateProject';
+import DisplayProject from './components/DisplayProject';
+import UpdateProject from './components/UpdateProject';
 
-const app = new Vue({
-    el: '#app'
-});
+render(
+    <Router history={browserHistory}>
+        <Route path="/" component={Master} >
+            <Route path="/add-item" component={CreateProject} />
+            <Route path="/display-item" component={DisplayProject} />
+            <Route path="/edit-item/:id" component={UpdateProject} />
+        </Route>
+    </Router>,
+document.getElementById('crud-app'));

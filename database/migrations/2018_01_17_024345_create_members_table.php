@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+// @codingStandardsIgnoreLine
 class CreateMembersTable extends Migration
 {
     /**
@@ -21,7 +22,6 @@ class CreateMembersTable extends Migration
             $table->date('birthday');
             $table->string('avatar')->nullable();
             $table->integer('position_id');
-            $table->string('position');
             $table->string('gender');
             $table->timestamps();
         });
