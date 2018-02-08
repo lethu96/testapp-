@@ -17,6 +17,7 @@ import CreateProject from './components/CreateProject';
 import DisplayProject from './components/DisplayProject';
 import UpdateProject from './components/UpdateProject';
 import DisplayMember from './components/DisplayMember';
+import CreateMember from './components/CreateMember';
 
 render(
     <Router history={browserHistory}>
@@ -25,6 +26,7 @@ render(
             <Route path="/display-item" component={DisplayProject} />
             <Route path="/edit-item/:id" component={UpdateProject} />
             <Route path ="/display-item-member" component={DisplayMember} />
+            <Route path="/add-item-member" component={CreateMember} />
         </Route>
     </Router>,
     document.getElementById('crud-app'));
