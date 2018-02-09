@@ -15,14 +15,16 @@ import { Router, Route, browserHistory } from 'react-router';
 import Master from './components/Master';
 import CreateProject from './components/CreateProject';
 import DisplayProject from './components/DisplayProject';
-
+import UpdateProject from './components/UpdateProject';
+import DisplayMember from './components/DisplayMember';
 
 render(
     <Router history={browserHistory}>
         <Route path="/" component={Master} >
             <Route path="/add-item" component={CreateProject} />
             <Route path="/display-item" component={DisplayProject} />
+            <Route path="/edit-item/:id" component={UpdateProject} />
+            <Route path ="/display-item-member" component={DisplayMember} />
         </Route>
     </Router>,
-    document.getElementById('crud-app')
-);
+    document.getElementById('crud-app'));

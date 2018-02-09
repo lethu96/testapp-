@@ -14,8 +14,17 @@ Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
+Route::resource('member', 'MemberController');
+Route::get('member', 'MemberController@index');
+Route::post('member/create', 'MemberController@store');
+
 Route::resource('project','ProjectController');
 Route::get('project', 'ProjectController@index');
+Route::get('project/edit/{id}','ProjectController@edit');
+Route::post('edit-item/{id}', 'ProjectController@update');
+Route::delete('project/destroy/{id}', 'ProjectController@destroy');
+Route::post('project/create','ProjectController@store');
+Route::get('positions','PositionController@index');
 
 Route::get('member_projects', 'MemberProjectController@index');
 Route::put('member_projects/update', 'MemberProjectController@update');
@@ -26,16 +35,9 @@ Route::delete('member_projects/destroy', [
  ]);
 Route::get('members', 'MemberController@index');
 Route::put('members/update', 'MemberController@update');
-Route::post('members/create', 'MemberController@store');
+
 Route::delete('members/destroy', [
   'as'=> 'members',
   'uses'=> 'MemberController@destroy',
- ]);
-
-Route::put('project/update', 'ProjectController@update');
-Route::post('project/create', 'ProjectController@store');
-Route::delete('project/destroy', [
-  'as'=> 'project',
-  'uses'=> 'ProjectController@destroy',
  ]);
 

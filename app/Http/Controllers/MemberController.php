@@ -13,7 +13,10 @@ class MemberController extends Controller
 {
     public function index(Request $request)
     {
-        $listMember= Member::all()->toArray();
+        $listMember= Member::all();
+        foreach ($listMember as $key => $position_name) {
+            $position_name->position->name;
+        }
         return response()->json($listMember);
     }
 
@@ -81,7 +84,7 @@ class MemberController extends Controller
             if ($request->hasFile('avatar')) {
                 $file = $request->avatar;
                 $file->move("img", $file->getClientOriginalName());
-                $newMember->avatar = $file->getClientOriginalName();
+                $newMember->avatar ="img/".$file->getClientOriginalName();
             }
             $newMember->save();
             return response()->json($newMember);

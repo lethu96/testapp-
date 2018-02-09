@@ -1,6 +1,7 @@
 class MyGlobalSettings 
 {
-    constructor() {
+    constructor()
+    {
         this.url = 'http://localhost:8000';
     }
 }
