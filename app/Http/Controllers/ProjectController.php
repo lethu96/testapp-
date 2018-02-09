@@ -33,7 +33,7 @@ class ProjectController extends Controller
         $project->type = $data['type'];
         $project->status = $data['status'];
         $project->save();
-        return response()->json('Project Updated Successfully.');
+        return response()->json($project);
     }
 
     public function update(StoreCreateProject $request, $id)
