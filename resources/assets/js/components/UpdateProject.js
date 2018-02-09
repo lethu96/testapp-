@@ -101,7 +101,7 @@ class UpdateProject extends Component
                         <Link to="/display-item" className="btn btn-success">Return to Project</Link>
                     </div>
                 </div>
-                <form onSubmit={this.handleSubmit} name="_method" value="PUT">
+                <form onSubmit={this.handleSubmit} >
                     <div className="form-group">
                         <label>Project Name</label>
                         <input type="text"
