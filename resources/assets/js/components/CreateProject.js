@@ -72,12 +72,9 @@ class CreateProject extends Component
                 type: this.state.type,
                 status: this.state.status
             }
-        )
-        .then(
-            (response) => {
-                browserHistory.push('/display-item');
-            }
-        ).catch(error => {
+        ).then(response => {
+            browserHistory.push('/display-item');
+        }).catch(error => {
             if (error.response) {
                 this.setState({ error: error.response.data.errors });
             }
