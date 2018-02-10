@@ -9,7 +9,7 @@ class CreateMember extends Component
         super(props);
         this.state = {
             position: '',
-            selectedposition: -1,
+            selectedposition: '1',
             name: '',
             information: '',
             phone_number: '',
@@ -17,6 +17,7 @@ class CreateMember extends Component
             gender: '',
             position_id:'',
             avatar:'',
+            error:''
         };
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeInformation = this.handleChangeInformation.bind(this);
@@ -115,8 +116,13 @@ class CreateMember extends Component
         data.append('position_id', this.state.selectedposition)
         axios.post('http://localhost:8000/member/create', data)
         .then(
-            (response) => {browserHistory.push('/display-item-member');}
-        );
+            (response) => {browserHistory.push('/display-item-member');
+        }).catch(error => {
+            if (error.response) {
+                this.setState({ error: error.response.data.errors });
+                console.log(error.response.data.errors);
+            }
+        });
     }
 
     render()
@@ -130,6 +136,7 @@ class CreateMember extends Component
                             <div className="form-group">
                                 <label>Name</label>
                                 <input value={this.state.name} type="text" className="form-control" onChange={this.handleChangeName} />
+                                <p className="help-block" >{this.state.error.name} </p>
                             </div>
                         </div>
                     </div>
@@ -138,6 +145,7 @@ class CreateMember extends Component
                             <div className="form-group">
                                 <label>birthday</label>
                                 <input value={this.state.birthday} type="date" className="form-control" onChange={this.handleChangeBirthday} />
+                                <p className="help-block" >{this.state.error.birthday} </p>
                             </div>
                         </div>
                     </div>
@@ -146,6 +154,7 @@ class CreateMember extends Component
                             <div className="form-group">
                             <label>Information</label>
                             <textarea value={this.state.information}className="form-control col-md-6" onChange={this.handleChangeInformation}></textarea>
+                            <p className="help-block" >{this.state.error.information} </p>
                         </div>
                         </div>
                     </div>
@@ -154,6 +163,7 @@ class CreateMember extends Component
                             <div className="form-group">
                             <label>Phone Number</label>
                             <textarea value={this.state.phone_number}className="form-control col-md-6" onChange={this.handleChangePhoneNumber}></textarea>
+                            <p className="help-block" >{this.state.error.phone_number} </p>
                         </div>
                         </div>
                     </div>
@@ -166,6 +176,7 @@ class CreateMember extends Component
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </select>
+                                <p className="help-block" >{this.state.error.gender} </p>
                             </div>
                         </div>
                     </div>
@@ -174,9 +185,9 @@ class CreateMember extends Component
                             <div className="form-group">
                                 <label>Position </label>
                                 <select value={this.state.selectedposition} className="form-control" onChange={this.handleChangePositionId}>
-                                    <option value="">---Option----</option>
                                     {this.showPosition()}
                                 </select>
+                                <p className="help-block" >{this.state.error.selectedposition} </p>
                             </div>
                         </div>
                     </div>
@@ -187,6 +198,7 @@ class CreateMember extends Component
                             <input  type= "file" ref={input => {
                                 this.fileInput = input;
                                 }} className="form-control col-md-6" onChange={this.handleChangeAvatar}/>
+                            <p className="help-block" >{this.state.error.avatar} </p>
                         </div>
                         </div>
                     </div>
