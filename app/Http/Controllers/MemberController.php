@@ -26,7 +26,7 @@ class MemberController extends Controller
         $member->delete();
         return response()->json('Member Deleted Successfully.');
     }
-    public function update(StoreCreateMember $request,$id)
+    public function update(StoreCreateMember $request, $id)
     {
         $member = Member::find($id);
         $data = $request->all();
@@ -40,8 +40,8 @@ class MemberController extends Controller
         $member->birthday = $data['birthday'];
         $countPosition = DB::table('positions')->where('id', $data['position_id'])->count();
         if ($countPosition > 0) {
-                $member->position_id = $data['position_id'];
-                $member->gender = $data['gender'];
+            $member->position_id = $data['position_id'];
+            $member->gender = $data['gender'];
             if ($request->hasFile('avatar')) {
                 $file = $request->avatar;
                 $file->move("img", $file->getClientOriginalName());
@@ -80,7 +80,7 @@ class MemberController extends Controller
         return response()->json(['message' => 'Dont exit Position_id'], 404);
     }
 
-        public function edit($id)
+    public function edit($id)
     {
         $member = Member::find($id);
         return response()->json($member);
