@@ -39,7 +39,7 @@ class CreateMember extends Component
     }
     tabRow()
     {
-        if(this.state.member instanceof Array) {
+        if (this.state.member instanceof Array) {
             return this.state.member.map(function (member, i) {
                 return <TableRowMember obj={member} key={i} />;
             })
@@ -116,12 +116,14 @@ class CreateMember extends Component
         data.append('position_id', this.state.selectedposition)
         axios.post('http://localhost:8000/member/create', data)
         .then(
-            (response) => {browserHistory.push('/display-item-member');
-        }).catch(error => {
+            (response) => {browserHistory.push('/display-item-member');}
+        )
+        .catch(error => {
             if (error.response) {
-                this.setState({ error: error.response.data.errors });
+                    this.setState({ error: error.response.data.errors });
+                }
             }
-        });
+        );
     }
 
     render()
