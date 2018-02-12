@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {browserHistory} from 'react-router';
 
 
-class CreateMember extends Component
+class UpdateMember extends Component
 {
     constructor(props)
     {
@@ -36,6 +36,16 @@ class CreateMember extends Component
         })
         .catch(function (error) {
             console.log(error);})
+        let current_url = window.location.href;
+        let current_id = current_url.split("/").pop();
+        axios.get('http://localhost:8000/member/edit/' + current_id)
+        .then(response=> {
+            this.setState({ name: response.data.name, information: response.data.information,
+                birthday: response.data.birthday, gender: response.data.gender, phone_number: response.data.phone_number,selectedposition: response.data.position_id});
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
     }
     tabRow()
     {
@@ -103,6 +113,7 @@ class CreateMember extends Component
             selectedposition: e.target.value
         })
     }
+
     handleSubmit(e)
     {
         e.preventDefault();
@@ -114,12 +125,14 @@ class CreateMember extends Component
         data.append('gender', this.state.gender)
         data.append('avatar', this.state.avatar)
         data.append('position_id', this.state.selectedposition)
-        axios.post('http://localhost:8000/member/create', data)
+                        console.log(this.state.avatar);
+        axios.post('http://localhost:8000/member/edit-item/'+this.props.params.id, data)
         .then(
             (response) => {browserHistory.push('/display-item-member');
         }).catch(error => {
             if (error.response) {
                 this.setState({ error: error.response.data.errors });
+                console.log(error.response.data.errors);
             }
         });
     }
@@ -194,7 +207,7 @@ class CreateMember extends Component
                         <div className="col-md-6">
                             <div className="form-group">
                             <label>Avatar</label>
-                            <input  type= "file" ref={input => {
+                            <input type= "file" ref={input => {
                                 this.fileInput = input;
                                 }} className="form-control col-md-6" onChange={this.handleChangeAvatar}/>
                             <p className="help-block" >{this.state.error.avatar} </p>
@@ -210,4 +223,4 @@ class CreateMember extends Component
         )
     }
 }
-export default CreateMember;
+export default UpdateMember;
