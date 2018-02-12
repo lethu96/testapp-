@@ -128,8 +128,9 @@ class UpdateMember extends Component
                         console.log(this.state.avatar);
         axios.post('http://localhost:8000/member/edit-item/'+this.props.params.id, data)
         .then(
-            (response) => {browserHistory.push('/display-item-member');
-        }).catch(error => {
+            (response) => {browserHistory.push('/display-item-member');}
+        )
+        .catch(error => {
             if (error.response) {
                 this.setState({ error: error.response.data.errors });
                 console.log(error.response.data.errors);
