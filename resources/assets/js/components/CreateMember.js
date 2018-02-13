@@ -34,8 +34,7 @@ class CreateMember extends Component
         axios.get('http://localhost:8000/positions').then(response => {
             this.setState({ position: response.data });
         })
-        .catch(function (error) {
-            console.log(error);})
+        .catch(function (error) {})
     }
     tabRow()
     {
