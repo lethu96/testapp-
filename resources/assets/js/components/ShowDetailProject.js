@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router';
 
-class ShowDetailProject extends Component
+
+class UpdateProject extends Component
 {
     constructor(props)
     {
@@ -13,7 +14,10 @@ class ShowDetailProject extends Component
             deadline: '',
             type: '',
             status: '',
-            error: ''
+            error: '',
+            member: '',
+            role: '',
+            project_id: '',
         };
     }
 
@@ -21,7 +25,19 @@ class ShowDetailProject extends Component
     {
         let current_url = window.location.href;
         let current_id = current_url.split("/").pop();
-        console.log(current_id);
+        this.setState({project_id : current_id});
+        axios.get('http://localhost:8000/memberproject/project/' +current_id).then(response => {
+            this.setState({ member: response.data });
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        axios.get('http://localhost:8000/memberproject/projectrole/' +current_id).then(response => {
+            this.setState({ role: response.data });
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
         axios.get('http://localhost:8000/project/edit/' + current_id)
         .then(response=> {
             this.setState({ name: response.data.name, information: response.data.information,
@@ -29,114 +45,72 @@ class ShowDetailProject extends Component
         });
     }
 
-    handleChangeName(e)
+    showMember()
     {
-        this.setState({
-            name: e.target.value
-        })
+        if (this.state.member instanceof Array) {
+            return this.state.member.map(function (member) {
+                return (<div key={member.id} value={member.id}>{member.name}</div>);
+            })
+        }
     }
 
-    handleChangeInformation(e)
+    showRole()
     {
-        this.setState({
-            information: e.target.value
-        })
+        if (this.state.role instanceof Array) {
+            return this.state.role.map(function (role) {
+                return (<div key={role.id} value={role.member_id}>{role.role}</div>);
+            })
+        }
     }
-
-    handleChangeDeadline(e)
-    {
-        this.setState({
-            deadline: e.target.value
-        })
-    }
-
-    handleChangeType(e)
-    {
-        this.setState({
-            type: e.target.value
-        })
-    }
-
-    handleChangeStatus(e)
-    {
-        this.setState({
-            status: e.target.value
-        })
-    }
-
 
     render()
     {
         return (
             <div>
-                <h1>Detail Project</h1>
+                <h1>Show Project</h1>
                 <div className="row">
-                    <div className="col-md-10"></div>
+                    <div className="col-md-6"></div>
                     <div className="col-md-2">
                         <Link to="/display-item" className="btn btn-success">Return to Project</Link>
                     </div>
                 </div>
-                <form onSubmit={this.handleSubmit} >
-                    <div className="form-group">
-                        <label> Name</label>
-                        <input type="text"
-                        className="form-control"
-                        value={this.state.name} disabled/>
-                        <p className="help-block" >{this.state.error.name} </p>
-                    </div>
-                    <div className="form-group">
-                        <label name="product_body"> Information</label>
-                        <textarea className="form-control" value={this.state.information} disabled></textarea>
-                        <p className="help-block" disabled>{this.state.error.information} </p>
-                    </div>
-                    <div className="form-group">
-                        <label> Deadline</label>
-                        <input type="date"
-                        className="form-control"
-                        value={this.state.deadline} disabled/>
-                        <p className="help-block" >{this.state.error.deadline} </p>
-                    </div>
-                    <div className="form-group">
-                        <label> Type</label>
-                        <select value={this.state.type} className="form-control" disabled>
-                            <option value="">---Option---</option>
-                            <option value="lab">Lab</option>
-                            <option value="single">Single</option>
-                            <option value="acceptance">Acceptance</option>
-                        </select>
-                        <p className="help-block" >{this.state.error.type} </p>
-                    </div>
-                    <div className="form-group">
-                        <label> Status</label>
-                        <select value={this.state.status} className="form-control" disabled>
-                            <option value="">---Option---</option>
-                            <option value="planned">Planned</option>
-                            <option value="onhold">Onhold</option>
-                            <option value="doing">Doing</option>
-                            <option value="done">Done</option>
-                            <option value="cancelled">Cancelled</option>
-                        </select>
-                        <p className="help-block" >{this.state.error.status} </p>
-                    </div>
-                </form>
-                <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <td>Member</td>
-                            <td></td>
-                            <td>Information</td>
-                            <td>Deadline</td>
-                            <td>Type</td>
-                            <td>Status</td>
-                            <td width="200px">Actions</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.tabRow()}
-                    </tbody>
-                </table>
+                <div className="col-md-6">
+                    <form onSubmit={this.handleSubmit} >
+                        <div className="form-group">
+                            <label> Name:</label>
+                             {this.state.name}
+                        </div>
+                        <div className="form-group">
+                            <label name="product_body"> Information :</label>
+                            {this.state.information}
+                        </div>
+                        <div className="form-group">
+                            <label> Deadline :</label>
+                             {this.state.deadline}
+                        </div>
+                        <div className="form-group">
+                            <label> Type :</label>
+                             {this.state.type}
+                        </div>
+                        <div className="form-group">
+                            <label> Status:</label>
+                            {this.state.status} 
+                        </div>
+                        <div className="row">
+                            <div className="col-md-3">
+                                <label>Member </label>
+                                {this.showMember()}
+                            </div>
+                            <div className="col-md-2">
+                                <label> Role </label>
+                                {this.showRole()}
+                            </div>
+                        </div> 
+                        <Link to={"/add-member-project/"+this.state.project_id} className="btn btn-success">Add Member</Link>
+                    </form>
+                </div>
             </div>
         )
     }
 }
-export default ShowDetailProject;
+export default UpdateProject;

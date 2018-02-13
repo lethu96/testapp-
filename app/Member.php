@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Position;
 use App\MemberProject;
+use App\Project;
 
 class Member extends Model
 {
@@ -15,9 +16,14 @@ class Member extends Model
     {
         return $this->belongsTo('App\Position', 'position_id', 'id');
     }
-    
-    public function memberProject()
+
+        public function project()
     {
-        return $this->belongsTo('App\MemberProject', 'member_id', 'id');
+        return $this->belongsToMany('App\Project','member_projects', 'member_id', 'project_id');
     }
+
+    // public function memberProject()
+    // {
+    //     return $this->belongsTo('App\MemberProject', 'member_id', 'id');
+    // }
 }
