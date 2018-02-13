@@ -51,7 +51,8 @@ class TableRowMember extends Component
                 <td>
                     <form onSubmit={this.handleSubmit}>
                         <Link to={"/edit-item-member/"+this.props.obj.id} className="btn btn-primary">Edit</Link>
-                        <input type="submit" value="Delete" className="btn btn-danger"/>
+                        <Link to={"/show-item-member/"+this.props.obj.id} className="btn btn-success"> Show </Link>
+                        <Link to={"/member/delete-item/"+this.props.obj.id} className="btn btn-danger">Delete</Link>
                     </form>
                 </td>
             </tr>
