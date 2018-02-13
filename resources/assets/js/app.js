@@ -31,6 +31,7 @@ render(
         <Route path="/" component={Master} >
             <Route path = "/add-item" component = {CreateProject} />
             <Route path = "/display-item" component = {DisplayProject} />
+            <Route path = "/display-item-member" component= {DisplayMember} />
             <Route path = "/edit-item/:id" component = {UpdateProject} />
             <Route path = "/show-detail-item/:id" component = {ShowDetailProject} />
             <Route path = "/add-member-project/:id" component = {AddMemberProject} />
