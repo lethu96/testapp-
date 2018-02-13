@@ -28,7 +28,6 @@ class UpdateProject extends Component
     {
         let current_url = window.location.href;
         let current_id = current_url.split("/").pop();
-        console.log(current_id);
         axios.get('http://localhost:8000/project/edit/' + current_id)
         .then(response=> {
             this.setState({ name: response.data.name, information: response.data.information,

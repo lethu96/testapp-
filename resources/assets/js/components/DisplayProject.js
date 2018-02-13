@@ -17,9 +17,7 @@ class DisplayProject extends Component
         .then(response => {
                 this.setState({ project: response.data });
             })
-            .catch(function (error) {
-                console.log(error);
-            })
+            .catch(function (error) {})
     }
 
     tabRow()

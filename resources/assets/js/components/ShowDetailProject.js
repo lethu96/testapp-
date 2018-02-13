@@ -29,15 +29,11 @@ class UpdateProject extends Component
         axios.get('http://localhost:8000/memberproject/project/' +current_id).then(response => {
             this.setState({ member: response.data });
         })
-        .catch(function (error) {
-            console.log(error);
-        })
+        .catch(function (error) {})
         axios.get('http://localhost:8000/memberproject/projectrole/' +current_id).then(response => {
             this.setState({ role: response.data });
         })
-        .catch(function (error) {
-            console.log(error);
-        })
+        .catch(function (error) {})
         axios.get('http://localhost:8000/project/edit/' + current_id)
         .then(response=> {
             this.setState({ name: response.data.name, information: response.data.information,

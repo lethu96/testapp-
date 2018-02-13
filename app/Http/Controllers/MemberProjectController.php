@@ -25,7 +25,7 @@ class MemberProjectController extends Controller
 
     public function showRole($projectId)
     {
-        $role=MemberProject::where('project_id',$projectId)->get();
+        $role = MemberProject::where('project_id', $projectId)->get();
         return response()->json($role);
     }
 
@@ -45,7 +45,7 @@ class MemberProjectController extends Controller
         }
         $countMemberId = DB::table('members')->where('id', $data['member_id'])->count();
         $countProjectId = DB::table('projects')->where('id', $data['project_id'])->count();
-        if ($countMemberId>0 && $countProjectId >0) {
+        if ($countMemberId > 0 && $countProjectId >0) {
                 $newMp->member_id = $data['member_id'];
                 $newMp->project_id = $data['project_id'];
                 $newMp->role = $data['role'];

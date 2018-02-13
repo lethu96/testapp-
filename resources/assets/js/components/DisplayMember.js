@@ -17,8 +17,7 @@ class DisplayMember extends Component
         axios.get('http://localhost:8000/member').then(response => {
             this.setState({ member: response.data });
         })
-        .catch(function (error) {
-            console.log(error);})
+        .catch(function (error) {})
     }
 
     tabRow()

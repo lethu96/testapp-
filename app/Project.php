@@ -16,7 +16,7 @@ class Project extends Model
         return $this->belongsTo('App\MemberProject', 'member_id', 'id');
     }
 
-            public function member()
+    public function member()
     {
         return $this->belongsToMany('App\Member', 'member_projects', 'project_id', 'member_id');
     }

@@ -17,13 +17,8 @@ class Member extends Model
         return $this->belongsTo('App\Position', 'position_id', 'id');
     }
 
-        public function project()
+    public function project()
     {
-        return $this->belongsToMany('App\Project','member_projects', 'member_id', 'project_id');
+        return $this->belongsToMany('App\Project', 'member_projects', 'member_id', 'project_id');
     }
-
-    // public function memberProject()
-    // {
-    //     return $this->belongsTo('App\MemberProject', 'member_id', 'id');
-    // }
 }
