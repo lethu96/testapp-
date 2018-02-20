@@ -45,12 +45,12 @@ class MemberProjectController extends Controller
         }
         $countMemberId = DB::table('members')->where('id', $data['member_id'])->count();
         $countProjectId = DB::table('projects')->where('id', $data['project_id'])->count();
-        if ($countMemberId > 0 && $countProjectId >0) {
-                $newMp->member_id = $data['member_id'];
-                $newMp->project_id = $data['project_id'];
-                $newMp->role = $data['role'];
-                $newMp->save();
-                return response()->json(['message'=>'Add Member Success']);
+        if ($countMemberId > 0 && $countProjectId > 0) {
+            $newMp->member_id = $data['member_id'];
+            $newMp->project_id = $data['project_id'];
+            $newMp->role = $data['role'];
+            $newMp->save();
+            return response()->json(['message'=>'Add Member Success']);
         }
             return response()->json(['message'=>'this member or project don t exit']);
     }
