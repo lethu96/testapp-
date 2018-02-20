@@ -24,6 +24,7 @@ Route::get('project/edit/{id}','ProjectController@edit');
 Route::post('edit-item/{id}', 'ProjectController@update');
 Route::delete('project/destroy/{id}', 'ProjectController@destroy');
 Route::post('project/create','ProjectController@store');
+Route::get('positions','PositionController@index');
 
 Route::get('member_projects', 'MemberProjectController@index');
 Route::put('member_projects/update', 'MemberProjectController@update');
