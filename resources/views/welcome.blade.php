@@ -7,9 +7,11 @@
         <title></title>
         <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css">
+        <link href="toastr.css" rel="stylesheet"/>
     </head>
     <body>
         <div id="crud-app"></div>
         <script src="{{asset('js/app.js')}}" ></script>
+        <script src="toastr.js"></script>
     </body>
 </html>

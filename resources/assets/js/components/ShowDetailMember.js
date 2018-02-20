@@ -15,7 +15,6 @@ class ShowDetailMember extends Component
             phone_number: '',
             birthday: '',
             gender: '',
-            position_id:'',
             avatar:'',
             error:'',
             position_name:''
@@ -56,65 +55,60 @@ class ShowDetailMember extends Component
     {
         return (
             <div>
-                <h1>Show Detail Member</h1>
+                <h1>SHOW MEMBER</h1>
                 <form >
                     <div className="col-md-6">
                         <div className="row">
                             <div className="col-md-10">
                                 <div className="form-group">
-                                    <label>Name</label>
-                                    <input value={this.state.name} type="text" className="form-control" disabled />
+                                    <label>Name :</label>
+                                    {this.state.name}
                                 </div>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-md-10">
                                 <div className="form-group">
-                                    <label>birthday</label>
-                                    <input value={this.state.birthday} type="date" className="form-control" disabled />
+                                    <label>Birthday :</label>
+                                    {this.state.birthday}
                                 </div>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-md-10">
                                 <div className="form-group">
-                                <label>Information</label>
-                                <textarea value={this.state.information}className="form-control col-md-6" disabled ></textarea>
+                                <label>Information :</label>
+                                {this.state.information}
                             </div>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-md-10">
                                 <div className="form-group">
-                                <label>Phone Number</label>
-                                <input value={this.state.phone_number}className="form-control col-md-6" disabled />
+                                <label>Phone Number :</label>
+                                {this.state.phone_number}
                             </div>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-md-10">
                                 <div className="form-group">
-                                    <label>Gender</label>
-                                    <select value={this.state.gender} className="form-control" disabled >
-                                        <option value="">---Option---</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                    </select>
-                                    <p className="help-block" >{this.state.error.gender} </p>
+                                    <label>Gender :</label>
+                                    {this.state.gender}
                                 </div>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-md-10">
                                 <div className="form-group">
-                                    <label>Position </label>
+                                    <label>Position :</label>
                                     <select value={this.state.selectedposition} className="form-control" disabled >
-                                        <option value="">---Option---</option>
                                         {this.showPosition()}
                                     </select>
                                 </div>
                             </div>
                         </div>
+
                         <div className="form-group">
                             <Link to="/display-item-member" className="btn btn-success">List Member</Link>
                         </div>

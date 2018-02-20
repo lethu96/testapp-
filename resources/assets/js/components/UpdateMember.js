@@ -128,7 +128,10 @@ class UpdateMember extends Component
                         console.log(this.state.avatar);
         axios.post('http://localhost:8000/member/edit-item/'+this.props.params.id, data)
         .then(
-            (response) => {browserHistory.push('/display-item-member');}
+            (response) => {
+                browserHistory.push('/display-item-member');
+                toastr.success('Update Member Success.', 'Turtle Bay Resort', {timeOut: 5000})
+            }
         )
         .catch(error => {
             if (error.response) {
@@ -142,7 +145,7 @@ class UpdateMember extends Component
     {
         return (
             <div>
-                <h1>Create Project</h1>
+                <h1>UPDATE MEMBER</h1>
                 <form onSubmit={this.handleSubmit}>
                     <div className="row">
                         <div className="col-md-6">

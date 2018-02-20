@@ -128,7 +128,7 @@ class CreateMember extends Component
     {
         return (
             <div>
-                <h1>Create Project</h1>
+                <h1>CREATE MEMBER</h1>
                 <form onSubmit={this.handleSubmit}>
                     <div className="row">
                         <div className="col-md-6">

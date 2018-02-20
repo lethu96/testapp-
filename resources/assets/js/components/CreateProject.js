@@ -85,7 +85,7 @@ class CreateProject extends Component
     {
         return (
             <div>
-                <h1>Create Project</h1>
+                <h1>CREATE PROJECT</h1>
                 <div className="row">
                     <div className="col-md-10"></div>
                     <div className="col-md-2">

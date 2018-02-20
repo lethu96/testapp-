@@ -34,7 +34,7 @@ class DisplayMember extends Component
     {
         return (
             <div>
-                <h1> List Member</h1>
+                <h1> LIST MEMBER</h1>
                 <div className="row">
                     <div className="col-md-10"></div>
                     <div className="col-md-2">
@@ -44,15 +44,15 @@ class DisplayMember extends Component
                 <table className="table table-hover">
                     <thead>
                         <tr>
-                            <td>ID</td>
-                            <td>Name</td>
-                            <td>Information</td>
-                            <td>Phone Number</td>
-                            <td>Birthday</td>
-                            <td>Gender</td>
-                            <td>Position</td>
-                            <td>Avatar</td>
-                            <td width="200px">Actions</td>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>INFORMATION</th>
+                            <th>PHONE NUMBER</th>
+                            <th>BIRTHDAY</th>
+                            <th>GENDER</th>
+                            <th>POSITION</th>
+                            <th>AVATAR</th>
+                            <th width="200px">ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -69,10 +69,13 @@ class MemberController extends Controller
         if ($countPosition > 0) {
             $newMember->position_id = $data['position_id'];
             $newMember->gender = $data['gender'];
+
             if ($request->hasFile('avatar')) {
                 $file = $request->avatar;
                 $file->move("img", $file->getClientOriginalName());
                 $newMember->avatar ="/img/".$file->getClientOriginalName();
+            }else{
+                $newMember->avatar="/img/avatar.jpg";
             }
             $newMember->save();
             return response()->json($newMember);

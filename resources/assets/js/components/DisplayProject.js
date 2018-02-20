@@ -35,7 +35,7 @@ class DisplayProject extends Component
     {
         return (
             <div>
-                <h1>Project</h1>
+                <h1>LIST PROJECT</h1>
                 <div className="row">
                     <div className="col-md-10"></div>
                     <div className="col-md-2">
@@ -45,13 +45,13 @@ class DisplayProject extends Component
                 <table className="table table-hover">
                     <thead>
                         <tr>
-                            <td>ID</td>
-                            <td>Name</td>
-                            <td>Information</td>
-                            <td>Deadline</td>
-                            <td>Type</td>
-                            <td>Status</td>
-                            <td width="200px">Actions</td>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>INFORMATION</th>
+                            <th>DEADLINE</th>
+                            <th>TYPE</th>
+                            <th>STATUS</th>
+                            <th width="200px">ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>

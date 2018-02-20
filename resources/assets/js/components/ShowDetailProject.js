@@ -67,7 +67,7 @@ class UpdateProject extends Component
     {
         return (
             <div>
-                <h1>Show Project</h1>
+                <h1>SHOW PROJECT</h1>
                 <div className="row">
                     <div className="col-md-6"></div>
                     <div className="col-md-2">
@@ -81,7 +81,7 @@ class UpdateProject extends Component
                              {this.state.name}
                         </div>
                         <div className="form-group">
-                            <label name="product_body"> Information :</label>
+                            <label> Information :</label>
                             {this.state.information}
                         </div>
                         <div className="form-group">
