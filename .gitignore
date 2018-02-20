@@ -24,7 +24,7 @@ app/storage/
 # Laravel 5 & Lumen specific
 public/storage
 public/hot
-public/css/app/css
+public/css/app.css
 public/js/app.js
 public/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.svg
 public/css/
