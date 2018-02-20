@@ -18,7 +18,6 @@ class DisplayProject extends Component
             this.setState({ project: response.data });
             })
             .catch(function (error) {
-                console.log(error);
             })
     }
 

@@ -29,7 +29,6 @@ class CreateProject extends Component
         this.setState({
             name: e.target.value
         })
-        console.log(e.target.value)
     }
 
     handleChangeInformation(e)
