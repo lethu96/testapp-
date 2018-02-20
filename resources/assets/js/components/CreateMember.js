@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {browserHistory} from 'react-router';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 class CreateMember extends Component
@@ -34,8 +35,7 @@ class CreateMember extends Component
         axios.get('http://localhost:8000/positions').then(response => {
             this.setState({ position: response.data });
         })
-        .catch(function (error) {
-            console.log(error);})
+        .catch(function (error) {})
     }
     tabRow()
     {
@@ -116,7 +116,8 @@ class CreateMember extends Component
         data.append('position_id', this.state.selectedposition)
         axios.post('http://localhost:8000/member/create', data)
         .then(
-            (response) => {browserHistory.push('/display-item-member');
+            (response) => {
+                browserHistory.push('/display-item-member');
         }).catch(error => {
             if (error.response) {
                 this.setState({ error: error.response.data.errors });

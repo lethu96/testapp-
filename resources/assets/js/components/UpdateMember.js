@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {browserHistory} from 'react-router';
+import { ToastContainer, toast } from 'react-toastify';
+import { ToastMessage } from "react-toastr";
 
 
 class UpdateMember extends Component
@@ -34,8 +36,7 @@ class UpdateMember extends Component
         axios.get('http://localhost:8000/positions').then(response => {
             this.setState({ position: response.data });
         })
-        .catch(function (error) {
-            console.log(error);})
+        .catch(function (error) {})
         let current_url = window.location.href;
         let current_id = current_url.split("/").pop();
         axios.get('http://localhost:8000/member/edit/' + current_id)
@@ -44,7 +45,6 @@ class UpdateMember extends Component
                 birthday: response.data.birthday, gender: response.data.gender, phone_number: response.data.phone_number,selectedposition: response.data.position_id});
         })
         .catch(function (error) {
-            console.log(error);
         })
     }
     tabRow()
@@ -125,18 +125,17 @@ class UpdateMember extends Component
         data.append('gender', this.state.gender)
         data.append('avatar', this.state.avatar)
         data.append('position_id', this.state.selectedposition)
-                        console.log(this.state.avatar);
         axios.post('http://localhost:8000/member/edit-item/'+this.props.params.id, data)
         .then(
             (response) => {
+
                 browserHistory.push('/display-item-member');
-                toastr.success('Update Member Success.', 'Turtle Bay Resort', {timeOut: 5000})
+                toast.success('Update Member Success.', 'Turtle Bay Resort', {timeOut: 5000})
             }
         )
         .catch(error => {
             if (error.response) {
                 this.setState({ error: error.response.data.errors });
-                console.log(error.response.data.errors);
             }
         });
     }
@@ -220,7 +219,7 @@ class UpdateMember extends Component
                     </div>
                     <br />
                     <div className="form-group">
-                        <button type = "submit" className="btn btn-primary">Add Member</button>
+                        <button type = "submit" className="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>

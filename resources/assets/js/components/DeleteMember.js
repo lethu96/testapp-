@@ -7,7 +7,6 @@ class DeleteMember extends Component
     {
         let current_url = window.location.href;
         let current_id = current_url.split("/").pop();
-        console.log(current_id);
         axios.delete('http://localhost:8000/member/destroy/' + current_id)
         .then(
             (response) => {browserHistory.push('/display-item-member');}

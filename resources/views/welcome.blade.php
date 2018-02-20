@@ -8,6 +8,8 @@
         <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css">
         <link href="toastr.css" rel="stylesheet"/>
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     </head>
     <body>
         <div id="crud-app"></div>

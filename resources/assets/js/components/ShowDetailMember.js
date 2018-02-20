@@ -26,8 +26,7 @@ class ShowDetailMember extends Component
         axios.get('http://localhost:8000/positions').then(response => {
             this.setState({ position: response.data });
         })
-        .catch(function (error) {
-            console.log(error);})
+        .catch(function (error) {})
         let current_url = window.location.href;
         let current_id = current_url.split("/").pop();
         axios.get('http://localhost:8000/member/edit/' + current_id)
@@ -35,10 +34,8 @@ class ShowDetailMember extends Component
             this.setState({ name: response.data.name, information: response.data.information,
                 birthday: response.data.birthday, gender: response.data.gender, phone_number: response.data.phone_number,
                 avatar: response.data.avatar,selectedposition: response.data.position_id});
-            console.log(this.state.avatar)
         })
         .catch(function (error) {
-            console.log(error);
         })
     }
 
@@ -102,7 +99,7 @@ class ShowDetailMember extends Component
                             <div className="col-md-10">
                                 <div className="form-group">
                                     <label>Position :</label>
-                                    <select value={this.state.selectedposition} className="form-control" disabled >
+                                    <select value={this.state.selectedposition}  disabled >
                                         {this.showPosition()}
                                     </select>
                                 </div>
