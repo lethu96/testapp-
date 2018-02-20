@@ -27,14 +27,12 @@ class UpdateProject extends Component
     {
         let current_url = window.location.href;
         let current_id = current_url.split("/").pop();
-        console.log(current_id);
         axios.get('http://localhost:8000/project/edit/' + current_id)
         .then(response=> {
             this.setState({ name: response.data.name, information: response.data.information,
                 deadline: response.data.deadline, type: response.data.type, status: response.data.status});
         })
         .catch(function (error) {
-            console.log(error);
         })
     }
 
@@ -84,7 +82,6 @@ class UpdateProject extends Component
             status: this.state.status
         }
         let uri = 'http://localhost:8000/edit-item/'+this.props.params.id;
-        console.log(this.props.params.id)
         axios.post(uri, project).then((response) => {
             this.props.history.push('/display-item');
         });

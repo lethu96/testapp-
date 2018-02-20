@@ -40,8 +40,8 @@ class MemberController extends Controller
         $member->birthday = $data['birthday'];
         $countPosition = DB::table('positions')->where('id', $data['position_id'])->count();
         if ($countPosition > 0) {
-                $member->position_id = $data['position_id'];
-                $member->gender = $data['gender'];
+            $member->position_id = $data['position_id'];
+            $member->gender = $data['gender'];
             if ($request->hasFile('avatar')) {
                 $file = $request->avatar;
                 $file->move("img", $file->getClientOriginalName());
@@ -73,6 +73,8 @@ class MemberController extends Controller
                 $file = $request->avatar;
                 $file->move("img", $file->getClientOriginalName());
                 $newMember->avatar ="/img/".$file->getClientOriginalName();
+            }else {
+                 $newMember->avatar ="/img/avatar.jpg";
             }
             $newMember->save();
             return response()->json($newMember);
