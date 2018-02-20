@@ -24,6 +24,8 @@
     },
     "dependencies": {
         "react-router": "^2.8.1",
+        "react-toastify": "^3.3.4",
+        "react-toastr": "^3.0.0",
         "toastr": "^2.1.4"
     }
 }
