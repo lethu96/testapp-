@@ -17,6 +17,9 @@ import CreateProject from './components/CreateProject';
 import DisplayProject from './components/DisplayProject';
 import UpdateProject from './components/UpdateProject';
 import DisplayMember from './components/DisplayMember';
+import ShowDetailProject from './components/ShowDetailProject';
+import AddMemberProject from './components/AddMemberProject';
+import DeleteProject from './components/DeleteProject';
 import CreateMember from './components/CreateMember';
 import UpdateMember from './components/UpdateMember';
 import DeleteMember from './components/DeleteMember';
@@ -29,6 +32,9 @@ render(
             <Route path = "/display-item" component = {DisplayProject} />
             <Route path = "/edit-item/:id" component = {UpdateProject} />
             <Route path = "/display-item-member" component = {DisplayMember} />
+            <Route path = "/show-detail-item/:id" component = {ShowDetailProject} />
+            <Route path = "/add-member-project/:id" component = {AddMemberProject} />
+            <Route path = "/delete-item/:id" component = {DeleteProject} />
             <Route path = "/add-item-member" component = {CreateMember} />
             <Route path = "/edit-item-member/:id" component = {UpdateMember} />
             <Route path = "/member/delete-item/:id" component = {DeleteMember} />

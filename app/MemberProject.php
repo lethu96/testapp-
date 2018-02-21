@@ -10,15 +10,11 @@ class MemberProject extends Model
 {
     public $timestamps = false;
     protected $table = "member_projects";
-    protected $hidden = array('id','created_at', 'updated_at');
+    protected $hidden = array('id', 'created_at', 'updated_at');
 
-    public function member()
+    public function showMember($id)
     {
-        return $this->hasMany('App\Member', 'member_id', 'id');
-    }
-    
-    public function project()
-    {
-        return $this->hasMany('App\Project', 'project_id', 'id');
+        $project=Project::find($id)->member;
+        return $project;
     }
 }

@@ -33,6 +33,7 @@ class TableRow extends Component
                 <td>
                     <form onSubmit={this.handleSubmit}>
                         <Link to={"/edit-item/"+this.props.project.id} className="btn btn-primary">Edit</Link>
+                        <Link to={"/show-detail-item/"+this.props.project.id} className="btn btn-success">Show</Link>
                         <Link to={"/delete-item/"+this.props.project.id} className="btn btn-danger">Delete</Link>
                     </form>
                 </td>
