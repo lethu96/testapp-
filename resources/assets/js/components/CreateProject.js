@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {browserHistory} from 'react-router';
-
+import { Link } from 'react-router';
 
 class CreateProject extends Component
 {
@@ -12,7 +12,9 @@ class CreateProject extends Component
             information: '',
             deadline: '',
             type: '',
-            status: ''
+            status: '',
+            value:'',
+            error:''
         };
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeInformation = this.handleChangeInformation.bind(this);
@@ -69,10 +71,13 @@ class CreateProject extends Component
                 type: this.state.type,
                 status: this.state.status
             }
-        )
-        .then(
-            (response) => {browserHistory.push('/display-item');}
-        );
+        ).then(response => {
+            browserHistory.push('/display-item');
+        }).catch(error => {
+            if (error.response) {
+                this.setState({ error: error.response.data.errors });
+            }
+        });
     }
 
     render()
@@ -80,12 +85,19 @@ class CreateProject extends Component
         return (
             <div>
                 <h1>Create Project</h1>
+                <div className="row">
+                    <div className="col-md-10"></div>
+                    <div className="col-md-2">
+                        <Link to="/display-item" className="btn btn-success">Return to Project</Link>
+                    </div>
+                </div><br />
                 <form onSubmit={this.handleSubmit}>
                     <div className="row">
                         <div className="col-md-6">
                             <div className="form-group">
                                 <label>Name</label>
                                 <input value={this.state.name} type="text" className="form-control" onChange={this.handleChangeName} />
+                                <p className="help-block" >{this.state.error.name} </p>
                             </div>
                         </div>
                     </div>
@@ -94,6 +106,7 @@ class CreateProject extends Component
                             <div className="form-group">
                                 <label>Deadline</label>
                                 <input value={this.state.deadline} type="date" className="form-control" onChange={this.handleChangeDeadline} />
+                                <p className="help-block" >{this.state.error.deadline} </p>
                             </div>
                         </div>
                     </div>
@@ -102,6 +115,7 @@ class CreateProject extends Component
                             <div className="form-group">
                             <label>Information</label>
                             <textarea value={this.state.information}className="form-control col-md-6" onChange={this.handleChangeInformation}></textarea>
+                            <p className="help-block" >{this.state.error.information} </p>
                         </div>
                         </div>
                     </div>
@@ -115,6 +129,7 @@ class CreateProject extends Component
                                     <option value="single">Single</option>
                                     <option value="acceptance">Acceptance</option>
                                 </select>
+                                <p className="help-block" >{this.state.error.type} </p>
                             </div>
                         </div>
                     </div>
@@ -130,6 +145,7 @@ class CreateProject extends Component
                                     <option value="done">Done</option>
                                     <option value="cancelled">Cancelled</option>
                                 </select>
+                                <p className="help-block" >{this.state.error.status} </p>
                             </div>
                         </div>
                     </div>
