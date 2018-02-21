@@ -13,7 +13,8 @@ class UpdateProject extends Component
             information: '',
             deadline: '',
             type: '',
-            status: ''
+            status: '',
+            error: ''
         };
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeInformation = this.handleChangeInformation.bind(this);
@@ -27,15 +28,11 @@ class UpdateProject extends Component
     {
         let current_url = window.location.href;
         let current_id = current_url.split("/").pop();
-        console.log(current_id);
         axios.get('http://localhost:8000/project/edit/' + current_id)
         .then(response=> {
             this.setState({ name: response.data.name, information: response.data.information,
                 deadline: response.data.deadline, type: response.data.type, status: response.data.status});
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
+        });
     }
 
     handleChangeName(e)
@@ -84,9 +81,12 @@ class UpdateProject extends Component
             status: this.state.status
         }
         let uri = 'http://localhost:8000/edit-item/'+this.props.params.id;
-        console.log(this.props.params.id)
         axios.post(uri, project).then((response) => {
             this.props.history.push('/display-item');
+        }).catch(error => {
+            if (error.response) {
+                this.setState({ error: error.response.data.errors });
+            }
         });
     }
 
@@ -101,18 +101,20 @@ class UpdateProject extends Component
                         <Link to="/display-item" className="btn btn-success">Return to Project</Link>
                     </div>
                 </div>
-                <form onSubmit={this.handleSubmit} name="_method" value="PUT">
+                <form onSubmit={this.handleSubmit} >
                     <div className="form-group">
                         <label>Project Name</label>
                         <input type="text"
                         className="form-control"
                         value={this.state.name}
                         onChange={this.handleChangeName} />
+                        <p className="help-block" >{this.state.error.name} </p>
                     </div>
                     <div className="form-group">
                         <label name="product_body">Project Information</label>
                         <textarea className="form-control"
                         onChange={this.handleChangeInformation} value={this.state.information}></textarea>
+                        <p className="help-block" >{this.state.error.information} </p>
                     </div>
                     <div className="form-group">
                         <label>Project Deadline</label>
@@ -120,6 +122,7 @@ class UpdateProject extends Component
                         className="form-control"
                         value={this.state.deadline}
                         onChange={this.handleChangeDeadline} />
+                        <p className="help-block" >{this.state.error.deadline} </p>
                     </div>
                     <div className="form-group">
                         <label>Project Type</label>
@@ -129,6 +132,7 @@ class UpdateProject extends Component
                             <option value="single">Single</option>
                             <option value="acceptance">Acceptance</option>
                         </select>
+                        <p className="help-block" >{this.state.error.type} </p>
                     </div>
                     <div className="form-group">
                         <label>Project Status</label>
@@ -140,6 +144,7 @@ class UpdateProject extends Component
                             <option value="done">Done</option>
                             <option value="cancelled">Cancelled</option>
                         </select>
+                        <p className="help-block" >{this.state.error.status} </p>
                     </div>
                     <div className="form-group">
                         <button className="btn btn-primary">Update</button>
