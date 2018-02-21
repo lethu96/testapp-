@@ -35,7 +35,6 @@ class ShowDetailMember extends Component
             this.setState({ name: response.data.name, information: response.data.information,
                 birthday: response.data.birthday, gender: response.data.gender, phone_number: response.data.phone_number,
                 avatar: response.data.avatar,selectedposition: response.data.position_id});
-            console.log(this.state.avatar)
         })
         .catch(function (error) {})
     }

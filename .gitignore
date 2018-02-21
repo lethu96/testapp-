@@ -24,10 +24,10 @@ app/storage/
 # Laravel 5 & Lumen specific
 public/storage
 public/hot
-public/mix-manifest.json
 public/css/app.css
 public/js/app.js
 public/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.svg
+public/mix-manifest.json
 storage/*.key
 .env.*.php
 .env.php

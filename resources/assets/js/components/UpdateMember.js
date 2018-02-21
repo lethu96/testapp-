@@ -122,7 +122,6 @@ class UpdateMember extends Component
         data.append('gender', this.state.gender)
         data.append('avatar', this.state.avatar)
         data.append('position_id', this.state.selectedposition)
-                        console.log(this.state.avatar);
         axios.post('http://localhost:8000/member/edit-item/'+this.props.params.id, data)
         .then(
             (response) => {browserHistory.push('/display-item-member');}
