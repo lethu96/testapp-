@@ -25,9 +25,9 @@ app/storage/
 public/storage
 public/hot
 public/mix-manifest.json
-public/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.svg
-public/js/app.js
 public/css/app.css
+public/js/app.js
+public/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.svg
 storage/*.key
 .env.*.php
 .env.php

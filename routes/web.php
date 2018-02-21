@@ -28,6 +28,11 @@ Route::post('edit-item/{id}', 'ProjectController@update');
 Route::delete('project/destroy/{id}', 'ProjectController@destroy');
 Route::post('project/create','ProjectController@store');
 Route::get('positions','PositionController@index');
+Route::post('member_projects/create', 'MemberProjectController@store');
+
+
+Route::get('/memberproject/project/{id}','MemberProjectController@show');
+Route::get('/memberproject/projectrole/{id}','MemberProjectController@showRole');
 
 Route::get('member_projects', 'MemberProjectController@index');
 Route::put('member_projects/update', 'MemberProjectController@update');

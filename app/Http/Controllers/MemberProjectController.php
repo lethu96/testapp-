@@ -12,10 +12,26 @@ use DB;
 
 class MemberProjectController extends Controller
 {
+    public function __construct(MemberProject $memberproject)
+   {
+       $this->memberproject = $memberproject;
+   }
+
     public function index()
     {
         $listMemberProject = MemberProject::all()->toArray();
         return $listMemberProject;
+    }
+
+    public function showRole($projectId)
+    {
+        $role = MemberProject::where('project_id', $projectId)->get();
+        return response()->json($role);
+    }
+
+    public function show($projectId)
+    {
+        return response()->json($this->memberproject->showMember($projectId));
     }
 
     public function store(StoreCreateMemberProject $request)
@@ -25,18 +41,18 @@ class MemberProjectController extends Controller
         $countCreate = MemberProject::where('member_id', $data['member_id'])
                                     ->where('project_id', $data['project_id'])->count();
         if ($countCreate > 0) {
-            return response()->json(['message'=>'this member_id and project_id have exit']);
+            return response()->json(['message'=>'This Member have exit in this project']);
         }
         $countMemberId = DB::table('members')->where('id', $data['member_id'])->count();
         $countProjectId = DB::table('projects')->where('id', $data['project_id'])->count();
-        if ($countMemberId>0 && $countProjectId >0) {
-                $newMp->member_id = $data['member_id'];
-                $newMp->project_id = $data['project_id'];
-                $newMp->role = $data['role'];
-                $newMp->save();
-                return response()->json($newMp);
+        if ($countMemberId > 0 && $countProjectId > 0) {
+            $newMp->member_id = $data['member_id'];
+            $newMp->project_id = $data['project_id'];
+            $newMp->role = $data['role'];
+            $newMp->save();
+            return response()->json(['message'=>'Add Member Success']);
         }
-            return response()->json(['message'=>'this member_id or project_id don t exit']);
+            return response()->json(['message'=>'this member or project don t exit']);
     }
 
     public function update(StoreCreateMemberProject $request)
