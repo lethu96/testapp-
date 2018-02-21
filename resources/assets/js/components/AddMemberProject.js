@@ -114,4 +114,5 @@ class AddMemberProject extends Component
         )
     }
 }
+}
 export default AddMemberProject;
