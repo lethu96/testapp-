@@ -32,7 +32,8 @@ class UpdateProject extends Component
         .then(response=> {
             this.setState({ name: response.data.name, information: response.data.information,
                 deadline: response.data.deadline, type: response.data.type, status: response.data.status});
-        });
+        .catch(function (error) {
+        })
     }
 
     handleChangeName(e)

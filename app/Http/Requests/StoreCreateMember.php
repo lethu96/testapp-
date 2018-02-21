@@ -29,7 +29,7 @@ class StoreCreateMember extends FormRequest
             'phone_number'=>'required|regex:/^[\(\)\-\ \.\+\/0-9]+$/|max:20',
             'birthday'=>'required|date|before:now|after:60 year ago',
             'position_id'=>'required|integer',
-            'avatar'=>'mimes:gif,png,jpeg|max:10240',
+            'avatar'=>'mimes:gif,png,jpeg|nullable|max:10240',
             'gender'=>'required|in:"male","female"'
         ];
     }
