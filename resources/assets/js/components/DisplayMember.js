@@ -37,7 +37,7 @@ class DisplayMember extends Component
                 <div className="row">
                     <div className="col-md-10"></div>
                     <div className="col-md-2">
-                        <Link to="/add-item-member">Create Member</Link>
+                        <Link to="/add-item-member" className="btn btn-success">Create Member</Link>
                     </div>
                 </div><br />
                 <table className="table table-hover">
