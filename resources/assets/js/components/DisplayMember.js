@@ -10,6 +10,7 @@ class DisplayMember extends Component
     {
         super(props);
         this.state = {value: '', member: ''};
+        this.updateState = this.updateState.bind(this);
     }
 
     componentDidMount()
@@ -20,11 +21,16 @@ class DisplayMember extends Component
         .catch(function (error) {})
     }
 
+    updateState(newlist)
+    {
+        this.setState({member :newlist});
+    }
+
     tabRow()
     {
         if (this.state.member instanceof Array) {
-            return this.state.member.map(function (member, i) {
-                return <TableRowMember obj={member} key={i} />;
+            return this.state.member.map( (member, i)=> {
+                return <TableRowMember obj={member} key={i} newlist ={this.updateState}/>;
             })
         }
     }

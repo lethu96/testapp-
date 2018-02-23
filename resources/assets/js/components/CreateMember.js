@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {browserHistory} from 'react-router';
+import {browserHistory,Link} from 'react-router';
 import { ToastContainer, toast } from 'react-toastify';
 
 
@@ -118,6 +118,11 @@ class CreateMember extends Component
         .then(
             (response) => {
                 browserHistory.push('/display-item-member');
+                swal("Create Member Success", {
+                    icon: "success",
+                    timer: 2000,
+                    buttons:false
+                });
         }).catch(error => {
             if (error.response) {
                 this.setState({ error: error.response.data.errors });
@@ -130,6 +135,12 @@ class CreateMember extends Component
         return (
             <div>
                 <h1>CREATE MEMBER</h1>
+                <div className="row">
+                    <div className="col-md-10"></div>
+                    <div className="col-md-2">
+                        <Link to="/display-item-member" className="btn btn-success">List Member</Link>
+                    </div>
+                </div><br />
                 <form onSubmit={this.handleSubmit}>
                     <div className="row">
                         <div className="col-md-6">

@@ -116,7 +116,7 @@ class ShowDetailMember extends Component
                                 <div className="form-group">
                                 <label>Avatar</label>
                             </div>
-                            <img width="300px" height="300px" src={this.state.avatar}/>
+                            <img className="img-detail" src={this.state.avatar}/>
                             </div>
                         </div>
                     </div>

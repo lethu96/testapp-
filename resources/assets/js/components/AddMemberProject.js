@@ -62,8 +62,12 @@ class AddMemberProject extends Component
         data.append('role', this.state.role)
         axios.post('http://localhost:8000/member_projects/create', data)
         .then(
-            (response) => {browserHistory.push('/display-item');
-            alert(response.data.message)
+            (response) => {
+            if(response.data.failed){
+                alert(response.data.failed)
+            }else{
+                browserHistory.push('/show-detail-item/'+this.state.project_id);
+            }
         }).catch(error => {
             if (error.response) {
                 this.setState({ error: error.response.data.errors });
@@ -106,7 +110,7 @@ class AddMemberProject extends Component
                             </div>
                         </div>
                     </div>
-                    <br />
+                    <br/>
                     <div className="form-group">
                         <button type = "submit" className="btn btn-primary">Add Member</button>
                     </div>

@@ -10,7 +10,7 @@ class UpdateProject extends Component
         super(props);
         this.state = {
             name: '',
-            information: '',
+            information:'',
             deadline: '',
             type: '',
             status: '',
@@ -83,6 +83,11 @@ class UpdateProject extends Component
         let uri = 'http://localhost:8000/edit-item/'+this.props.params.id;
         axios.post(uri, project).then((response) => {
             this.props.history.push('/display-item');
+            swal("Project have Update", {
+                    icon: "success",
+                    timer: 2000,
+                    buttons:false
+                });
         }).catch(error => {
             if (error.response) {
                 this.setState({ error: error.response.data.errors });
@@ -113,7 +118,7 @@ class UpdateProject extends Component
                     <div className="form-group">
                         <label name="product_body">Project Information</label>
                         <textarea className="form-control"
-                        onChange={this.handleChangeInformation} value={this.state.information}></textarea>
+                        onChange={this.handleChangeInformation} value={this.state.information || ''} ></textarea>
                         <p className="help-block" >{this.state.error.information} </p>
                     </div>
                     <div className="form-group">

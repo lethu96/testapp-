@@ -72,40 +72,48 @@ class UpdateProject extends Component
                         <Link to="/display-item" className="btn btn-success">Return to Project</Link>
                     </div>
                 </div>
-                <div className="col-md-6">
-                    <form onSubmit={this.handleSubmit} >
-                        <div className="form-group">
-                            <label> Name:</label>
-                             {this.state.name}
-                        </div>
-                        <div className="form-group">
-                            <label> Information :</label>
-                            {this.state.information}
-                        </div>
-                        <div className="form-group">
-                            <label> Deadline :</label>
-                             {this.state.deadline}
-                        </div>
-                        <div className="form-group">
-                            <label> Type :</label>
-                             {this.state.type}
-                        </div>
-                        <div className="form-group">
-                            <label> Status:</label>
-                            {this.state.status} 
-                        </div>
-                        <div className="row">
-                            <div className="col-md-3">
-                                <label>Member </label>
+                <div className="col-md-12">
+                <table className="table table-hover">
+                    <thead>
+                    <tr>
+                            <th>NAME</th>
+                            <th width="300px">INFORMATION</th>
+                            <th>DEADLINE</th>
+                            <th>TYPE</th>
+                            <th>STATUS</th>
+                            <th width="200px">MEMBER</th>
+                            <th >ROLE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                {this.state.name}
+                            </td>
+                            <td>
+                                {this.state.information}
+                            </td>
+                            <td>
+                                {this.state.deadline}
+                            </td>
+                            <td>
+                                 {this.state.type}
+                            </td>
+                            <td>
+                                 {this.state.status}
+                            </td>
+                            <td>
                                 {this.showMember()}
-                            </div>
-                            <div className="col-md-2">
-                                <label> Role </label>
+                            </td> 
+                            <td>
                                 {this.showRole()}
-                            </div>
-                        </div> 
-                        <Link to={"/add-member-project/"+this.state.project_id} className="btn btn-success">Add Member</Link>
-                    </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <form onSubmit={this.handleSubmit}>
+                    <Link to={"/add-member-project/"+this.state.project_id} className="btn btn-success">Add Member</Link>
+                </form>
                 </div>
             </div>
         )

@@ -75,7 +75,7 @@ class MemberController extends Controller
                 $file->move("img", $file->getClientOriginalName());
                 $newMember->avatar ="/img/".$file->getClientOriginalName();
             }else{
-                $newMember->avatar="/img/avatar.jpg";
+                $newMember->avatar="/img/default/avatar.jpg";
             }
             $newMember->save();
             return response()->json($newMember);

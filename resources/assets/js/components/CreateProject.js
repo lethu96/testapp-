@@ -73,6 +73,11 @@ class CreateProject extends Component
             }
         ).then(response => {
             browserHistory.push('/display-item');
+            swal("Create Project Success!", {
+                    icon: "success",
+                    timer: 2000,
+                    buttons:false
+                });
         }).catch(error => {
             if (error.response) {
                 this.setState({ error: error.response.data.errors });
@@ -88,7 +93,7 @@ class CreateProject extends Component
                 <div className="row">
                     <div className="col-md-10"></div>
                     <div className="col-md-2">
-                        <Link to="/display-item" className="btn btn-success">Return to Project</Link>
+                        <Link to="/display-item" className="btn btn-success">List Project</Link>
                     </div>
                 </div><br />
                 <form onSubmit={this.handleSubmit}>

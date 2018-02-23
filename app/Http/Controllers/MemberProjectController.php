@@ -41,7 +41,7 @@ class MemberProjectController extends Controller
         $countCreate = MemberProject::where('member_id', $data['member_id'])
                                     ->where('project_id', $data['project_id'])->count();
         if ($countCreate > 0) {
-            return response()->json(['message'=>'This Member have exit in this project']);
+            return response()->json(['failed'=>'This Member have exit in this project']);
         }
         $countMemberId = DB::table('members')->where('id', $data['member_id'])->count();
         $countProjectId = DB::table('projects')->where('id', $data['project_id'])->count();
@@ -50,9 +50,9 @@ class MemberProjectController extends Controller
                 $newMp->project_id = $data['project_id'];
                 $newMp->role = $data['role'];
                 $newMp->save();
-                return response()->json(['message'=>'Add Member Success']);
+                return response()->json(['success'=>'Add Member Success']);
         }
-            return response()->json(['message'=>'this member or project don t exit']);
+            return response()->json(['failed'=>'this member or project dont exit']);
     }
 
     public function update(StoreCreateMemberProject $request)

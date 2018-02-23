@@ -3,12 +3,14 @@ import axios from 'axios';
 import { Link } from 'react-router';
 import TableRow from './TableRow';
 
+
 class DisplayProject extends Component
 {
     constructor(props)
     {
         super(props);
         this.state = {value: '', project: ''};
+        this.updateState = this.updateState.bind(this);
     }
 
     componentDidMount()
@@ -21,11 +23,16 @@ class DisplayProject extends Component
         })
     }
 
+    updateState(newlist)
+    {
+        this.setState({project :newlist});
+    }
+
     tabRow()
     {
         if (this.state.project instanceof Array) {
-            return this.state.project.map(function (object, i) {
-                return <TableRow project={object} key={i} />;
+            return this.state.project.map( (object, i) =>{
+                return <TableRow project={object}  key={i} newlist ={this.updateState}/>;
             })
         }
     }
