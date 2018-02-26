@@ -29,18 +29,17 @@ import CreateMember from './components/CreateMember';
 render(
     <Router history={browserHistory}>
         <Route path="/" component={Master} >
-            <Route path = "/add-item" component = {CreateProject} />
-            <Route path = "/display-item" component = {DisplayProject} />
-            <Route path = "/display-item-member" component= {DisplayMember} />
+            <Route path = "/addproject" component = {CreateProject}> </Route>
+            <Route exact path = "/listproject" component = {DisplayProject} />
+            <Route path = "/list" component= {DisplayMember} />
             <Route path = "/edit-item/:id" component = {UpdateProject} />
             <Route path = "/show-detail-item/:id" component = {ShowDetailProject} />
             <Route path = "/add-member-project/:id" component = {AddMemberProject} />
             <Route path = "/delete-item/:id" component = {DeleteProject} />
-            <Route path = "/add-item-member" component = {CreateMember} />
+            <Route path = "/addmember" component = {CreateMember} />
             <Route path = "/edit-item-member/:id" component = {UpdateMember} />
             <Route path = "/member/delete-item/:id" component = {DeleteMember} />
             <Route path = "/show-item-member/:id" component = {ShowDetailMember} />
-
         </Route>
     </Router>,
     document.getElementById('crud-app'));

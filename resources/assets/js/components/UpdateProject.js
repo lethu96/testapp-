@@ -82,7 +82,7 @@ class UpdateProject extends Component
         }
         let uri = 'http://localhost:8000/edit-item/'+this.props.params.id;
         axios.post(uri, project).then((response) => {
-            this.props.history.push('/display-item');
+            this.props.history.push('/listproject');
             swal("Project have Update", {
                     icon: "success",
                     timer: 2000,
@@ -103,7 +103,7 @@ class UpdateProject extends Component
                 <div className="row">
                     <div className="col-md-10"></div>
                     <div className="col-md-2">
-                        <Link to="/display-item" className="btn btn-success">Return to Project</Link>
+                        <Link to="/listproject" className="btn btn-success">Return to Project</Link>
                     </div>
                 </div>
                 <form onSubmit={this.handleSubmit} >

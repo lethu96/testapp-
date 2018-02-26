@@ -69,7 +69,7 @@ class UpdateProject extends Component
                 <div className="row">
                     <div className="col-md-6"></div>
                     <div className="col-md-2">
-                        <Link to="/display-item" className="btn btn-success">Return to Project</Link>
+                        <Link to="/listproject" className="btn btn-success">Return to Project</Link>
                     </div>
                 </div>
                 <div className="col-md-12">

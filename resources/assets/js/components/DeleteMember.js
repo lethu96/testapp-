@@ -9,13 +9,13 @@ class DeleteMember extends Component
         let current_id = current_url.split("/").pop();
         axios.delete('http://localhost:8000/member/destroy/' + current_id)
         .then(
-            (response) => {browserHistory.push('/display-item-member');}
+            (response) => {browserHistory.push('/list');}
         );
     }
 
     notDelete()
     {
-        browserHistory.push('/display-item-member');
+        browserHistory.push('/list');
     }
 
     render()

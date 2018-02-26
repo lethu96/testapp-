@@ -117,7 +117,7 @@ class CreateMember extends Component
         axios.post('http://localhost:8000/member/create', data)
         .then(
             (response) => {
-                browserHistory.push('/display-item-member');
+                browserHistory.push('/list');
                 swal("Create Member Success", {
                     icon: "success",
                     timer: 2000,
@@ -138,7 +138,7 @@ class CreateMember extends Component
                 <div className="row">
                     <div className="col-md-10"></div>
                     <div className="col-md-2">
-                        <Link to="/display-item-member" className="btn btn-success">List Member</Link>
+                        <Link to="/list" className="btn btn-success">List Member</Link>
                     </div>
                 </div><br />
                 <form onSubmit={this.handleSubmit}>

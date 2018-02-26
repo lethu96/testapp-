@@ -11,8 +11,8 @@ class Master extends Component
                 <nav className="navbar navbar-default">
                     <div className="container-fluid">
                         <ul className="nav navbar-nav">
-                            <li><Link to="display-item">Project</Link></li>
-                            <li><Link to="display-item-member">Member</Link></li>
+                            <li><Link to="listproject">Project</Link></li>
+                            <li><Link to="list">Member</Link></li>
                         </ul>
                     </div>
                 </nav>

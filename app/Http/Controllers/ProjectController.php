@@ -16,6 +16,11 @@ class ProjectController extends Controller
         return response()->json($listProject);
     }
 
+    public function list()
+    {
+        return view('welcome');
+    }
+
     public function destroy($id)
     {
         $project = Project::findOrFail($id);

@@ -129,7 +129,7 @@ class UpdateMember extends Component
         .then(
             (response) => {
 
-                browserHistory.push('/display-item-member');
+                browserHistory.push('/list');
                 swal("Member Have Update", {
                     icon: "success",
                     timer: 2000,

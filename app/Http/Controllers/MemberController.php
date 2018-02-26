@@ -19,6 +19,10 @@ class MemberController extends Controller
         }
         return response()->json($listMember);
     }
+    public function list()
+    {
+        return view('welcome');
+    }
 
     public function destroy($id)
     {

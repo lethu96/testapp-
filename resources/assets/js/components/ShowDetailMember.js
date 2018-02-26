@@ -107,7 +107,7 @@ class ShowDetailMember extends Component
                         </div>
 
                         <div className="form-group">
-                            <Link to="/display-item-member" className="btn btn-success">List Member</Link>
+                            <Link to="/list" className="btn btn-success">List Member</Link>
                         </div>
                     </div>
                     <div className="col-md-6">

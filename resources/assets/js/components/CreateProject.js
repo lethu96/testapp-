@@ -72,7 +72,7 @@ class CreateProject extends Component
                 status: this.state.status
             }
         ).then(response => {
-            browserHistory.push('/display-item');
+            browserHistory.push('/listproject');
             swal("Create Project Success!", {
                     icon: "success",
                     timer: 2000,
@@ -93,7 +93,7 @@ class CreateProject extends Component
                 <div className="row">
                     <div className="col-md-10"></div>
                     <div className="col-md-2">
-                        <Link to="/display-item" className="btn btn-success">List Project</Link>
+                        <Link to="/listproject" className="btn btn-success">List Project</Link>
                     </div>
                 </div><br />
                 <form onSubmit={this.handleSubmit}>

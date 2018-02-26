@@ -45,7 +45,7 @@ class DisplayProject extends Component
                 <div className="row">
                     <div className="col-md-10"></div>
                     <div className="col-md-2">
-                        <Link to="/add-item" className="btn btn-success">Create Projects</Link>
+                        <Link to="/addproject" className="btn btn-success">Create Projects</Link>
                     </div>
                 </div><br />
                 <table className="table table-hover">

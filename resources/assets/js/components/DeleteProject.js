@@ -12,12 +12,12 @@ class DeleteProject extends Component
         let current_id = current_url.split("/").pop();
         axios.delete('http://localhost:8000/project/destroy/' + current_id).then(
             (response) => {
-                browserHistory.push('/display-item');}
+                browserHistory.push('/listproject');}
             );
     }
 
     notDelete(){
-        browserHistory.push('/display-item');
+        browserHistory.push('/listproject');
     }
 
     render()
