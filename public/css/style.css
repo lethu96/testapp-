@@ -1,0 +1,21 @@
+.help-block{
+    color: red;
+    font-style: oblique;
+}
+label{
+    width: 30%;
+}
+.thumb {
+width: 150px;
+height: 100px;
+object-fit: cover;
+}
+.img-detail{
+width: 500px;
+height: auto;
+object-fit: cover;
+}
+.infor{
+    width: 250px;
+    word-break: break-all;
+}

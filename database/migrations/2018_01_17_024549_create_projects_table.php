@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+// @codingStandardsIgnoreLine
 class CreateProjectsTable extends Migration
 {
     /**
@@ -16,7 +17,7 @@ class CreateProjectsTable extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('information')->nullable();
+            $table->text('information')->nullable();
             $table->date('deadline')->nullable();
             $table->string('type');
             $table->string('status');

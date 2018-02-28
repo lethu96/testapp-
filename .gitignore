@@ -1,0 +1,40 @@
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+/.idea
+/img
+/.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.env# Created by https://www.gitignore.io/api/laravel
+
+### Laravel ###
+/vendor
+node_modules/
+npm-debug.log
+
+# Laravel 4 specific
+bootstrap/compiled.php
+app/storage/
+
+# Laravel 5 & Lumen specific
+public/storage
+public/hot
+public/css/app.css
+public/js/app.js
+public/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.svg
+public/mix-manifest.json
+storage/*.key
+.env.*.php
+.env.php
+.env
+Homestead.yaml
+Homestead.json
+
+# Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
+.rocketeer/
+

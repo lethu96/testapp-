@@ -1,22 +1,40 @@
 
 /**
  * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
+ * includes React and other helpers. It's a great starting point while
+ * building robust, powerful web applications using React + Laravel.
  */
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+import React from 'react';
+import { render } from 'react-dom';
+import { Router, Route, browserHistory } from 'react-router';
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+import Master from './components/Master';
+import CreateProject from './components/CreateProject';
+import DisplayProject from './components/DisplayProject';
+import UpdateProject from './components/UpdateProject';
+import DisplayMember from './components/DisplayMember';
+import ShowDetailProject from './components/ShowDetailProject';
+import AddMemberProject from './components/AddMemberProject';
+import CreateMember from './components/CreateMember';
+import UpdateMember from './components/UpdateMember';
+import ShowDetailMember from './components/ShowDetailMember';
 
-const app = new Vue({
-    el: '#app'
-});
+render(
+    <Router history={browserHistory}>
+        <Route path="/" component={Master} >
+            <Route path = "/add-item" component = {CreateProject} />
+            <Route path = "/display-item" component = {DisplayProject} />
+            <Route path = "/edit-item/:id" component = {UpdateProject} />
+            <Route path = "/display-item-member" component = {DisplayMember} />
+            <Route path = "/show-detail-item/:id" component = {ShowDetailProject} />
+            <Route path = "/add-member-project/:id" component = {AddMemberProject} />
+            <Route path = "/add-item-member" component = {CreateMember} />
+            <Route path = "/edit-item-member/:id" component = {UpdateMember} />
+            <Route path = "/show-item-member/:id" component = {ShowDetailMember} />
+        </Route>
+    </Router>,
+    document.getElementById('crud-app'));
