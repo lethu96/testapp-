@@ -31,6 +31,7 @@ class StoreCreateMember extends FormRequest
             'position_id'=>'required|integer',
             'avatar'=>'mimes:gif,png,jpeg|nullable|max:10240',
             'gender'=>'required|in:"male","female"'
+            'password'=>'required|min:1|max:10|regex:/^[A-Za-z0-9]+$/',
         ];
     }
 }

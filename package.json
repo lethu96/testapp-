@@ -23,9 +23,12 @@
         "babel-loader": "7.1.2"
     },
     "dependencies": {
+        "react-redux": "^5.0.7",
         "react-router": "^2.8.1",
         "react-toastify": "^3.3.4",
         "react-toastr": "^3.0.0",
+        "redux": "^3.7.2",
+        "redux-thunk": "^2.2.0",
         "sweetalert": "^2.1.0",
         "toastr": "^2.1.4"
     }
