@@ -14,7 +14,8 @@ class CreateProject extends Component
             type: '',
             status: '',
             value:'',
-            error:''
+            error:'',
+            isButtonDisabled: false
         };
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeInformation = this.handleChangeInformation.bind(this);
@@ -75,9 +76,10 @@ class CreateProject extends Component
             browserHistory.push('/display-item');
         }).catch(error => {
             if (error.response) {
-                this.setState({ error: error.response.data.errors });
+                this.setState({ error: error.response.data.errors , isButtonDisabled: false});
             }
         });
+        this.setState({isButtonDisabled: true});
     }
 
     render()
@@ -151,7 +153,7 @@ class CreateProject extends Component
                     </div>
                     <br />
                     <div className="form-group">
-                        <button type = "submit" className="btn btn-primary">Add Project</button>
+                        <button type = "submit" className="btn btn-primary" disabled={this.state.isButtonDisabled}>Add Project</button>
                     </div>
                 </form>
             </div>

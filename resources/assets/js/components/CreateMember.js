@@ -17,7 +17,8 @@ class CreateMember extends Component
             gender: '',
             position_id:'',
             avatar:'',
-            error:''
+            error:'',
+            isButtonDisabled: false
         };
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeInformation = this.handleChangeInformation.bind(this);
@@ -115,14 +116,17 @@ class CreateMember extends Component
         data.append('position_id', this.state.selectedposition)
         axios.post('http://localhost:8000/member/create', data)
         .then(
-            (response) => {browserHistory.push('/display-item-member');}
+            (response) => {
+                browserHistory.push('/display-item-member');
+            }
         )
         .catch(error => {
             if (error.response) {
-                    this.setState({ error: error.response.data.errors });
+                    this.setState({ error: error.response.data.errors , isButtonDisabled: false});
                 }
             }
         );
+        this.setState({isButtonDisabled: true});
     }
 
     render()
@@ -204,7 +208,7 @@ class CreateMember extends Component
                     </div>
                     <br />
                     <div className="form-group">
-                        <button type = "submit" className="btn btn-primary">Add Member</button>
+                        <button type = "submit" className="btn btn-primary" disabled={this.state.isButtonDisabled}>Add Member</button>
                     </div>
                 </form>
             </div>
