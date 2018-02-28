@@ -12,12 +12,32 @@ class TableRowMember extends Component
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(event)
+    handleSubmit(event) 
     {
         event.preventDefault();
-        let uri = MyGlobleSetting.url + '/api/member/${this.props.obj.id}';
-        axios.delete(uri);
-            browserHistory.push('/display-item-member');
+        swal({
+            title: "Are you sure?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                axios.delete('http://localhost:8000/member/destroy/' + this.props.obj.id).then(
+                    (response) => {
+                        axios.get('http://localhost:8000/member')
+                    .then(response => {
+                        this.setState({ list: response.data });
+                        this.props.newlist(this.state.list)
+                    })
+                });
+                swal("Member has been deleted!", {
+                    icon: "success",
+                    timer: 1000,
+                    buttons:false
+                });
+            }
+        });
     }
 
     render()
@@ -46,13 +66,13 @@ class TableRowMember extends Component
                     {this.props.obj.position.name}
                 </td>
                 <td>
-                    <img width="100px" height="100px" src={this.props.obj.avatar} />
+                    <img className="thumb"  src={this.props.obj.avatar} />
                 </td>
                 <td>
                     <form onSubmit={this.handleSubmit}>
                         <Link to={"/edit-item-member/"+this.props.obj.id} className="btn btn-primary">Edit</Link>
                         <Link to={"/show-item-member/"+this.props.obj.id} className="btn btn-success"> Show </Link>
-                        <Link to={"/member/delete-item/"+this.props.obj.id} className="btn btn-danger">Delete</Link>
+                        <input type="submit" value="Delete" className="btn btn-danger"/>
                     </form>
                 </td>
             </tr>
