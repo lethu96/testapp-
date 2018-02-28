@@ -212,7 +212,7 @@ class UpdateMember extends Component
                     </div>
                     <br />
                     <div className="form-group">
-                        <button type = "submit" className="btn btn-primary">Add Member</button>
+                        <button type = "submit" className="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>

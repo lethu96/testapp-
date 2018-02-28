@@ -50,7 +50,7 @@ class TableRowMember extends Component
                 <td>
                     {this.props.obj.name}
                 </td>
-                <td>
+                <td className="infor">
                     {this.props.obj.information}
                 </td>
                 <td>

@@ -47,7 +47,7 @@ class TableRow extends Component
                 <td>
                     {this.props.project.name}
                 </td>
-                <td>
+                <td className="infor">
                     {this.props.project.information}
                 </td>
                 <td>
