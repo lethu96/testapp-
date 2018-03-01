@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { Link, browserHistory, Image } from 'react-router';
 import MyGlobalSettings from './MyGlobalSettings';
@@ -23,7 +24,7 @@ class TableRowMember extends Component
         })
         .then((willDelete) => {
             if (willDelete) {
-                axios.delete('http://localhost:8000/member/destroy/' + this.props.obj.id)
+                axios.delete('http://localhost:8000/member/' + this.props.obj.id)
                 .then(
                     (response) => {
                         axios.get('http://localhost:8000/member')

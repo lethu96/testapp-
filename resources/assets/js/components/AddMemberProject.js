@@ -60,9 +60,9 @@ class AddMemberProject extends Component
         data.append('project_id', this.state.project_id)
         data.append('member_id', this.state.selectedmember_id)
         data.append('role', this.state.role)
-        axios.post('http://localhost:8000/member_projects/create', data)
+        axios.post('http://localhost:8000/member_projects/', data)
         .then(
-            (response) => {browserHistory.push('/display-item');
+            (response) => {browserHistory.push('/show-detail-item/'+this.state.project_id);
         }).catch(error => {
             if (error.response) {
                 this.setState({ error: error.response.data.errors , isButtonDisabled: false});

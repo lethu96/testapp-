@@ -22,7 +22,7 @@ class TableRow extends Component
         })
         .then((willDelete) => {
             if (willDelete) {
-                axios.delete('http://localhost:8000/project/destroy/' + this.props.project.id)
+                axios.delete('http://localhost:8000/project/' + this.props.project.id)
                 .then(
                     (response) => {
                         axios.get('http://localhost:8000/project')

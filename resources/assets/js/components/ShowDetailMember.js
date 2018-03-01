@@ -30,7 +30,7 @@ class ShowDetailMember extends Component
             this.setState({ position: response.data.name});
         })
         .catch(function (error) {})
-        axios.get('http://localhost:8000/member/edit/' + current_id)
+        axios.get('http://localhost:8000/member/' + current_id)
         .then(response=> {
             this.setState({ name: response.data.name, information: response.data.information,
                 birthday: response.data.birthday, gender: response.data.gender, phone_number: response.data.phone_number,

@@ -114,7 +114,7 @@ class CreateMember extends Component
         data.append('gender', this.state.gender)
         data.append('avatar', this.state.avatar)
         data.append('position_id', this.state.selectedposition)
-        axios.post('http://localhost:8000/member/create', data)
+        axios.post('http://localhost:8000/member', data)
         .then(
             (response) => {browserHistory.push('/display-item-member');}
         )

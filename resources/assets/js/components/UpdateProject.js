@@ -28,7 +28,8 @@ class UpdateProject extends Component
     {
         let current_url = window.location.href;
         let current_id = current_url.split("/").pop();
-        axios.get('http://localhost:8000/project/edit/' + current_id)
+        console.log(current_url);
+        axios.get('http://localhost:8000/project/' + current_id)
         .then(response=> {
             this.setState({ name: response.data.name, information: response.data.information,
                 deadline: response.data.deadline, type: response.data.type, status: response.data.status});
@@ -80,8 +81,8 @@ class UpdateProject extends Component
             type: this.state.type,
             status: this.state.status
         }
-        let uri = 'http://localhost:8000/edit-item/'+this.props.params.id;
-        axios.post(uri, project).then((response) => {
+        let uri = 'http://localhost:8000/project/'+this.props.params.id;
+        axios.put(uri, project).then((response) => {
             this.props.history.push('/display-item');
         }).catch(error => {
             if (error.response) {
@@ -129,7 +130,7 @@ class UpdateProject extends Component
                         <select value={this.state.type} className="form-control" onChange={this.handleChangeType}>
                             <option value="">---Option---</option>
                             <option value="lab">lab</option>
-                            <option value="single">lingle</option>
+                            <option value="single">single</option>
                             <option value="acceptance">acceptance</option>
                         </select>
                         <p className="help-block" >{this.state.error.type} </p>

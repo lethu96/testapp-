@@ -64,7 +64,7 @@ class CreateProject extends Component
     {
         e.preventDefault();
         axios.post(
-            'http://localhost:8000/project/create',
+            'http://localhost:8000/project',
             {
                 name: this.state.name,
                 information: this.state.information,

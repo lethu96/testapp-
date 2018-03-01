@@ -89,7 +89,7 @@ class MemberController extends Controller
         return response()->json(['message' => 'Dont exit Position_id'], 404);
     }
 
-    public function edit($id)
+    public function show($id)
     {
         $member = Member::find($id);
         return response()->json($member);
