@@ -128,9 +128,9 @@ class UpdateProject extends Component
                         <label>Project Type</label>
                         <select value={this.state.type} className="form-control" onChange={this.handleChangeType}>
                             <option value="">---Option---</option>
-                            <option value="lab">Lab</option>
-                            <option value="single">Single</option>
-                            <option value="acceptance">Acceptance</option>
+                            <option value="lab">lab</option>
+                            <option value="single">lingle</option>
+                            <option value="acceptance">acceptance</option>
                         </select>
                         <p className="help-block" >{this.state.error.type} </p>
                     </div>
@@ -138,11 +138,11 @@ class UpdateProject extends Component
                         <label>Project Status</label>
                         <select value={this.state.status} className="form-control" onChange={this.handleChangeStatus}>
                             <option value="">---Option---</option>
-                            <option value="planned">Planned</option>
-                            <option value="onhold">Onhold</option>
-                            <option value="doing">Doing</option>
-                            <option value="done">Done</option>
-                            <option value="cancelled">Cancelled</option>
+                            <option value="planned">planned</option>
+                            <option value="onhold">onhold</option>
+                            <option value="doing">doing</option>
+                            <option value="done">done</option>
+                            <option value="cancelled">cancelled</option>
                         </select>
                         <p className="help-block" >{this.state.error.status} </p>
                     </div>

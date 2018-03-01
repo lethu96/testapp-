@@ -21,7 +21,7 @@ class DisplayMember extends Component
         .catch(function (error) {})
     }
 
-        updateState(newlist)
+    updateState(newlist)
     {
         this.setState({member :newlist});
     }
@@ -29,7 +29,7 @@ class DisplayMember extends Component
     tabRow()
     {
         if (this.state.member instanceof Array) {
-            return this.state.member.map( (member, i)=> {
+            return this.state.member.map((member, i)=> {
                 return <TableRowMember obj={member} key={i} newlist ={this.updateState}/>;
             })
         }

@@ -12,7 +12,7 @@ class TableRowMember extends Component
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(event) 
+    handleSubmit(event)
     {
         event.preventDefault();
         swal({
@@ -23,13 +23,15 @@ class TableRowMember extends Component
         })
         .then((willDelete) => {
             if (willDelete) {
-                axios.delete('http://localhost:8000/member/destroy/' + this.props.obj.id).then(
+                axios.delete('http://localhost:8000/member/destroy/' + this.props.obj.id)
+                .then(
                     (response) => {
                         axios.get('http://localhost:8000/member')
-                    .then(response => {
-                        this.setState({ list: response.data });
-                        this.props.newlist(this.state.list)
-                    })
+                        .then(response => {
+                            this.setState({ list: response.data });
+                            this.props.newlist(this.state.list)
+                        }
+                    )
                 });
                 swal("Member has been deleted!", {
                     icon: "success",

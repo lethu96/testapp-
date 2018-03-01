@@ -116,16 +116,13 @@ class CreateMember extends Component
         data.append('position_id', this.state.selectedposition)
         axios.post('http://localhost:8000/member/create', data)
         .then(
-            (response) => {
-                browserHistory.push('/display-item-member');
-            }
+            (response) => {browserHistory.push('/display-item-member');}
         )
         .catch(error => {
             if (error.response) {
-                    this.setState({ error: error.response.data.errors , isButtonDisabled: false});
-                }
+                this.setState({ error: error.response.data.errors , isButtonDisabled: false});
             }
-        );
+        });
         this.setState({isButtonDisabled: true});
     }
 
@@ -177,8 +174,8 @@ class CreateMember extends Component
                                 <label>Gender</label>
                                 <select value={this.state.gender} className="form-control" onChange={this.handleChangeGender}>
                                     <option value="">---Option---</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
+                                    <option value="male">male</option>
+                                    <option value="female">female</option>
                                 </select>
                                 <p className="help-block" >{this.state.error.gender} </p>
                             </div>

@@ -28,7 +28,7 @@ class AddMemberProject extends Component
         axios.get('http://localhost:8000/member').then(response => {
             this.setState({ member: response.data });
         })
-        .catch(function (error) {})
+    }
 
     showMember()
     {
@@ -63,7 +63,6 @@ class AddMemberProject extends Component
         axios.post('http://localhost:8000/member_projects/create', data)
         .then(
             (response) => {browserHistory.push('/display-item');
-            alert(response.data.message)
         }).catch(error => {
             if (error.response) {
                 this.setState({ error: error.response.data.errors , isButtonDisabled: false});
@@ -114,6 +113,5 @@ class AddMemberProject extends Component
             </div>
         )
     }
-}
 }
 export default AddMemberProject;

@@ -11,7 +11,8 @@ class TableRow extends Component
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(event) {
+    handleSubmit(event)
+    {
         event.preventDefault();
         swal({
             title: "Are you sure?",
@@ -21,14 +22,17 @@ class TableRow extends Component
         })
         .then((willDelete) => {
             if (willDelete) {
-                axios.delete('http://localhost:8000/project/destroy/' + this.props.project.id).then(
+                axios.delete('http://localhost:8000/project/destroy/' + this.props.project.id)
+                .then(
                     (response) => {
                         axios.get('http://localhost:8000/project')
-                    .then(response => {
-                        this.setState({ list: response.data });
-                        this.props.newlist(this.state.list)
-                    })
-                });
+                            .then(response => {
+                                this.setState({ list: response.data });
+                                this.props.newlist(this.state.list)
+                            }
+                        )
+                    }
+                );
                 swal("Project has been deleted!", {
                     icon: "success",
                     timer: 1000,
@@ -37,6 +41,7 @@ class TableRow extends Component
             }
         });
     }
+
     render()
     {
         return (
