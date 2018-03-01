@@ -29,7 +29,7 @@ class DisplayProject extends Component
     tabRow()
     {
         if (this.state.project instanceof Array) {
-            return this.state.project.map((object, i) =>{
+            return this.state.project.map((object, i) => {
                 return <TableRow project={object}  key={i} newlist ={this.updateState}/>;
             })
         }

@@ -10,7 +10,7 @@ class DisplayMember extends Component
     {
         super(props);
         this.state = {value: '', member: ''};
-         this.updateState = this.updateState.bind(this);
+        this.updateState = this.updateState.bind(this);
     }
 
     componentDidMount()
@@ -18,7 +18,6 @@ class DisplayMember extends Component
         axios.get('http://localhost:8000/member').then(response => {
             this.setState({ member: response.data });
         })
-        .catch(function (error) {})
     }
 
     updateState(newlist)
@@ -29,7 +28,7 @@ class DisplayMember extends Component
     tabRow()
     {
         if (this.state.member instanceof Array) {
-            return this.state.member.map((member, i)=> {
+            return this.state.member.map((member, i) => {
                 return <TableRowMember obj={member} key={i} newlist ={this.updateState}/>;
             })
         }
