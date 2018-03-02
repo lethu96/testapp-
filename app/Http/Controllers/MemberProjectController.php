@@ -13,9 +13,9 @@ use DB;
 class MemberProjectController extends Controller
 {
     public function __construct(MemberProject $memberproject)
-   {
-       $this->memberproject = $memberproject;
-   }
+    {
+        $this->memberproject = $memberproject;
+    }
 
     public function index()
     {

@@ -20,6 +20,7 @@ Route::post('member/create', 'MemberController@store');
 Route::get('member/edit/{id}','MemberController@edit');
 Route::post('member/edit-item/{id}', 'MemberController@update');
 Route::delete('member/destroy/{id}','MemberController@destroy');
+Route::get('member/show/position/{id}','MemberController@showPosition');
 
 Route::resource('project','ProjectController');
 Route::get('project', 'ProjectController@index');
@@ -29,7 +30,6 @@ Route::delete('project/destroy/{id}', 'ProjectController@destroy');
 Route::post('project/create','ProjectController@store');
 Route::get('positions','PositionController@index');
 Route::post('member_projects/create', 'MemberProjectController@store');
-
 
 Route::get('/memberproject/project/{id}','MemberProjectController@show');
 Route::get('/memberproject/projectrole/{id}','MemberProjectController@showRole');

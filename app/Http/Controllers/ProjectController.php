@@ -49,7 +49,7 @@ class ProjectController extends Controller
         return response()->json('Project Updated Successfully.');
     }
 
-    public function edit($id)
+    public function show($id)
     {
         $project = Project::find($id);
         return response()->json($project);

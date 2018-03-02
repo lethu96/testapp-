@@ -12,7 +12,8 @@ class AddMemberProject extends Component
             project_id: '',
             role: '',
             error:'',
-            message: ''
+            message: '',
+            isButtonDisabled: false
         };
         this.handleChangemember_id = this.handleChangemember_id.bind(this);
         this.handleChangeRole = this.handleChangeRole.bind(this);
@@ -27,7 +28,7 @@ class AddMemberProject extends Component
         axios.get('http://localhost:8000/member').then(response => {
             this.setState({ member: response.data });
         })
-        .catch(function (error) {})
+    }
 
     showMember()
     {
@@ -59,13 +60,12 @@ class AddMemberProject extends Component
         data.append('project_id', this.state.project_id)
         data.append('member_id', this.state.selectedmember_id)
         data.append('role', this.state.role)
-        axios.post('http://localhost:8000/member_projects/create', data)
+        axios.post('http://localhost:8000/member_projects/', data)
         .then(
-            (response) => {browserHistory.push('/display-item');
-            alert(response.data.message)
+            (response) => {browserHistory.push('/show-detail-item/'+this.state.project_id);
         }).catch(error => {
             if (error.response) {
-                this.setState({ error: error.response.data.errors });
+                this.setState({ error: error.response.data.errors , isButtonDisabled: false});
             }
         });
     }
@@ -107,12 +107,11 @@ class AddMemberProject extends Component
                     </div>
                     <br />
                     <div className="form-group">
-                        <button type = "submit" className="btn btn-primary">Add Member</button>
+                        <button type = "submit" className="btn btn-primary" disabled={this.state.isButtonDisabled}>Add Member</button>
                     </div>
                 </form>
             </div>
         )
     }
-}
 }
 export default AddMemberProject;

@@ -28,7 +28,8 @@ class UpdateProject extends Component
     {
         let current_url = window.location.href;
         let current_id = current_url.split("/").pop();
-        axios.get('http://localhost:8000/project/edit/' + current_id)
+        console.log(current_url);
+        axios.get('http://localhost:8000/project/' + current_id)
         .then(response=> {
             this.setState({ name: response.data.name, information: response.data.information,
                 deadline: response.data.deadline, type: response.data.type, status: response.data.status});
@@ -80,8 +81,8 @@ class UpdateProject extends Component
             type: this.state.type,
             status: this.state.status
         }
-        let uri = 'http://localhost:8000/edit-item/'+this.props.params.id;
-        axios.post(uri, project).then((response) => {
+        let uri = 'http://localhost:8000/project/'+this.props.params.id;
+        axios.put(uri, project).then((response) => {
             this.props.history.push('/display-item');
         }).catch(error => {
             if (error.response) {
@@ -128,9 +129,9 @@ class UpdateProject extends Component
                         <label>Project Type</label>
                         <select value={this.state.type} className="form-control" onChange={this.handleChangeType}>
                             <option value="">---Option---</option>
-                            <option value="lab">Lab</option>
-                            <option value="single">Single</option>
-                            <option value="acceptance">Acceptance</option>
+                            <option value="lab">lab</option>
+                            <option value="single">single</option>
+                            <option value="acceptance">acceptance</option>
                         </select>
                         <p className="help-block" >{this.state.error.type} </p>
                     </div>
@@ -138,11 +139,11 @@ class UpdateProject extends Component
                         <label>Project Status</label>
                         <select value={this.state.status} className="form-control" onChange={this.handleChangeStatus}>
                             <option value="">---Option---</option>
-                            <option value="planned">Planned</option>
-                            <option value="onhold">Onhold</option>
-                            <option value="doing">Doing</option>
-                            <option value="done">Done</option>
-                            <option value="cancelled">Cancelled</option>
+                            <option value="planned">planned</option>
+                            <option value="onhold">onhold</option>
+                            <option value="doing">doing</option>
+                            <option value="done">done</option>
+                            <option value="cancelled">cancelled</option>
                         </select>
                         <p className="help-block" >{this.state.error.status} </p>
                     </div>

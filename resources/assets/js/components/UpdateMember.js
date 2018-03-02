@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import {browserHistory} from 'react-router';
 
@@ -37,7 +38,7 @@ class UpdateMember extends Component
         .catch(function (error) {})
         let current_url = window.location.href;
         let current_id = current_url.split("/").pop();
-        axios.get('http://localhost:8000/member/edit/' + current_id)
+        axios.get('http://localhost:8000/member/' + current_id)
         .then(response=> {
             this.setState({ name: response.data.name, information: response.data.information,
                 birthday: response.data.birthday, gender: response.data.gender, phone_number: response.data.phone_number,selectedposition: response.data.position_id});
@@ -114,15 +115,17 @@ class UpdateMember extends Component
     handleSubmit(e)
     {
         e.preventDefault();
-        let data = new FormData();
-        data.append('name', this.state.name)
-        data.append('information', this.state.information)
-        data.append('birthday', this.state.birthday)
-        data.append('phone_number', this.state.phone_number)
-        data.append('gender', this.state.gender)
-        data.append('avatar', this.state.avatar)
-        data.append('position_id', this.state.selectedposition)
-        axios.post('http://localhost:8000/member/edit-item/'+this.props.params.id, data)
+        const data = {
+            name: this.state.name,
+            information: this.state.information,
+            birthday : this.state.birthday,
+            phone_number: this.state.phone_number,
+            gender: this.state.gender,
+            avatar: this.state.avatar,
+            position_id: this.state.selectedposition
+        }
+        let uri = 'http://localhost:8000/member/'+this.props.params.id;
+        axios.put(uri, data)
         .then(
             (response) => {browserHistory.push('/display-item-member');}
         )
@@ -181,8 +184,8 @@ class UpdateMember extends Component
                                 <label>Gender</label>
                                 <select value={this.state.gender} className="form-control" onChange={this.handleChangeGender}>
                                     <option value="">---Option---</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
+                                    <option value="male">male</option>
+                                    <option value="female">female</option>
                                 </select>
                                 <p className="help-block" >{this.state.error.gender} </p>
                             </div>
@@ -212,7 +215,7 @@ class UpdateMember extends Component
                     </div>
                     <br />
                     <div className="form-group">
-                        <button type = "submit" className="btn btn-primary">Add Member</button>
+                        <button type = "submit" className="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>

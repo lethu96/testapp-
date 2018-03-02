@@ -17,7 +17,8 @@ class CreateMember extends Component
             gender: '',
             position_id:'',
             avatar:'',
-            error:''
+            error:'',
+            isButtonDisabled: false
         };
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeInformation = this.handleChangeInformation.bind(this);
@@ -113,16 +114,16 @@ class CreateMember extends Component
         data.append('gender', this.state.gender)
         data.append('avatar', this.state.avatar)
         data.append('position_id', this.state.selectedposition)
-        axios.post('http://localhost:8000/member/create', data)
+        axios.post('http://localhost:8000/member', data)
         .then(
             (response) => {browserHistory.push('/display-item-member');}
         )
         .catch(error => {
             if (error.response) {
-                    this.setState({ error: error.response.data.errors });
-                }
+                this.setState({ error: error.response.data.errors , isButtonDisabled: false});
             }
-        );
+        });
+        this.setState({isButtonDisabled: true});
     }
 
     render()
@@ -173,8 +174,8 @@ class CreateMember extends Component
                                 <label>Gender</label>
                                 <select value={this.state.gender} className="form-control" onChange={this.handleChangeGender}>
                                     <option value="">---Option---</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
+                                    <option value="male">male</option>
+                                    <option value="female">female</option>
                                 </select>
                                 <p className="help-block" >{this.state.error.gender} </p>
                             </div>
@@ -204,7 +205,7 @@ class CreateMember extends Component
                     </div>
                     <br />
                     <div className="form-group">
-                        <button type = "submit" className="btn btn-primary">Add Member</button>
+                        <button type = "submit" className="btn btn-primary" disabled={this.state.isButtonDisabled}>Add Member</button>
                     </div>
                 </form>
             </div>

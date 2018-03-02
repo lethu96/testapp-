@@ -34,7 +34,7 @@ class UpdateProject extends Component
             this.setState({ role: response.data });
         })
         .catch(function (error) {})
-        axios.get('http://localhost:8000/project/edit/' + current_id)
+        axios.get('http://localhost:8000/project/' + current_id)
         .then(response=> {
             this.setState({ name: response.data.name, information: response.data.information,
                 deadline: response.data.deadline, type: response.data.type, status: response.data.status});
@@ -63,47 +63,63 @@ class UpdateProject extends Component
     {
         return (
             <div>
-                <h1>Show Project</h1>
-                <div className="row">
-                    <div className="col-md-6"></div>
-                    <div className="col-md-2">
-                        <Link to="/display-item" className="btn btn-success">Return to Project</Link>
+                <div className="row show">
+                    <div>
+                        <div className="col-md-6">
+                            <h2> Detail Project </h2>
+                        </div>
+                        <div className="col-md-6">
+                            <h2> Member Of Project</h2>
+                        </div>
                     </div>
                 </div>
-                <div className="col-md-6">
-                    <form onSubmit={this.handleSubmit} >
+                <div className="row">
+                    <div className="col-md-6">
+                        <form onSubmit={this.handleSubmit} >
                         <div className="form-group">
-                            <label> Name:</label>
-                             {this.state.name}
+                            <label> NAME:</label>
+                            {this.state.name}
                         </div>
                         <div className="form-group">
-                            <label name="product_body"> Information :</label>
-                            {this.state.information}
+                            <label name="product_body"> INFORMATION :</label>
+                            <label className="infor">{this.state.information}</label>
                         </div>
                         <div className="form-group">
-                            <label> Deadline :</label>
-                             {this.state.deadline}
+                            <label> DEADLINE :</label>
+                            {this.state.deadline}
                         </div>
                         <div className="form-group">
-                            <label> Type :</label>
-                             {this.state.type}
+                            <label> TYPE :</label>
+                            {this.state.type}
                         </div>
                         <div className="form-group">
-                            <label> Status:</label>
-                            {this.state.status} 
+                            <label> STATUS:</label>
+                            {this.state.status}
                         </div>
+                        </form>
+                    </div>
+                    <div className="col-md-6">
                         <div className="row">
-                            <div className="col-md-3">
-                                <label>Member </label>
+                        <div className="col-md-3">
+                            <label>MEMBER </label>
                                 {this.showMember()}
                             </div>
                             <div className="col-md-2">
-                                <label> Role </label>
+                                <label> ROLE </label>
                                 {this.showRole()}
                             </div>
-                        </div> 
-                        <Link to={"/add-member-project/"+this.state.project_id} className="btn btn-success">Add Member</Link>
-                    </form>
+                        </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div>
+                        <div className="col-md-6">
+                            <Link to="/display-item" className="btn btn-success">List Project</Link>
+                        </div>
+                        <div className="col-md-6">
+                            <Link to={"/add-member-project/"+this.state.project_id} className="btn btn-success">Add Member</Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         )
