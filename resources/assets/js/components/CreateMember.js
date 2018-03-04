@@ -116,7 +116,14 @@ class CreateMember extends Component
         data.append('position_id', this.state.selectedposition)
         axios.post('http://localhost:8000/member', data)
         .then(
-            (response) => {browserHistory.push('/display-item-member');}
+            (response) => {
+                swal("Create Member Success!", {
+                    icon: "success",
+                    timer: 1000,
+                    buttons:false
+                });
+                browserHistory.push('/display-item-member');
+            }
         )
         .catch(error => {
             if (error.response) {

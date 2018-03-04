@@ -83,6 +83,11 @@ class UpdateProject extends Component
         }
         let uri = 'http://localhost:8000/project/'+this.props.params.id;
         axios.put(uri, project).then((response) => {
+            swal("Update Project Success", {
+                    icon: "success",
+                    timer: 1000,
+                    buttons:false
+                });
             this.props.history.push('/display-item');
         }).catch(error => {
             if (error.response) {

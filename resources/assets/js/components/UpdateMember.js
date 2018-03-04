@@ -127,7 +127,14 @@ class UpdateMember extends Component
         let uri = 'http://localhost:8000/member/'+this.props.params.id;
         axios.put(uri, data)
         .then(
-            (response) => {browserHistory.push('/display-item-member');}
+            (response) => {
+                swal("Update Member Success", {
+                    icon: "success",
+                    timer: 1000,
+                    buttons:false
+                });
+                browserHistory.push('/display-item-member');
+            }
         )
         .catch(error => {
             if (error.response) {

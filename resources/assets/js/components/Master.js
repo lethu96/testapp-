@@ -1,7 +1,7 @@
 
 import React, {Component} from 'react';
 import { Router, Route, Link } from 'react-router';
-
+import swal from 'sweetalert';
 
 class Master extends Component
 {

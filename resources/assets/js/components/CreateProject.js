@@ -73,6 +73,11 @@ class CreateProject extends Component
                 status: this.state.status
             }
         ).then(response => {
+            swal("Create Project Success", {
+                    icon: "success",
+                    timer: 1000,
+                    buttons:false
+                });
             browserHistory.push('/display-item');
         }).catch(error => {
             if (error.response) {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
-import swal from 'sweetalert';
 
 class TableRow extends Component
 {

@@ -62,7 +62,13 @@ class AddMemberProject extends Component
         data.append('role', this.state.role)
         axios.post('http://localhost:8000/member_projects/', data)
         .then(
-            (response) => {browserHistory.push('/show-detail-item/'+this.state.project_id);
+            (response) => {
+                swal("Member Assign Project Success", {
+                    icon: "success",
+                    timer: 1000,
+                    buttons:false
+                });
+                browserHistory.push('/show-detail-item/'+this.state.project_id);
         }).catch(error => {
             if (error.response) {
                 this.setState({ error: error.response.data.errors , isButtonDisabled: false});

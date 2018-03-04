@@ -66,15 +66,19 @@ class UpdateProject extends Component
                 <div className="row show">
                     <div>
                         <div className="col-md-6">
-                            <h2> Detail Project </h2>
+                            
                         </div>
                         <div className="col-md-6">
-                            <h2> Member Of Project</h2>
+                            
                         </div>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-1">
+                    </div>
+                    <div className="col-md-5 thu">
+                        <h2> Detail Project </h2>
+                        <div> </div>
                         <form onSubmit={this.handleSubmit} >
                         <div className="form-group">
                             <label> NAME:</label>
@@ -97,10 +101,17 @@ class UpdateProject extends Component
                             {this.state.status}
                         </div>
                         </form>
+                        <div className="btnadd">
+                            <Link to="/display-item" className="btn btn-success">List Project</Link>
+                        </div>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-1">
+                    </div>
+                    <div className="col-md-5 thu thu1">
+                        <h2> Member Of Project</h2>
+                        <div> </div>
                         <div className="row">
-                        <div className="col-md-3">
+                        <div className="col-md-6">
                             <label>MEMBER </label>
                                 {this.showMember()}
                             </div>
@@ -109,14 +120,7 @@ class UpdateProject extends Component
                                 {this.showRole()}
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div>
-                        <div className="col-md-6">
-                            <Link to="/display-item" className="btn btn-success">List Project</Link>
-                        </div>
-                        <div className="col-md-6">
+                        <div className="addmp">
                             <Link to={"/add-member-project/"+this.state.project_id} className="btn btn-success">Add Member</Link>
                         </div>
                     </div>
