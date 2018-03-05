@@ -20,6 +20,17 @@ class MemberController extends Controller
         return response()->json($listMember);
     }
 
+    public function showPosition($id)
+    {
+        $member = Member::findOrFail($id);
+        $position_name=Position::where('id', $member['position_id'])->select('name')->first();
+        return response()->json($position_name);
+    }
+
+    public function showindex()
+    {
+        return view('welcome');
+    }
     public function destroy($id)
     {
         $member = Member::findOrFail($id);
@@ -73,8 +84,8 @@ class MemberController extends Controller
                 $file = $request->avatar;
                 $file->move("img", $file->getClientOriginalName());
                 $newMember->avatar ="/img/".$file->getClientOriginalName();
-            }else {
-                 $newMember->avatar ="/img/avatar.jpg";
+            } else {
+                $newMember->avatar ="/img/avatar.png";
             }
             $newMember->save();
             return response()->json($newMember);
@@ -82,7 +93,7 @@ class MemberController extends Controller
         return response()->json(['message' => 'Dont exit Position_id'], 404);
     }
 
-    public function edit($id)
+    public function show($id)
     {
         $member = Member::find($id);
         return response()->json($member);
