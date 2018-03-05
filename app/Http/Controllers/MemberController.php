@@ -35,7 +35,7 @@ class MemberController extends Controller
     {
         $member = Member::findOrFail($id);
         $member->delete();
-        return response()->json('Member Deleted Successfully.');
+        return response()->json(['message'=>'Member Deleted Successfully.']);
     }
     public function update(StoreCreateMember $request, $id)
     {

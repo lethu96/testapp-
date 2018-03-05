@@ -20,7 +20,7 @@ class ProjectController extends Controller
     {
         $project = Project::findOrFail($id);
         $project->delete();
-        return response()->json('Project Deleted Successfully.');
+        return response()->json(['message'=>'Project Deleted Successfully.']);
     }
 
     public function store(StoreCreateProject $request)
