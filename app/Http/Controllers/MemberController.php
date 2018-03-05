@@ -27,6 +27,10 @@ class MemberController extends Controller
         return response()->json($position_name);
     }
 
+    public function showindex()
+    {
+        return view('welcome');
+    }
     public function destroy($id)
     {
         $member = Member::findOrFail($id);
@@ -81,7 +85,7 @@ class MemberController extends Controller
                 $file->move("img", $file->getClientOriginalName());
                 $newMember->avatar ="/img/".$file->getClientOriginalName();
             } else {
-                $newMember->avatar ="/img/avatar.jpg";
+                $newMember->avatar ="/img/avatar.png";
             }
             $newMember->save();
             return response()->json($newMember);
